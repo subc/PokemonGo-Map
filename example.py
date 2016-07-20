@@ -28,6 +28,8 @@ from geopy.exc import GeocoderTimedOut, GeocoderServiceError
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 from requests.adapters import ConnectionError
 from requests.models import InvalidURL
+from rarity import RARE_POKEMON
+from notify import notify
 from transform import *
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
@@ -764,6 +766,7 @@ app = create_app()
 @app.route('/data')
 def data():
     """ Gets all the PokeMarkers via REST """
+    notify(pokemons)
     return json.dumps(get_pokemarkers())
 
 @app.route('/raw_data')
@@ -787,7 +790,6 @@ def config():
 @app.route('/')
 def fullmap():
     clear_stale_pokemons()
-
     return render_template(
         'example_fullmap.html', key=GOOGLEMAPS_KEY, fullmap=get_map(), auto_refresh=auto_refresh)
 
@@ -835,12 +837,13 @@ def get_pokemarkers():
         label = LABEL_TMPL.format(**pokemon)
         #  NOTE: `infobox` field doesn't render multiple line string in frontend
         label = label.replace('\n', '')
-
+        large_icon = int(pokemon["id"]) in RARE_POKEMON
+        icon = 'static/{}/{}.png'.format("larger-icons" if large_icon else "icons", pokemon["id"])
         pokeMarkers.append({
             'type': 'pokemon',
             'key': pokemon_key,
             'disappear_time': pokemon['disappear_time'],
-            'icon': 'static/icons/%d.png' % pokemon["id"],
+            'icon': icon,
             'lat': pokemon["lat"],
             'lng': pokemon["lng"],
             'infobox': label
