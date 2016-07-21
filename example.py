@@ -505,6 +505,12 @@ def get_args():
         help='Coordinates transformer for China',
         action='store_true')
     parser.add_argument(
+        '-stop',
+        '--stopupdate',
+        help='stop update bg',
+        action='store_true',
+        default=False)
+    parser.add_argument(
     	"-pm",
     	"--ampm_clock",
     	help="Toggles the AM/PM clock for Pokemon timers",
@@ -921,5 +927,10 @@ def get_map():
 
 if __name__ == '__main__':
     args = get_args()
-    register_background_thread(initial_registration=True)
+    if not args.stopupdate:
+        register_background_thread(initial_registration=True)
+    else:
+        # スタンドアローン
+        retrying_set_location(args.location)
+
     app.run(debug=True, threaded=True, host=args.host, port=args.port)
