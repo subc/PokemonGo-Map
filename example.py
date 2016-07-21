@@ -479,6 +479,17 @@ def get_args():
         help='Set web server listening port',
         default=5000)
     parser.add_argument(
+        '-rH',
+        '--redishost',
+        help='Set redis server host',
+        default='127.0.0.1')
+    parser.add_argument(
+        '-rP',
+        '--redisport',
+        type=int,
+        help='Set redis server port',
+        default=6379)
+    parser.add_argument(
         "-L",
         "--locale",
         help="Locale for Pokemon names: default en, check locale folder for more options",
