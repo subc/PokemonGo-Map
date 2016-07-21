@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import, unicode_literals
 
 import flask
 from flask import Flask, render_template
@@ -29,6 +30,7 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 from requests.adapters import ConnectionError
 from requests.models import InvalidURL
 
+from flavor import get_flavor_text
 from points import POINTS, get_near_point
 from rarity import RARE_POKEMON
 from notify import notify
@@ -117,7 +119,7 @@ def time_left(ms):
 def encode(cellid):
     output = []
     encoder._VarintEncoder()(output.append, cellid)
-    return ''.join(output)
+    return b''.join(output)
 
 
 def getNeighbors():
@@ -180,7 +182,7 @@ def set_location(location_name):
         loc = geolocator.geocode(location_name)
         origin_lat, origin_lon = local_lat, local_lng = loc.latitude, loc.longitude
         alt = loc.altitude
-        print '[!] Your given location: {}'.format(loc.address.encode('utf-8'))
+        print '[!] Your given location: {}'.format(loc.address)
 
     print('[!] lat/long/alt: {} {} {}'.format(local_lat, local_lng, alt))
     set_location_coords(local_lat, local_lng, alt)
@@ -389,15 +391,15 @@ def get_heartbeat(service,
     m4.message = m.SerializeToString()
     m5 = pokemon_pb2.RequestEnvelop.Requests()
     m = pokemon_pb2.RequestEnvelop.MessageSingleString()
-    m.bytes = '05daf51635c82611d1aac95c0b051d3ec088a930'
+    m.bytes = str('05daf51635c82611d1aac95c0b051d3ec088a930')
     m5.message = m.SerializeToString()
     walk = sorted(getNeighbors())
     m1 = pokemon_pb2.RequestEnvelop.Requests()
     m1.type = 106
     m = pokemon_pb2.RequestEnvelop.MessageQuad()
-    m.f1 = ''.join(map(encode, walk))
+    m.f1 = b''.join(map(encode, walk))
     m.f2 = \
-        "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000"
+        b"\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000"
     m.lat = COORDS_LATITUDE
     m.long = COORDS_LONGITUDE
     m1.message = m.SerializeToString()
@@ -735,13 +737,14 @@ transform_from_wgs_to_gcj(Location(Fort.Latitude, Fort.Longitude))
                     poke.Longitude))
 
         set_pokemon(poke.SpawnPointId, {
-            "lat": poke.Latitude,
-            "lng": poke.Longitude,
-            "disappear_time": disappear_timestamp,
-            "id": poke.pokemon.PokemonId,
-            "name": pokename
-            }
-        )
+                        "lat": poke.Latitude,
+                        "lng": poke.Longitude,
+                        "disappear_time": disappear_timestamp,
+                        "id": poke.pokemon.PokemonId,
+                        "name": pokename
+                        },
+                    point=int(args.diffpoint)
+                    )
 
 
 def clear_stale_pokemons():
@@ -751,8 +754,8 @@ def clear_stale_pokemons():
         pokemon = get_pokemon(pokemon_key)
         if pokemon and current_time > pokemon['disappear_time']:
             print "[+] removing stale pokemon %s at %f, %f from list" % (
-                pokemon['name'].encode('utf-8'), pokemon['lat'], pokemon['lng'])
-            delete_pokemon(pokemon_key)
+                pokemon['name'], pokemon['lat'], pokemon['lng'])
+            # delete_pokemon(pokemon_key, point=int(args.diffpoint))
 
 
 def register_background_thread(initial_registration=False):
@@ -812,12 +815,13 @@ def data():
     # debug
     from points import POINTS
     ct = 0
-    for _x, _y in POINTS:
+    for _x, _y, _ in POINTS:
         if point_x == _x and point_y == _y:
             print "No.is...{}".format(ct)
+            break
         ct += 1
 
-    return json.dumps(get_pokemarkers())
+    return json.dumps(get_pokemarkers(point=ct))
 
 
 @app.route('/raw_data')
@@ -866,13 +870,13 @@ def get_marker_for_debug():
     """
     r = []
     ct = 0
-    for _x, _y in POINTS:
+    for _x, _y, flavor_text in POINTS:
         # red
         red_marker = {
             'icon': icons.dots.red,
             'lat': _x,
             'lng': _y,
-            'infobox': "Start position:{}:{}:No:{}".format(_x, _y, str(ct)),
+            'infobox': "{} position:{},{} No:{}".format(flavor_text, _x, _y, ct),
             'type': 'custom',
             'key': 'start-position:{}:{}'.format(_x, _y),
             'disappear_time': -1
@@ -907,8 +911,8 @@ def get_pokemarkers(point=0):
     else:
         pokeMarkers = []
 
-    for pokemon_key in get_pokemon_keys():
-        pokemon = get_pokemon(pokemon_key)
+    for pokemon_key in get_pokemon_keys(point=point):
+        pokemon = get_pokemon(pokemon_key, point=point)
         if not pokemon:
             continue
         datestr = datetime.fromtimestamp(pokemon[
