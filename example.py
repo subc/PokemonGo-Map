@@ -29,7 +29,7 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 from requests.adapters import ConnectionError
 from requests.models import InvalidURL
 
-from points import POINTS
+from points import POINTS, get_near_point
 from rarity import RARE_POKEMON
 from notify import notify
 from transform import *
@@ -513,6 +513,12 @@ def get_args():
         action='store_true',
         default=False)
     parser.add_argument(
+        "-dpoint",
+        "--diffpoint",
+        type=int,
+        help="偏差",
+        default=0)
+    parser.add_argument(
     	"-pm",
     	"--ampm_clock",
     	help="Toggles the AM/PM clock for Pokemon timers",
@@ -521,7 +527,15 @@ def get_args():
     parser.add_argument(
         '-d', '--debug', help='Debug Mode', action='store_true')
     parser.set_defaults(DEBUG=True)
-    return parser.parse_args()
+    args = parser.parse_args()
+
+    # 差分を入れる
+    if int(args.diffpoint):
+        from points import POINTS
+        _ = POINTS[int(args.diffpoint)]
+        args.location = "{} {}".format(_[0], _[1])
+
+    return args
 
 @memoize
 def login(args):
@@ -646,7 +660,7 @@ def main():
     else:
         set_location_coords(origin_lat, origin_lon, 0)
 
-    register_background_thread()
+    # register_background_thread()
 
 
 def process_step(args, api_endpoint, access_token, profile_response,
@@ -784,11 +798,27 @@ def create_app():
 app = create_app()
 
 
-@app.route('/data')
+@app.route('/data', methods=['GET'], strict_slashes=False)
 def data():
-    """ Gets all the PokeMarkers via REST """
+    """
+    Gets all the PokeMarkers via REST
+    :param position: str
+    """
     # notify(pokemons)
+    x, y, _ = flask.request.url.split("?%40")[1].split(",")
+    point_x, point_y = get_near_point(float(x), float(y))
+    print(point_x, point_y)
+
+    # debug
+    from points import POINTS
+    ct = 0
+    for _x, _y in POINTS:
+        if point_x == _x and point_y == _y:
+            print "No.is...{}".format(ct)
+        ct += 1
+
     return json.dumps(get_pokemarkers())
+
 
 @app.route('/raw_data')
 def raw_data():
@@ -835,18 +865,20 @@ def get_marker_for_debug():
     デバッグ用、探索範囲をpointする
     """
     r = []
+    ct = 0
     for _x, _y in POINTS:
         # red
         red_marker = {
             'icon': icons.dots.red,
             'lat': _x,
             'lng': _y,
-            'infobox': "Start position:{}:{}".format(_x, _y),
+            'infobox': "Start position:{}:{}:No:{}".format(_x, _y, str(ct)),
             'type': 'custom',
             'key': 'start-position:{}:{}'.format(_x, _y),
             'disappear_time': -1
         }
         r.append(red_marker)
+        ct += 1
 
         # blue 超重い
         d = (int(args.step_limit) - 1) / 2
@@ -959,7 +991,7 @@ def get_map():
         lat=origin_lat,
         lng=origin_lon,
         markers=get_pokemarkers(),
-        zoom='15', )
+        zoom='20')
     return fullmap
 
 

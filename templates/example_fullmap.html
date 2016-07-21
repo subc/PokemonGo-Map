@@ -116,7 +116,7 @@
                         var json_obj = $.parseJSON(response);//parse JSON
                         options["lat"] = json_obj["lat"];
                         options["lng"] = json_obj["lng"];
-                        options["zoom"] = json_obj["zoom"];
+                        options["zoom"] = 16;
                         options["identifier"] = json_obj["identifier"];
                         updateMap();
                     });
@@ -144,7 +144,7 @@
             createMap();
             // Requests the data and populates the map
 
-            $.get(baseURL + "/data?" + map.rmiUrl.split('/')[4], function(response){
+            $.get(baseURL + "/data/?" + map.rmiUrl.split('/')[4], function(response){
                 var json_obj = $.parseJSON(response);
                 var now = new Date();
                 
