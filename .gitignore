@@ -1,3 +1,4 @@
 *.pyc
 .idea
 run_worker*
+.DS_Store
