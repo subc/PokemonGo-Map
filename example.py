@@ -31,6 +31,8 @@ from requests.models import InvalidURL
 from rarity import RARE_POKEMON
 from notify import notify
 from transform import *
+from kvs import *
+
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
@@ -68,7 +70,6 @@ NEXT_LONG = 0
 auto_refresh = 0
 default_step = 0.001
 api_endpoint = None
-pokemons = {}
 gyms = {}
 pokestops = {}
 numbertoteam = {  # At least I'm pretty sure that's it. I could be wrong and then I'd be displaying the wrong owner team of gyms.
@@ -701,23 +702,25 @@ transform_from_wgs_to_gcj(Location(Fort.Latitude, Fort.Longitude))
                 transform_from_wgs_to_gcj(Location(poke.Latitude,
                     poke.Longitude))
 
-        pokemons[poke.SpawnPointId] = {
+        set_pokemon(poke.SpawnPointId, {
             "lat": poke.Latitude,
             "lng": poke.Longitude,
             "disappear_time": disappear_timestamp,
             "id": poke.pokemon.PokemonId,
             "name": pokename
-        }
+            }
+        )
+
 
 def clear_stale_pokemons():
     current_time = time.time()
 
-    for pokemon_key in pokemons.keys():
-        pokemon = pokemons[pokemon_key]
+    for pokemon_key in get_pokemon_keys():
+        pokemon = get_pokemon(pokemon_key)
         if current_time > pokemon['disappear_time']:
             print "[+] removing stale pokemon %s at %f, %f from list" % (
                 pokemon['name'].encode('utf-8'), pokemon['lat'], pokemon['lng'])
-            del pokemons[pokemon_key]
+            delete_pokemon(pokemon_key)
 
 
 def register_background_thread(initial_registration=False):
@@ -766,13 +769,13 @@ app = create_app()
 @app.route('/data')
 def data():
     """ Gets all the PokeMarkers via REST """
-    notify(pokemons)
+    # notify(pokemons)
     return json.dumps(get_pokemarkers())
 
 @app.route('/raw_data')
 def raw_data():
     """ Gets raw data for pokemons/gyms/pokestops via REST """
-    return flask.jsonify(pokemons=pokemons, gyms=gyms, pokestops=pokestops)
+    return flask.jsonify(pokemons=get_all_pokemon(), gyms=gyms, pokestops=pokestops)
 
 
 @app.route('/config')
@@ -820,8 +823,8 @@ def get_pokemarkers():
         'disappear_time': -1
     }]
 
-    for pokemon_key in pokemons:
-        pokemon = pokemons[pokemon_key]
+    for pokemon_key in get_pokemon_keys():
+        pokemon = get_pokemon(pokemon_key)
         datestr = datetime.fromtimestamp(pokemon[
             'disappear_time'])
         dateoutput = datestr.strftime("%H:%M:%S")
