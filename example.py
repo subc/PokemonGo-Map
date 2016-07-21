@@ -254,7 +254,7 @@ def api_req(service, api_endpoint, access_token, *args, **kwargs):
         print '''
 
 '''
-    time.sleep(0.51)
+    time.sleep(0.01)
     return p_ret
 
 
@@ -440,7 +440,7 @@ def get_token(service, username, password):
         return global_token
 
 
-def get_args():
+def get_args(worker=False):
     parser = argparse.ArgumentParser()
     parser.add_argument(
         '-a', '--auth_service', type=str.lower, help='Auth Service', default='ptc')
@@ -536,6 +536,16 @@ def get_args():
         from points import POINTS
         _ = POINTS[int(args.diffpoint)]
         args.location = "{} {}".format(_[0], _[1])
+        print("_/_/_/_/_/_/_/_/_/_/_/_/_/_/")
+        print("set point:{}".format(args.diffpoint))
+        print("_/_/_/_/_/_/_/_/_/_/_/_/_/_/")
+    elif(worker):
+        from points import POINTS
+        _ = POINTS[0]
+        args.location = "{} {}".format(_[0], _[1])
+        print("_/_/_/_/_/_/_/_/_/_/_/_/_/_/")
+        print("set point:{}".format(0))
+        print("_/_/_/_/_/_/_/_/_/_/_/_/_/_/")
 
     return args
 
@@ -587,7 +597,7 @@ def main():
     full_path = os.path.realpath(__file__)
     (path, filename) = os.path.split(full_path)
 
-    args = get_args()
+    args = get_args(worker=True)
 
     if args.auth_service not in ['ptc', 'google']:
         print '[!] Invalid Auth service specified'
@@ -836,6 +846,21 @@ def config():
     center = {
         'lat': FLOAT_LAT,
         'lng': FLOAT_LONG,
+        'zoom': 15,
+        'identifier': "fullmap"
+    }
+    return json.dumps(center)
+
+
+@app.route('/configc')
+def configc():
+    """
+    Gets the settings for the Google Maps via REST
+    """
+    x, y = flask.request.url.split("?")[1].replace("p=", "").split(",")
+    center = {
+        'lat': x,
+        'lng': y,
         'zoom': 15,
         'identifier': "fullmap"
     }

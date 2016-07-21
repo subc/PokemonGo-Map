@@ -112,14 +112,27 @@
             setMapOnAll(null, length);
         }
 
-        $.get(baseURL + "/config", function(response){
-                        var json_obj = $.parseJSON(response);//parse JSON
-                        options["lat"] = json_obj["lat"];
-                        options["lng"] = json_obj["lng"];
-                        options["zoom"] = 16;
-                        options["identifier"] = json_obj["identifier"];
-                        updateMap();
-                    });
+        if(location.hash == null | location.hash == "") {
+            $.get(baseURL + "/config", function (response) {
+                var json_obj = $.parseJSON(response);//parse JSON
+                options["lat"] = json_obj["lat"];
+                options["lng"] = json_obj["lng"];
+                options["zoom"] = 16;
+                options["identifier"] = json_obj["identifier"];
+                updateMap();
+            });
+        } else {
+            // 座標指定URLのときはconfigcに飛ばす
+            var grid_param = location.hash;
+            $.get(baseURL + "/configc" + grid_param.replace("#", "?p=").replace("&z", ""), function (response) {
+                var json_obj = $.parseJSON(response);//parse JSON
+                options["lat"] = json_obj["lat"];
+                options["lng"] = json_obj["lng"];
+                options["zoom"] = 16;
+                options["identifier"] = json_obj["identifier"];
+                updateMap();
+            });
+        }
 
         function createMap(){
             if(map == null && google != null && google.maps != null){
@@ -144,7 +157,11 @@
             createMap();
             // Requests the data and populates the map
 
-            $.get(baseURL + "/data/?" + map.mapUrl.split('=')[1], function(response){
+            // change active url replace
+            var grid_param = map.mapUrl.split('=')[1];
+            location.hash=grid_param;
+
+            $.get(baseURL + "/data/?" + grid_param, function(response){
                 var json_obj = $.parseJSON(response);
                 var now = new Date();
                 
