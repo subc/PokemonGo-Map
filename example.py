@@ -70,7 +70,6 @@ NEXT_LONG = 0
 auto_refresh = 0
 default_step = 0.001
 api_endpoint = None
-gyms = {}
 pokestops = {}
 numbertoteam = {  # At least I'm pretty sure that's it. I could be wrong and then I'd be displaying the wrong owner team of gyms.
     0: 'Gym',
@@ -668,8 +667,8 @@ def process_step(args, api_endpoint, access_token, profile_response,
                                 (Fort.Latitude, Fort.Longitude) = \
 transform_from_wgs_to_gcj(Location(Fort.Latitude, Fort.Longitude))
                             if Fort.GymPoints and args.display_gym:
-                                gyms[Fort.FortId] = [Fort.Team, Fort.Latitude,
-                                                     Fort.Longitude, Fort.GymPoints]
+                                set_gym(Fort.FortId, [Fort.Team, Fort.Latitude,
+                                                      Fort.Longitude, Fort.GymPoints])
 
                             elif Fort.FortType \
                                 and args.display_pokestop:
@@ -775,7 +774,7 @@ def data():
 @app.route('/raw_data')
 def raw_data():
     """ Gets raw data for pokemons/gyms/pokestops via REST """
-    return flask.jsonify(pokemons=get_all_pokemon(), gyms=gyms, pokestops=pokestops)
+    return flask.jsonify(pokemons=get_all_pokemon(), gyms=get_all_gym(), pokestops=pokestops)
 
 
 @app.route('/config')
@@ -852,8 +851,8 @@ def get_pokemarkers():
             'infobox': label
         })
 
-    for gym_key in gyms:
-        gym = gyms[gym_key]
+    for gym_key in get_gym_keys():
+        gym = get_gym(gym_key)
         if gym[0] == 0:
             color = "rgba(0,0,0,.4)"
         if gym[0] == 1:
