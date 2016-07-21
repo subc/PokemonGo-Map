@@ -818,6 +818,7 @@ def data():
     :param position: str
     """
     # notify(pokemons)
+    first_time = "FirstTime" in flask.request.url
     x, y = flask.request.url.split("?")[-1].split("&")[0].split(",")
     point_x, point_y = get_near_point(float(x), float(y))
     print(point_x, point_y)
@@ -831,7 +832,7 @@ def data():
             break
         ct += 1
 
-    return json.dumps(get_pokemarkers(point=ct))
+    return json.dumps(get_pokemarkers(point=ct, first_time=first_time))
 
 
 @app.route('/raw_data')
@@ -889,13 +890,18 @@ def next_loc():
         return 'ok'
 
 
-def get_marker_for_debug():
+def get_marker_for_debug(point):
     """
     デバッグ用、探索範囲をpointする
     """
     r = []
-    ct = 0
+    ct = -1
     for _x, _y, flavor_text in POINTS:
+        ct += 1
+
+        # if ct % 3 != 0 and ct != point:
+        #     continue
+
         # red
         red_marker = {
             'icon': icons.dots.red,
@@ -907,9 +913,10 @@ def get_marker_for_debug():
             'disappear_time': -1
         }
         r.append(red_marker)
-        ct += 1
 
         # blue 超重い
+        # if point == ct:
+        # print("print blue marker .... {}".format(point))
         d = (int(args.step_limit) - 1) / 2
         for y in [-1 * d, d]:
             for x in [-1 * d, d]:
@@ -924,15 +931,15 @@ def get_marker_for_debug():
                     'icon': icons.dots.blue,
                     'lat': __x,
                     'lng': __y,
-                    'infobox': "hogehoge:{}:{}".format(str(__x), str(__y))
+                    'infobox': "edge:{}:{}".format(str(__x), str(__y))
                 })
     return r
 
 
-def get_pokemarkers(point=0):
-    # for debug
-    if args.debug:
-        pokeMarkers = get_marker_for_debug()
+def get_pokemarkers(point=0, first_time=False):
+    # 範囲通知用のマーカー
+    if first_time:
+        pokeMarkers = get_marker_for_debug(point)
     else:
         pokeMarkers = []
 

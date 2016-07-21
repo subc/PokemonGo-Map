@@ -1,20 +1,35 @@
 <!DOCTYPE html>
-    <html>
-    <head>
-            <meta charset="utf-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <title>Flask Google Maps Full Map Example</title>
-    </head>
-    <body>
-        <h1>Flask Google Maps Full Map Example</h1>
-        <div id="fullmap" style='height:100%;width:100%;top:0;left:0;position:absolute;z-index:200;'>
-            {{ fullmap.html }}
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Flask Google Maps Full Map Example</title>
+    <link href="http://www.niku.tokyo/static/css/tag.css?8" rel="stylesheet">
+</head>
+<body style="margin: 0px">
+<div style="height:40px;width:100%;background-color:#333333;color: #ffffff;padding: 8px;">
+    PokemonGO RealTime MAP
+</div>
 
+<div id="fullmap" style='height:100%;width:100%;margin-top:40px;top:0;left:0;position:absolute;z-index:200;'>
+    {{ fullmap.html }}
+</div>
+
+{#AD#}
+<div id="ad" style="height:calc(100vh);width:100%;background-color:#000000;display: None;opacity: 0.5">
+    <a href="#" onclick="adCloseClick();">
+        <div class="close-icon">
+            <div class="batu1"></div>
+            <div class="batu2"></div>
         </div>
-        
+    </a>
 
-    </body>
+    ADADADAD
+</div>
+{#AD#}
+
+</body>
 {{ fullmap.js }}
 <!-- Webdesign 101: scripts at the end make the page load faster -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
@@ -57,6 +72,9 @@
         var baseURL = location.protocol + "//" + location.hostname + (location.port ? ":"+location.port: "");
         var options = {};
         var map = null;
+        var firstTime = true;
+        var counter = 0;
+        var adLimit = 10;
         var markers = [];
         var markerCache = {};
         // Adds a marker to the map and push to the array.
@@ -152,13 +170,46 @@
                 }
             }
         }
+        function adOpne(){
+{#            $('#fullmap').css("display","None");#}
+            $('#ad').css("display","Block");
+            $('#fullmap').css("opacity", '0.3');
+            $('#fullmap').css("z-index", '-200');
+        }
+        function adClose(){
+            $('#fullmap').css("display","Block");
+            $('#ad').css("display","None");
+            $('#fullmap').css("opacity", '1');
+            $('#fullmap').css("z-index", '200');
+        }
+
+        function adCloseClick(){
+            adClose();
+            counter = 0;
+        }
+        function createHeader(){
+            if(counter >= adLimit){
+                adOpne();
+            }else{
+                counter += 1;
+            }
+        }
         function updateMap(){
             // A new map is created because the original one isn't saved
             createMap();
             // Requests the data and populates the map
 
+            createHeader();
+            if (counter >= adLimit){return}
+
             // change active url replace
             var grid_param = map.mapUrl.split('=')[1];
+            if(firstTime){
+                // todo
+                console.debug('First Time!!');
+                firstTime = false;
+                grid_param += '&FirstTime=1';
+            }
             location.hash=grid_param;
 
             $.get(baseURL + "/data/?" + grid_param, function(response){
