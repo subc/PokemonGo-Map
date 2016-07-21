@@ -733,7 +733,7 @@ def clear_stale_pokemons():
 
     for pokemon_key in get_pokemon_keys():
         pokemon = get_pokemon(pokemon_key)
-        if current_time > pokemon['disappear_time']:
+        if pokemon and current_time > pokemon['disappear_time']:
             print "[+] removing stale pokemon %s at %f, %f from list" % (
                 pokemon['name'].encode('utf-8'), pokemon['lat'], pokemon['lng'])
             delete_pokemon(pokemon_key)
@@ -808,7 +808,7 @@ def config():
 
 @app.route('/')
 def fullmap():
-    clear_stale_pokemons()
+    # clear_stale_pokemons()
     return render_template(
         'example_fullmap.html', key=GOOGLEMAPS_KEY, fullmap=get_map(), auto_refresh=auto_refresh)
 
@@ -841,6 +841,8 @@ def get_pokemarkers():
 
     for pokemon_key in get_pokemon_keys():
         pokemon = get_pokemon(pokemon_key)
+        if not pokemon:
+            continue
         datestr = datetime.fromtimestamp(pokemon[
             'disappear_time'])
         dateoutput = datestr.strftime("%H:%M:%S")
@@ -932,5 +934,6 @@ if __name__ == '__main__':
     else:
         # スタンドアローン
         retrying_set_location(args.location)
-
+        if args.auto_refresh:
+            auto_refresh = int(args.auto_refresh) * 1000
     app.run(debug=True, threaded=True, host=args.host, port=args.port)

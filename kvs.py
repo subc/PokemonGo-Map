@@ -5,8 +5,6 @@ import thread
 from threading import Thread, local
 from module import Gym
 import redis
-
-pokemons = {}
 gyms = {}
 tls = local()
 
@@ -32,19 +30,23 @@ def get_pokemon_key(point, _key):
 def get_pokemon(key, point=10):
     import ast
     pokemon = get_client().get(key)
-    assert pokemon, "{}:{}".format(pokemon, key)
-    return ast.literal_eval(pokemon)
+    if pokemon:
+        return ast.literal_eval(pokemon)
+    return None
 
 
 def get_all_pokemon(point=10):
+    result = []
     for key in get_pokemon_keys(point=point):
-        return get_pokemon(key, point=point)
+        result.append(get_pokemon(key, point=point))
+    return result
 
 
 def set_pokemon(key, value, point=10):
     diff = datetime.fromtimestamp(value['disappear_time']) - datetime.now()
-    get_client().setex(get_pokemon_key(point, key), value, diff.seconds)
-    pokemons[key] = value
+    diff_sec = diff.seconds - 10  # 10秒短く設定しておく
+    if diff_sec > 0:
+        get_client().setex(get_pokemon_key(point, key), value, diff.seconds)
 
 
 def delete_pokemon(key, point=10):
