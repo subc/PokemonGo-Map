@@ -808,7 +808,7 @@ def data():
     :param position: str
     """
     # notify(pokemons)
-    x, y, _ = flask.request.url.split("?%40")[1].split(",")
+    x, y = flask.request.url.split("?")[-1].split("&")[0].split(",")
     point_x, point_y = get_near_point(float(x), float(y))
     print(point_x, point_y)
 

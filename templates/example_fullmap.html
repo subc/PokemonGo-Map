@@ -144,7 +144,7 @@
             createMap();
             // Requests the data and populates the map
 
-            $.get(baseURL + "/data/?" + map.rmiUrl.split('/')[4], function(response){
+            $.get(baseURL + "/data/?" + map.mapUrl.split('=')[1], function(response){
                 var json_obj = $.parseJSON(response);
                 var now = new Date();
                 
