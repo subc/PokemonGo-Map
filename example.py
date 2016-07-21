@@ -28,6 +28,8 @@ from geopy.exc import GeocoderTimedOut, GeocoderServiceError
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 from requests.adapters import ConnectionError
 from requests.models import InvalidURL
+
+from points import POINTS
 from rarity import RARE_POKEMON
 from notify import notify
 from transform import *
@@ -828,16 +830,50 @@ def next_loc():
         return 'ok'
 
 
-def get_pokemarkers():
-    pokeMarkers = [{
-        'icon': icons.dots.red,
-        'lat': origin_lat,
-        'lng': origin_lon,
-        'infobox': "Start position",
-        'type': 'custom',
-        'key': 'start-position',
-        'disappear_time': -1
-    }]
+def get_marker_for_debug():
+    """
+    デバッグ用、探索範囲をpointする
+    """
+    r = []
+    for _x, _y in POINTS:
+        # red
+        red_marker = {
+            'icon': icons.dots.red,
+            'lat': _x,
+            'lng': _y,
+            'infobox': "Start position:{}:{}".format(_x, _y),
+            'type': 'custom',
+            'key': 'start-position:{}:{}'.format(_x, _y),
+            'disappear_time': -1
+        }
+        r.append(red_marker)
+
+        # blue 超重い
+        d = (int(args.step_limit) - 1) / 2
+        for y in [-1 * d, d]:
+            for x in [-1 * d, d]:
+                if x == y == 0:
+                    continue
+                __x = _x + 0.0025 * x
+                __y = _y + 0.0025 * y
+                r.append({
+                    'type': 'custom',
+                    'key': 'options-position:{}:{}'.format(str(__x), str(__y)),
+                    'disappear_time': -1,
+                    'icon': icons.dots.blue,
+                    'lat': __x,
+                    'lng': __y,
+                    'infobox': "hogehoge:{}:{}".format(str(__x), str(__y))
+                })
+    return r
+
+
+def get_pokemarkers(point=0):
+    # for debug
+    if args.debug:
+        pokeMarkers = get_marker_for_debug()
+    else:
+        pokeMarkers = []
 
     for pokemon_key in get_pokemon_keys():
         pokemon = get_pokemon(pokemon_key)
