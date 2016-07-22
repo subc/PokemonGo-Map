@@ -912,22 +912,22 @@ def get_marker_for_debug(point):
         r.append(red_marker)
 
         # blue 超重い
-        d = (int(args.step_limit) - 1) / 2
-        for y in [-1 * d, d]:
-            for x in [-1 * d, d]:
-                if x == y == 0:
-                    continue
-                __x = _x + 0.0025 * x
-                __y = _y + 0.0025 * y
-                r.append({
-                    'type': 'custom',
-                    'key': 'options-position:{}:{}'.format(str(__x), str(__y)),
-                    'disappear_time': -1,
-                    'icon': icons.dots.blue,
-                    'lat': __x,
-                    'lng': __y,
-                    'infobox': "edge:{}:{}".format(str(__x), str(__y))
-                })
+        # d = (int(args.step_limit) - 1) / 2
+        # for y in [-1 * d, d]:
+        #     for x in [-1 * d, d]:
+        #         if x == y == 0:
+        #             continue
+        #         __x = _x + 0.0025 * x
+        #         __y = _y + 0.0025 * y
+        #         r.append({
+        #             'type': 'custom',
+        #             'key': 'options-position:{}:{}'.format(str(__x), str(__y)),
+        #             'disappear_time': -1,
+        #             'icon': icons.dots.blue,
+        #             'lat': __x,
+        #             'lng': __y,
+        #             'infobox': "edge:{}:{}".format(str(__x), str(__y))
+        #         })
     return r
 
 
