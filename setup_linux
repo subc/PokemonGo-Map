@@ -48,9 +48,12 @@ echo "source `which virtualenvwrapper.sh`" >> ~/.bash_profile
 mkvirtualenv --no-site-packages --python=/usr/local/bin/python2.7 poke
 
 # supervisor
-easy_install supervisor
+yum install supervisor -y
 supervisorctl
 echo "alias sctl='supervisorctl'" >> ~/.bash_profile
+
+
+
 
 # bash
 echo "# color" >> ~/.bash_profile
