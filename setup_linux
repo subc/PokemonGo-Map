@@ -100,6 +100,8 @@ vi /etc/sysconfig/network-scripts/ifcfg-lo
 yum install -y nginx
 pip install gunicorn
 
+# firewalld
+
 
 
 

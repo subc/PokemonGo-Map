@@ -31,6 +31,7 @@ from points import POINTS, get_near_point
 from rarity import RARE_POKEMON
 from transform import *
 from kvs import *
+from threading import local
 
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
@@ -78,6 +79,7 @@ numbertoteam = {  # At least I'm pretty sure that's it. I could be wrong and the
 }
 origin_lat, origin_lon = None, None
 is_ampm_clock = False
+tls = local()
 
 # stuff for in-background search thread
 
