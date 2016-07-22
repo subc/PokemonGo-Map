@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang='en'>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PokemonGO リアルタイムMAP</title>
-    <link href="http://www.niku.tokyo/static/css/tag.css?8" rel="stylesheet">
+    <link href="/static/css/tag.css?1" rel="stylesheet">
+    <meta name="Identifier-URL" content="http://pokemon-go-map.tokyo/" />
+    <meta content="PokemonGO リアルタイムMAP" name="title">
+    <meta content="PokemonGO リアルタイムMAPは街に潜むポケモンをドローンや野良猫やおじいちゃんに設置したセンサーで探索して、みなさまに共有するサービスです。" name="description">
 </head>
 <body style="margin: 0px">
 <div style="height:40px;width:100%;background-color:#333333;color: #ffffff;padding: 8px;font-size: 12px;">
@@ -40,6 +43,19 @@
 {#AD#}
 
 </body>
+{#google analy#}
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-69760509-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+{#google analy#}
+
 {{ fullmap_js }}
 <!-- Webdesign 101: scripts at the end make the page load faster -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
@@ -84,7 +100,7 @@
         var map = null;
         var firstTime = true;
         var counter = 0;
-        var adLimit = 30;
+        var adLimit = 22;
         var markers = [];
         var markerCache = {};
         // Adds a marker to the map and push to the array.

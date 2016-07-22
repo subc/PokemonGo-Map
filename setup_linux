@@ -100,7 +100,6 @@ vi /etc/sysconfig/network-scripts/ifcfg-lo
 
 
 # gunicornで動かす
-yum install -y nginx
 pip install gunicorn
 
 # firewalld
@@ -108,3 +107,10 @@ systemctl status firewalld
 systemctl start firewalld
 systemctl stop firewalld
 
+
+# nginx
+yum install -y nginx
+systemctl start nginx.service
+systemctl stop nginx.service
+systemctl status nginx.service
+sudo systemctl enable nginx

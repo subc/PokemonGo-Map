@@ -5,7 +5,7 @@ from __future__ import absolute_import, unicode_literals
 import flask
 from flask import render_template, Blueprint
 from flask import Flask, render_template
-from flask_googlemaps import Map, DEFAULT_ICON, icons
+from flask_googlemaps import Map, DEFAULT_ICON, icons, Markup
 import os
 import re
 import sys

@@ -1,0 +1,276 @@
+/*http://cssglobe.com/pure-css3-post-tags/*/
+
+.tags{
+	padding-left: 10px;
+	padding-top: 20px;
+	padding-bottom: 30px;
+	list-style:none;
+	}
+
+.tags-bottom{
+	padding-bottom: 25px;
+	margin-top: 0px;
+	}
+
+.tags li, .tags a{
+	float:left;
+	height:24px;
+	line-height:24px;
+	position:relative;
+	font-size:11px;
+	margin-bottom: 10px;
+	}
+
+.tags a{
+	margin-left:20px;
+	padding:0 10px 0 12px;
+	/*background:#0089e0;*/
+	background:#1b6d85;
+	color:#fff;
+	text-decoration:none;
+	-moz-border-radius-bottomright:4px;
+	-webkit-border-bottom-right-radius:4px;
+	border-bottom-right-radius:4px;
+	-moz-border-radius-topright:4px;
+	-webkit-border-top-right-radius:4px;
+	border-top-right-radius:4px;
+	}
+
+.tags a:before{
+	content:"";
+	float:left;
+	position:absolute;
+	top:0;
+	left:-11px;
+	width:0;
+	height:0;
+	/*border-color:transparent #0089e0 transparent transparent;*/
+	border-color:transparent #1b6d85 transparent transparent;
+	border-style:solid;
+	border-width:12px 12px 12px 0;
+	}
+
+.tags a:after{
+	content:"";
+	position:absolute;
+	top:10px;
+	left:0;
+	float:left;
+	width:4px;
+	height:4px;
+	-moz-border-radius:2px;
+	-webkit-border-radius:2px;
+	border-radius:2px;
+	background:#fff;
+	-moz-box-shadow:-1px -1px 2px #004977;
+	-webkit-box-shadow:-1px -1px 2px #004977;
+	box-shadow:-1px -1px 2px #004977;
+	}
+
+.tags a:hover{background:#555;}
+
+.tags a:hover:before{border-color:transparent #555 transparent transparent;}
+
+
+/*枠丸ごとリンク*/
+.wrap {
+	width: 100%;
+	height: 100%;
+}
+
+.wrap a {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.wrap a:hover{
+	/*color:orange;*/
+}
+.wrap:hover{
+	opacity:0.85;
+	text-decoration:none;
+}
+.supernova {
+color: #FE2A15 !important;
+}
+
+.hot {
+color: #FE7A15 !important;
+}
+
+.warm {
+color: #CF7721 !important;
+}
+
+.tag-help-image{
+margin-left: 30px; opacity:0.6; height: 80px
+}
+
+
+/* STARの表示 */
+.starlevel5 {
+   background-image: url('/static/img/parts/starlevels.gif'); /* 星画像 */
+   background-repeat: no-repeat;  /* 繰り返しはナシ */
+   width: 75px;                   /* 横幅は星５つ分 */
+   height: 15px;                  /* 高さは星１つ分 */
+}
+.starlevel4 {
+   background-image: url('/static/img/parts/starlevels.gif'); /* 星画像 */
+   background-repeat: no-repeat;  /* 繰り返しはナシ */
+   width: 60px;                   /* 横幅は星４つ分 */
+   height: 15px;                  /* 高さは星１つ分 */
+}
+.starlevel3 {
+   background-image: url('starlevels.gif'); /* 星画像 */
+   background-repeat: no-repeat;  /* 繰り返しはナシ */
+   width: 45px;                   /* 横幅は星３つ分 */
+   height: 15px;                  /* 高さは星１つ分 */
+}
+.star50 { background-position: left top; }
+.star40 { background-position: -15px top; }
+.star30 { background-position: -30px top; }
+.star20 { background-position: -45px top; }
+.star10 { background-position: -60px top; }
+.star00 { background-position: -75px top; }
+
+.star45 { background-position: -150px top; }
+.star35 { background-position: -165px top; }
+.star25 { background-position: -180px top; }
+.star15 { background-position: -195px top; }
+.star05 { background-position: -210px top; }
+
+
+
+.bg-gray{
+	background-color: #f5f5f5;
+}
+.bg-gray:hover{
+	opacity: 0.5;
+}
+
+/******************************
+
+ ソーシャルエリア全体を囲む要素
+ * 他のコンテンツと距離を取りたい場合は[margin]を設定して下さい
+
+******************************/
+.social-area-syncer {
+	width: 100% ;
+	min-height: 80px ;
+}
+
+/******************************
+
+ [ul]要素
+
+******************************/
+/* スマホ */
+ul.social-button-syncer {
+	width: 238px ;
+	margin: 24px auto ;
+	padding: 0 ;
+	border: none ;
+	list-style-type: none ;
+}
+
+/******************************
+
+ [li]要素
+
+******************************/
+ul.social-button-syncer li {
+	float: left ;
+	text-align: center ;
+	height: 71px ;
+	margin: 0 8px ;
+	padding:0 ;
+}
+
+
+/******************************
+
+ 各種ボタン
+
+******************************/
+/* [Twitter] */
+.sc-tw {
+	width: 71px ;
+}
+
+.sc-tw svg {
+	width: 30px ;
+	height: 30px ;
+ }
+
+.sc-tw a {
+	height: 56px ;
+	margin: 0 auto ;
+	padding-top: 6px ;
+	display: block ;
+	background: #1B95E0 ;
+	font-size: 12px ;
+	color: #fff ;
+	font-weight: 700 ;
+	text-decoration: none ;
+	letter-spacing: .5px ;
+	border-radius: 2px ;
+	padding-bottom: 54px;
+}
+
+.sc-tw a:hover {
+	color: #fff ;
+	background: #0c7abf ;
+}
+
+.sc-tw span:before {
+	white-space: pre ;
+	content: '\A' ;
+}
+
+/* キーワードの最上部ヘッダー */
+.keyword-header a{
+	display: block;
+	width: 100%;
+	height: 33px;
+}
+.keyword-header-body {
+	position: absolute;
+	color: white;
+	padding-left: 18px;
+	margin-top: 5px;
+}
+
+/*キーワードの閉じるボタン*/
+.close-icon {
+	position: relative;
+	cursor: pointer;
+	float:right;
+	right: 30px;
+}
+
+.batu1 {
+	width: 15px;
+	height: 3px;
+	background-color: #fff;
+	position: absolute;
+	top: 15px;
+	-o-transform: rotate(405deg);
+	-moz-transform: rotate(405deg);
+	-webkit-transform: rotate(405deg);
+	-ms-transform: rotate(405deg);
+	transform: rotate(405deg);
+}
+
+.batu2 {
+	width: 15px;
+	height: 3px;
+	background-color: #fff;
+	position: absolute;
+	top: 15px;
+	-o-transform: rotate(-405deg);
+	-moz-transform: rotate(-405deg);
+	-webkit-transform: rotate(-405deg);
+	-ms-transform: rotate(-405deg);
+	transform: rotate(-405deg);
+}
