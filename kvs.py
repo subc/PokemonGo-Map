@@ -6,21 +6,23 @@ from threading import local
 from module import Gym
 import redis
 gyms = {}
-tls = local()
+tls_kvs = local()
 
 
 # redis
 def get_client(point):
     key = "redis_client:{}".format(str(point))
-    if not hasattr(tls, key):
-        from example import get_args
-        args = get_args()
-        host = args.redishost
-        port = args.redisport
+    if not hasattr(tls_kvs, key):
+        from app import conf
+        config = conf()
+        host = config.get('REDIS_HOST')
+        port = config.get('REDIS_PORT')
         db = point
-        print("redis db is {}".format(db))
-        setattr(tls, key, redis.Redis(host=host, port=port, db=db))
-    return getattr(tls, key)
+        assert host, host
+        assert port, port
+        # print("redis db is {}: host:{} port:{}".format(db, host, port))
+        setattr(tls_kvs, key, redis.Redis(host=host, port=port, db=db))
+    return getattr(tls_kvs, key)
 
 
 # pokemon

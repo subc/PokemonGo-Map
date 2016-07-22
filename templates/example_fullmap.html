@@ -150,9 +150,9 @@
                 updateMap();
             });
         } else {
-            // 座標指定URLのときはconfigcに飛ばす
+            // 座標指定URLのときはconfig/cに飛ばす
             var grid_param = location.hash;
-            $.get(baseURL + "/configc" + grid_param.replace("#", "?p=").replace("&z", ""), function (response) {
+            $.get(baseURL + "/config/c" + grid_param.replace("#", "?p=").replace("&z", ""), function (response) {
                 var json_obj = $.parseJSON(response);//parse JSON
                 options["lat"] = json_obj["lat"];
                 options["lng"] = json_obj["lng"];

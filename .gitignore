@@ -3,3 +3,4 @@
 run_worker*
 .DS_Store
 wsgi.py
+password.py
