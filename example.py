@@ -569,6 +569,7 @@ def login(config, point):
     print(access_token)
 
     if access_token is None:
+        time.sleep(5)
         raise Exception('[-] Wrong username/password')
 
     print '[+] RPC Session Token: {} ...'.format(access_token[:25])
