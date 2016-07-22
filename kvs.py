@@ -45,7 +45,7 @@ def get_all_pokemon(point=10):
 
 def set_pokemon(key, value, point=10):
     diff = datetime.fromtimestamp(value['disappear_time']) - datetime.now()
-    diff_sec = diff.seconds - 10 + 10000000 # 10秒短く設定しておく
+    diff_sec = diff.seconds - 10  # 10秒短く設定しておく
     if diff_sec > 0:
         get_client(point=point).setex(get_pokemon_key(point, key), value, diff.seconds)
 

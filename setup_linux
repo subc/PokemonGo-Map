@@ -1,0 +1,58 @@
+# git
+yum install git
+git st
+git config --global color.diff auto
+git config --global color.status auto
+git config --global color.branch auto
+git config --global color.interactive auto
+git config --global alias.co commit
+git config --global alias.cp cherry-pick
+git config --global alias.br branch
+git config --global alias.st status
+
+# python
+python --version
+yum groupinstall "Development tools"
+yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel
+wget https://www.python.org/ftp/python/2.7.12/Python-2.7.12.tar.xz
+tar xf Python-2.7.12.tar.xz
+cd Python-2.7.12
+./configure --prefix=/usr/local --enable-unicode=ucs4 --enable-shared LDFLAGS="-Wl,-rpath /usr/local/lib"
+make && make altinstall
+/usr/local/bin/python2.7 --version
+
+
+# redis
+yum -y install redis
+ls -al /etc/redis*
+
+# pip
+sudo easy_install pip
+sudo easy_install virtualenv
+sudo easy_install virtualenvwrapper
+pip
+pip install pbr
+sudo easy_install virtualenvwrapper
+
+# mkvirualenv
+export WORKON_HOME=$HOME/.virtualenvs
+source `which virtualenvwrapper.sh`
+echo "export WORKON_HOME=$HOME/.virtualenvs" >> ~/.bash_profile
+echo "source `which virtualenvwrapper.sh`" >> ~/.bash_profile
+mkvirtualenv --no-site-packages --python=/usr/local/bin/python2.7 poke
+
+# supervisor
+easy_install supervisor
+supervisorctl
+echo "alias sctl='supervisorctl'" >> ~/.bash_profile
+
+# bash
+echo "# color" >> ~/.bash_profile
+echo "export PS1='\[\e[0;37m\]\u@\h:\w${text}$\[\e[m\] '" >> ~/.bash_profile
+echo "workon poke" >> ~/.bash_profile
+
+
+
+
+
+

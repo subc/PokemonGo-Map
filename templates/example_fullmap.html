@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Flask Google Maps Full Map Example</title>
+    <title>PokemonGO リアルタイムMAP</title>
     <link href="http://www.niku.tokyo/static/css/tag.css?8" rel="stylesheet">
 </head>
 <body style="margin: 0px">
-<div style="height:40px;width:100%;background-color:#333333;color: #ffffff;padding: 8px;">
-    PokemonGO RealTime MAP
+<div style="height:40px;width:100%;background-color:#333333;color: #ffffff;padding: 8px;font-size: 12px;">
+    PokemonGO リアルタイムMAP
 </div>
 
 <div id="fullmap" style='height:100%;width:100%;margin-top:40px;top:0;left:0;position:absolute;z-index:200;'>
@@ -74,7 +74,7 @@
         var map = null;
         var firstTime = true;
         var counter = 0;
-        var adLimit = 10;
+        var adLimit = 30;
         var markers = [];
         var markerCache = {};
         // Adds a marker to the map and push to the array.

@@ -899,9 +899,6 @@ def get_marker_for_debug(point):
     for _x, _y, flavor_text in POINTS:
         ct += 1
 
-        # if ct % 3 != 0 and ct != point:
-        #     continue
-
         # red
         red_marker = {
             'icon': icons.dots.red,
@@ -915,8 +912,6 @@ def get_marker_for_debug(point):
         r.append(red_marker)
 
         # blue 超重い
-        # if point == ct:
-        # print("print blue marker .... {}".format(point))
         d = (int(args.step_limit) - 1) / 2
         for y in [-1 * d, d]:
             for x in [-1 * d, d]:
@@ -937,6 +932,11 @@ def get_marker_for_debug(point):
 
 
 def get_pokemarkers(point=0, first_time=False):
+    """
+    first_timeはhtmlのjs側で制御してる。
+    :param point:
+    :param first_time:
+    """
     # 範囲通知用のマーカー
     if first_time:
         pokeMarkers = get_marker_for_debug(point)
