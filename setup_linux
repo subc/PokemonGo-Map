@@ -1,6 +1,5 @@
 # git
 yum install git
-git st
 git config --global color.diff auto
 git config --global color.status auto
 git config --global color.branch auto
@@ -9,6 +8,7 @@ git config --global alias.co commit
 git config --global alias.cp cherry-pick
 git config --global alias.br branch
 git config --global alias.st status
+git st
 
 # python
 python --version
@@ -29,6 +29,8 @@ vi /etc/redis.conf  # fix databases
 systemctl start redis.service
 systemctl status redis.service
 redis-cli
+sudo systemctl enable redis
+# DB と bidn 0.0.0
 
 # pip
 sudo easy_install pip
@@ -56,9 +58,9 @@ echo "export PS1='\[\e[0;37m\]\u@\h:\w${text}$\[\e[m\] '" >> ~/.bash_profile
 echo "workon poke" >> ~/.bash_profile
 
 ##### ssh 鍵のコピー
-scp ~/.ssh/ikeda poke-worker1:/root/.ssh/
-scp ~/.ssh/ikeda.pub poke-worker1:/root/.ssh/
-scp ~/.ssh/config poke-worker1:/root/.ssh/
+scp ~/.ssh/ikeda poke-app1:/root/.ssh/
+scp ~/.ssh/ikeda.pub poke-app1:/root/.ssh/
+scp ~/.ssh/config poke-app1:/root/.ssh/
 
 # create git
 mkdir -p /var/poke/
@@ -67,4 +69,24 @@ git clone git@github.com:subc/PokemonGo-Map.git pokemap
 cd pokemap
 pip install -r ./requirements.txt
 pip freeze
+echo "cd /var/poke/pokemap" >> ~/.bash_profile
 
+
+# network
+ifconfig
+ip link
+cd /etc/sysconfig/network-scripts
+ls
+cp ifcfg-eth0 ifcfg-eth1
+vi ./ifcfg-eth1
+    ###### EXAMPLE
+DEVICE="eth1"
+BOOTPROTO="none"
+ONBOOT="yes"
+TYPE="Ethernet"
+IPADDR="192.168.0.3"
+NETMASK="255.255.255.0"
+    ###### EXAMPLE
+
+service network restart
+ifconfig
