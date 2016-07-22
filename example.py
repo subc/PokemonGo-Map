@@ -170,20 +170,13 @@ def retrying_set_location(location_name):
 
 
 def set_location(location_name):
-    geolocator = GoogleV3()
-    prog = re.compile('^(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)$')
     global origin_lat
     global origin_lon
-    if prog.match(location_name):
-        local_lat, local_lng = [float(x) for x in location_name.split(",")]
-        alt = 0
-        origin_lat, origin_lon = local_lat, local_lng
-    else:
-        loc = geolocator.geocode(location_name)
-        origin_lat, origin_lon = local_lat, local_lng = loc.latitude, loc.longitude
-        alt = loc.altitude
-        print '[!] Your given location: {}'.format(loc.address)
-
+    s = location_name.split(" ")
+    local_lat = float(s[0])
+    local_lng = float(s[1])
+    origin_lat, origin_lon = local_lat, local_lng
+    alt = 0.0
     print('[!] lat/long/alt: {} {} {}'.format(local_lat, local_lng, alt))
     set_location_coords(local_lat, local_lng, alt)
 
@@ -614,8 +607,9 @@ def main():
 
     # only get location for first run
     if not (FLOAT_LAT and FLOAT_LONG):
-      print('[+] Getting initial location')
-      retrying_set_location(args.location)
+        print('[+] Getting initial location')
+        print(args.location)
+        retrying_set_location(args.location)
 
     if args.auto_refresh:
         global auto_refresh
@@ -912,22 +906,22 @@ def get_marker_for_debug(point):
         r.append(red_marker)
 
         # blue 超重い
-        # d = (int(args.step_limit) - 1) / 2
-        # for y in [-1 * d, d]:
-        #     for x in [-1 * d, d]:
-        #         if x == y == 0:
-        #             continue
-        #         __x = _x + 0.0025 * x
-        #         __y = _y + 0.0025 * y
-        #         r.append({
-        #             'type': 'custom',
-        #             'key': 'options-position:{}:{}'.format(str(__x), str(__y)),
-        #             'disappear_time': -1,
-        #             'icon': icons.dots.blue,
-        #             'lat': __x,
-        #             'lng': __y,
-        #             'infobox': "edge:{}:{}".format(str(__x), str(__y))
-        #         })
+        d = (int(args.step_limit) - 1) / 2
+        for y in [-1 * d, d]:
+            for x in [-1 * d, d]:
+                if x == y == 0:
+                    continue
+                __x = _x + 0.0025 * x
+                __y = _y + 0.0025 * y
+                r.append({
+                    'type': 'custom',
+                    'key': 'options-position:{}:{}'.format(str(__x), str(__y)),
+                    'disappear_time': -1,
+                    'icon': icons.dots.blue,
+                    'lat': __x,
+                    'lng': __y,
+                    'infobox': "edge:{}:{}".format(str(__x), str(__y))
+                })
     return r
 
 
