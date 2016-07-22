@@ -942,8 +942,15 @@ def raw_data():
 def fullmap():
     # clear_stale_pokemons()
     from app import conf
+    key = conf().get('GOOGLEMAPS_KEY')
+    fullmap, fullmap_js = get_map()
     return render_template(
-        'example_fullmap.html', key=conf().get('GOOGLEMAPS_KEY'), fullmap=get_map(), auto_refresh=conf().get('AUTO_REFRESH'))
+            'example_fullmap.html',
+            key=key,
+            GOOGLEMAPS_KEY=key,
+            fullmap=fullmap,
+            fullmap_js=fullmap_js,
+            auto_refresh=conf().get('AUTO_REFRESH'))
 
 
 @app.route('/next_loc')
@@ -1096,8 +1103,9 @@ def get_pokemarkers(point=0, first_time=False):
 def get_map():
     from app import conf
     config = conf()
-    origin_lat = conf().get('LAT')
-    origin_lon = conf().get('LON')
+    origin_lat = config.get('LAT')
+    origin_lon = config.get('LON')
+    key = config.get('GOOGLEMAPS_KEY')
     fullmap = Map(
         identifier="fullmap2",
         style='height:100%;width:100%;top:0;left:0;position:absolute;z-index:200;',
@@ -1105,7 +1113,16 @@ def get_map():
         lng=origin_lon,
         markers=get_pokemarkers(),
         zoom='20')
-    return fullmap
+    from flask_googlemaps import Markup, DEFAULT_ICON
+    fullmap_js = Markup(
+            fullmap.render(
+                    'googlemaps/gmapjs.html',
+                    gmap=fullmap,
+                    DEFAULT_ICON=DEFAULT_ICON,
+                    GOOGLEMAPS_KEY=key
+            )
+    )
+    return fullmap, fullmap_js
 
 
 def start(debug, threaded, host, port):
