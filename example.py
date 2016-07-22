@@ -5,9 +5,7 @@ from __future__ import absolute_import, unicode_literals
 import flask
 from flask import render_template, Blueprint
 from flask import Flask, render_template
-from flask_googlemaps import GoogleMaps
-from flask_googlemaps import Map
-from flask_googlemaps import icons
+from flask_googlemaps import Map, DEFAULT_ICON, icons
 import os
 import re
 import sys
@@ -633,7 +631,7 @@ def update_map(point):
     api_endpoint, access_token, profile_response = login(config, point)
 
     # 10000回繰り返す
-    for x in xrange(10000):
+    for x in xrange(5):
         if x > 2:
             time.sleep(20)
 
@@ -782,14 +780,15 @@ def process_step(config, api_endpoint, access_token, profile_response,
                           profile_response))
     set_location_coords(step_lat, step_long, 0)
     visible = []
-
+    wild_pokemon_ct = 0
     for hh in hs:
         try:
             for cell in hh.cells:
                 for wild in cell.WildPokemon:
-                    hash = wild.SpawnPointId;
+                    hash = wild.SpawnPointId
                     if hash not in seen.keys() or (seen[hash].TimeTillHiddenMs <= wild.TimeTillHiddenMs):
-                        visible.append(wild)    
+                        wild_pokemon_ct += 1
+                        visible.append(wild)
                     seen[hash] = wild.TimeTillHiddenMs
                 if cell.Fort:
                     for Fort in cell.Fort:
@@ -813,6 +812,7 @@ transform_from_wgs_to_gcj(Location(Fort.Latitude, Fort.Longitude))
                                                               Fort.Longitude, expire_time]
         except AttributeError:
             break
+    print("[+]pokemon count:{}".format(wild_pokemon_ct))
 
     for poke in visible:
         pokeid = str(poke.pokemon.PokemonId)
@@ -1113,7 +1113,6 @@ def get_map():
         lng=origin_lon,
         markers=get_pokemarkers(),
         zoom='20')
-    from flask_googlemaps import Markup, DEFAULT_ICON
     fullmap_js = Markup(
             fullmap.render(
                     'googlemaps/gmapjs.html',
