@@ -1024,6 +1024,9 @@ def start(debug, threaded, host, port):
     app.run(debug=True, threaded=True, host=host, port=port)
 
 
+def start_production():
+    app.run(debug=True)
+
 if __name__ == '__main__':
     args = get_args()
     if not args.stopupdate:
