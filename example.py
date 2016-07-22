@@ -637,7 +637,7 @@ def update_map(point):
         if x > 2:
             time.sleep(20)
 
-        clear_stale_pokemons()
+        # clear_stale_pokemons()
 
         ignore = []
         only = []
