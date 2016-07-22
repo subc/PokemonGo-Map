@@ -22,18 +22,13 @@ import time
 from google.protobuf.internal import encoder
 from google.protobuf.message import DecodeError
 from s2sphere import *
-from datetime import datetime
-from geopy.geocoders import GoogleV3
 from gpsoauth import perform_master_login, perform_oauth
 from geopy.exc import GeocoderTimedOut, GeocoderServiceError
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 from requests.adapters import ConnectionError
 from requests.models import InvalidURL
-
-from flavor import get_flavor_text
 from points import POINTS, get_near_point
 from rarity import RARE_POKEMON
-from notify import notify
 from transform import *
 from kvs import *
 
@@ -436,12 +431,12 @@ def get_token(service, username, password):
 def get_args(worker=False):
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        '-a', '--auth_service', type=str.lower, help='Auth Service', default='ptc')
-    parser.add_argument('-u', '--username', help='Username', required=True)
+        '-a', '--auth_service',     help='Auth Service', default='ptc')
+    parser.add_argument('-u', '--username', help='Username', required=False)
     parser.add_argument('-p', '--password', help='Password', required=False)
     parser.add_argument(
-        '-l', '--location', type=parse_unicode, help='Location', required=True)
-    parser.add_argument('-st', '--step-limit', help='Steps', required=True)
+        '-l', '--location', type=parse_unicode, help='Location', required=False)
+    parser.add_argument('-st', '--step-limit', help='Steps', required=False)
     group = parser.add_mutually_exclusive_group(required=False)
     group.add_argument(
         '-i', '--ignore', help='Comma-separated list of Pokémon names or IDs to ignore')
@@ -1025,6 +1020,10 @@ def get_map():
     return fullmap
 
 
+def start(debug, threaded, host, port):
+    app.run(debug=True, threaded=True, host=host, port=port)
+
+
 if __name__ == '__main__':
     args = get_args()
     if not args.stopupdate:
@@ -1034,4 +1033,5 @@ if __name__ == '__main__':
         retrying_set_location(args.location)
         if args.auto_refresh:
             auto_refresh = int(args.auto_refresh) * 1000
-    app.run(debug=True, threaded=True, host=args.host, port=args.port)
+    start(debug=True, threaded=True, host=args.host, port=args.port)
+    # app.run(debug=True, threaded=True, host=args.host, port=args.port)
