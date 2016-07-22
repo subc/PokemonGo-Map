@@ -24,8 +24,18 @@
             <div class="batu2"></div>
         </div>
     </a>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
 
-    ADADADAD
+    <div style="border-style: solid;
+    border-width: 1px; border-color: midnightblue; color: black;
+     margin-left : auto ; margin-right : auto; opacity: 1.0;
+    background-color: #ffffff; width: 400px; padding-bottom: 150px; padding-top: 150px; padding-left: 10px;">
+    サーバ負荷軽減にご協力ください<br/>
+    Thank you for cooperation.<br/>
+    </div>
 </div>
 {#AD#}
 
@@ -74,7 +84,7 @@
         var map = null;
         var firstTime = true;
         var counter = 0;
-        var adLimit = 30;
+        var adLimit = 3;
         var markers = [];
         var markerCache = {};
         // Adds a marker to the map and push to the array.
@@ -204,13 +214,14 @@
 
             // change active url replace
             var grid_param = map.mapUrl.split('=')[1];
-            if(firstTime){
+            location.hash=grid_param;
+
+            if(firstTime) {
                 // todo
                 console.debug('First Time!!');
                 firstTime = false;
                 grid_param += '&FirstTime=1';
             }
-            location.hash=grid_param;
 
             $.get(baseURL + "/data/?" + grid_param, function(response){
                 var json_obj = $.parseJSON(response);
