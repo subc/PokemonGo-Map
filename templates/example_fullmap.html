@@ -182,15 +182,27 @@
         function createMap(){
             if(map == null && google != null && google.maps != null){
                 if(options.identifier != null){
+                    console.debug("create map set config");
                     map = new google.maps.Map(
                         document.getElementById(options["identifier"]), {
                             center: new google.maps.LatLng(options["lat"], options["lng"]),
                             zoom: options["zoom"],
-                            mapTypeId: google.maps.MapTypeId.ROADMAP,
-                            zoomControl: true,
                             mapTypeControl: true,
+                            mapTypeControlOptions: {
+                                style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+                                position: google.maps.ControlPosition.TOP_RIGHT,
+                                mapTypeIds: [
+                                    google.maps.MapTypeId.ROADMAP,
+                                    google.maps.MapTypeId.TERRAIN
+                                ]
+                            },
+                            zoomControl: true,
+                            zoomControlOptions: {
+                                style: google.maps.ZoomControlStyle.LARGE,
+                                position: google.maps.ControlPosition.TOP_LEFT
+                            },
                             scaleControl: true,
-                            streetViewControl: true,
+                            streetViewControl: false,
                             rotateControl: true,
                             fullscreenControl: true
                     });
