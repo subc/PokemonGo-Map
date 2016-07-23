@@ -17,10 +17,11 @@ def config():
     config = conf()
     origin_lat = conf().get('LAT')
     origin_lon = conf().get('LON')
+    zoom = conf().get('ZOOM')
     center = {
         'lat': origin_lat,
         'lng': origin_lon,
-        'zoom': 15,
+        'zoom': zoom,
         'identifier': "fullmap"
     }
     return json.dumps(center)
@@ -31,11 +32,14 @@ def configc():
     """
     Gets the settings for the Google Maps via REST
     """
+    from app import conf
+    config = conf()
+    zoom = conf().get('ZOOM')
     x, y = flask.request.url.split("?")[1].replace("p=", "").split(",")
     center = {
         'lat': x,
         'lng': y,
-        'zoom': 15,
+        'zoom': zoom,
         'identifier': "fullmap"
     }
     return json.dumps(center)

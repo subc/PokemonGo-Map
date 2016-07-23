@@ -945,9 +945,12 @@ def fullmap():
     from app import conf
     key = conf().get('GOOGLEMAPS_KEY')
     fullmap, fullmap_js = get_map()
+    config = conf()
+    zoom = conf().get('ZOOM')
     return render_template(
             'example_fullmap.html',
             key=key,
+            zoom=zoom,
             GOOGLEMAPS_KEY=key,
             fullmap=fullmap,
             fullmap_js=fullmap_js,

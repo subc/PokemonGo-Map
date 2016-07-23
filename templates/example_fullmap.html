@@ -169,7 +169,7 @@
                 var json_obj = $.parseJSON(response);//parse JSON
                 options["lat"] = json_obj["lat"];
                 options["lng"] = json_obj["lng"];
-                options["zoom"] = 16;
+                options["zoom"] = {{ zoom }};
                 options["identifier"] = json_obj["identifier"];
                 updateMap();
             });
@@ -180,7 +180,7 @@
                 var json_obj = $.parseJSON(response);//parse JSON
                 options["lat"] = json_obj["lat"];
                 options["lng"] = json_obj["lng"];
-                options["zoom"] = 16;
+                options["zoom"] = {{ zoom }};
                 options["identifier"] = json_obj["identifier"];
                 updateMap();
             });
