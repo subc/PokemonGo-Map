@@ -107,6 +107,13 @@ systemctl status firewalld
 systemctl start firewalld
 systemctl stop firewalld
 
+# firewalld trusted
+firewall-cmd --zone=trusted --add-source=192.168.10.0/24
+firewall-cmd --add-service=redis --zone=trusted --permanent
+firewall-cmd --remove-service=redis --zone=public --permanent
+
+# firewalld 確認
+firewall-cmd --zone=trusted --query-source=192.168.10.0/24
 
 # nginx
 yum install -y nginx
