@@ -88,3 +88,52 @@ def delete_gym(key, point=10):
 
 def get_gym_keys(point=10):
     return gyms.keys()
+
+
+# acc switch
+def get_acc_version(point):
+    """
+    return True or False
+    1. key両方ない ... True 内部でA(expire 6h) B(expire 12h)作る
+    2. key両方ある ... True
+    3. keyAだけある ... True
+    4. keyBだけある ... False
+
+    :rtype: bool
+    """
+    base = "ACC:SWICH:{}"
+    key_a = base.format("A")
+    key_b = base.format("B")
+
+    exist_a = key_is_exist(point, key_a)
+    exist_b = key_is_exist(point, key_b)
+
+    # 1. key両方ない ... True 内部でA(expire 6h) B(expire 12h)作る
+    if exist_a is False and exist_b is False:
+        timeout_a = 3600 * 6
+        timeout_b = 3600 * 12
+        client = get_client(point)
+
+        # create A, B
+        client.setex(key_a, 1, timeout_a)
+        client.setex(key_b, 1, timeout_b)
+        return True
+
+    # 2. key両方ある ... True
+    if exist_a and exist_b:
+        return True
+
+    # 3. keyAだけある ... True
+    if exist_a and exist_b is False:
+        return True
+
+    # 4. keyBだけある ... False
+    if exist_a is False and exist_b:
+        return False
+
+    raise ValueError
+
+
+def key_is_exist(point, key):
+    client = get_client(point)
+    return bool(client.exists(key))
