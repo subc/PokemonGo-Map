@@ -556,8 +556,10 @@ def get_args(worker=False):
 
 
 def get_user_and_password(config, point):
-    return config['ACCOUNTS'][point]
-
+    if config["IS_PRODUCTION"]:
+        return config['ACCOUNTS'][point]
+    else:
+        return config['USERNAME'], config['PASSWORD']
 
 @memoize
 def login(config, point):
