@@ -107,6 +107,11 @@ systemctl status firewalld
 systemctl start firewalld
 systemctl stop firewalld
 
+# create settings
+cd /usr/lib/firewalld/services/
+touch redis.xml
+vi redis.xml
+
 # firewalld trusted
 firewall-cmd --zone=trusted --add-source=192.168.10.0/24
 firewall-cmd --add-service=redis --zone=trusted --permanent
@@ -114,6 +119,8 @@ firewall-cmd --remove-service=redis --zone=public --permanent
 
 # firewalld 確認
 firewall-cmd --zone=trusted --query-source=192.168.10.0/24
+firewall-cmd --list-services --zone=public  --permanent
+firewall-cmd --list-services --zone=trusted  --permanent
 
 # nginx
 yum install -y nginx
