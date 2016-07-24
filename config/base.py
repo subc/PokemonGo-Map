@@ -19,3 +19,6 @@ DISPLAY_POKE_STOP = False
 
 # PokemonGo-Map/locales/pokemon.en.json
 LOCALE = "en"
+
+IS_LOCAL = True
+IS_PRODUCTION = False
