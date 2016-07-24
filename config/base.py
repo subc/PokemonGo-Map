@@ -2,7 +2,7 @@
 from __future__ import absolute_import, unicode_literals
 from config.password import USERNAME, PASSWORD, ACCOUNTS
 
-REDIS_HOST = '127.0.0.1'
+REDIS_HOSTS = ['127.0.0.1']
 REDIS_PORT = 6379
 USERNAME = USERNAME
 PASSWORD = PASSWORD

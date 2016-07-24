@@ -9,13 +9,18 @@ gyms = {}
 tls_kvs = local()
 
 
-# redis
+def _get_redis_host(config, point):
+    redis_hosts = config.get('REDIS_HOSTS')
+    redis_server_count = len(redis_hosts)
+    return redis_hosts[point % redis_server_count]
+
+
 def get_client(point):
     key = "redis_client:{}".format(str(point))
     if not hasattr(tls_kvs, key):
         from app import conf
         config = conf()
-        host = config.get('REDIS_HOST')
+        host = _get_redis_host(config, point)
         port = config.get('REDIS_PORT')
         db = point
         assert host, host
