@@ -17,7 +17,20 @@ class MapUpdate(Command):
         print("finish")
 
     def init(self):
-        pass
+        # setting test
+        from app import conf
+        config = conf()
+        acc1 = config['ACCOUNTS']
+        acc2 = config['ACCOUNTS2']
+
+        # test
+        from points import POINTS
+        assert len(POINTS) <= len(acc1), "point:{} acc1:{}".format(len(POINTS), len(acc1))
+        assert len(POINTS) <= len(acc2), "point:{} acc2:{}".format(len(POINTS), len(acc2))
+
+        # printer
+        print "POINT:{} ACC1:{} ACC2:{}".format(len(POINTS), len(acc1), len(acc2))
+
 
     def _run(self, point):
         update_map(point)

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
-from config.password import USERNAME, PASSWORD, ACCOUNTS
+from config.password import *
 
 REDIS_HOSTS = ['127.0.0.1']
 REDIS_PORT = 6379

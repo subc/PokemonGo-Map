@@ -556,7 +556,11 @@ def get_args(worker=False):
 
 
 def get_user_and_password(config, point):
+    use_sub_account = get_acc_version(point)
+
     if config["IS_PRODUCTION"]:
+        if use_sub_account:
+            return config['ACCOUNTS2'][point]
         return config['ACCOUNTS'][point]
     else:
         return config['USERNAME'], config['PASSWORD']
