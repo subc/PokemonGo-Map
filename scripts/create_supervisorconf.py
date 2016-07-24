@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
-from points import POINTS
 from config.password import ACCOUNTS
 import codecs
+from config.production import REDIS_HOSTS
+from points import POINTS
 
 
 F = """[program:{}]
@@ -19,11 +20,14 @@ redirect_stderr=true
 
 def create_file(ct):
     print("[+]start create file : {}".format(ct))
-    _base_path = "/Users/ikeda/noah/PokemonGo-Map/config/supervisord/up/"
+    _base_path = "/Users/ikeda/python/maps/config/supervisord/up/"
     filename = "up{0:03d}".format(ct)
     body = F.format(filename, ct, filename)
     print(body)
-    path = _base_path + filename + ".ini"
+
+    # set folder
+    folder_name = ct % len(REDIS_HOSTS)
+    path = _base_path + str(folder_name) + "/" + filename + ".ini"
 
     with codecs.open(path, "w", "utf-8") as file:
         file.write(body)
@@ -36,6 +40,4 @@ assert len(ACCOUNTS) >= len(POINTS), "{}:{}".format(len(ACCOUNTS), len(POINTS))
 for x, y, _ in POINTS:
     create_file(ct)
     ct += 1
-
-
 
