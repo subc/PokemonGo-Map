@@ -20,7 +20,4 @@ for f in poke-worker1; do
   echo "_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/"
   ssh -l root $f "date"
   ssh -l root $f "/usr/bin/supervisorctl -c /etc/supervisord.conf status"
-  ssh -l root $f "ls -lta /var/log/supervisor"
 done
-
-
