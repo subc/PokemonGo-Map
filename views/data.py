@@ -19,7 +19,9 @@ def data():
     :param position: str
     """
     first_time = "FirstTime" in flask.request.url
+    enable_gym = "gym" in flask.request.url
     x, y = flask.request.url.split("?")[-1].split("&")[0].split(",")
+
     point_x, point_y = get_near_point(float(x), float(y))
 
     # debug
@@ -31,4 +33,4 @@ def data():
             break
         ct += 1
 
-    return json.dumps(get_pokemarkers(point=ct, first_time=first_time))
+    return json.dumps(get_pokemarkers(point=ct, first_time=first_time, enable_gym=enable_gym))

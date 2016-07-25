@@ -1024,11 +1024,12 @@ def get_marker_for_debug(point):
     return r
 
 
-def get_pokemarkers(point=0, first_time=False):
+def get_pokemarkers(point=0, first_time=False, enable_gym=False):
     """
     first_timeはhtmlのjs側で制御してる。
     :param point:
     :param first_time:
+    :param enable_gym:
     """
     # 範囲通知用のマーカー
     if first_time:
@@ -1074,6 +1075,9 @@ def get_pokemarkers(point=0, first_time=False):
             'lng': pokemon["lng"],
             'infobox': label
         })
+
+    if not enable_gym:
+        return pokeMarkers
 
     for gym_key in get_gym_keys(point):
         gym = get_gym(gym_key, point)

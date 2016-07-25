@@ -20,7 +20,10 @@
 </head>
 <body style="margin: 0px">
 <div style="height:40px;width:100%;background-color:#333333;color: #ffffff;padding-top: 8px;">
-    <h1 style="height:100%;width:100%;font-size: 12px; margin-top: 3px; margin-left: 5px">PGO MAP - ポケモンGO リアルタイムMAP</h1>
+    <h1 style="height:100%;width:100%;font-size: 12px; margin-top: 3px; margin-left: 5px">PGO MAP - ポケモンGO リアルタイムMAP
+    </h1>
+    <span style="float:right; margin-top: -52px; margin-right: 15px; z-index: 1000"><a id="showGym" href="#" onclick="toggleGym();" style="color: #ffffff; font-size: 12px">ジム表示</a></span>
+
 </div>
 
 <div id="fullmap" style='height:100%;width:100%;margin-top:40px;top:0;left:0;position:absolute;z-index:200;'>
@@ -106,6 +109,7 @@
         var baseURL = location.protocol + "//" + location.hostname + (location.port ? ":"+location.port: "");
         var options = {};
         var map = null;
+        var gym = false;
         var firstTime = true;
         var counter = 0;
         var adLimit = 300;
@@ -215,8 +219,17 @@
                 }
             }
         }
+        function toggleGym(){
+            if(gym == false){
+                gym = true;
+                $('#showGym').text("ジム非表示");
+            }else{
+                gym = false;
+                $('#showGym').text("ジム表示");
+                location.reload()
+            }
+        }
         function adOpne(){
-{#            $('#fullmap').css("display","None");#}
             $('#ad').css("display","Block");
             $('#fullmap').css("opacity", '0.3');
             $('#fullmap').css("z-index", '-200');
@@ -251,9 +264,11 @@
             var grid_param = map.mapUrl.split('=')[1];
             location.hash=grid_param;
 
+            if(gym){
+                grid_param += '&gym=1';
+            }
+
             if(firstTime) {
-                // todo
-                console.debug('First Time!!');
                 firstTime = false;
                 grid_param += '&FirstTime=1';
             }
