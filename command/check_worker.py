@@ -21,9 +21,9 @@ class CheckWorker(Command):
         for x in xrange((len(POINTS))):
             num = len(get_all_pokemon(point=x))
             if num > 5:
-                print "[+]ok({}) point:{}".format(num, x)
+                print "[+]ok({0:04d}) point:{0:04d}".format(num, x)
             else:
-                print "[-]NGNGNG({}) point:{}".format(num, x)
+                print "[-]NGNGNG({0:04d}) point:{0:04d}".format(num, x)
                 ng_group.append((num, x))
 
         if ng_group:
@@ -31,7 +31,7 @@ class CheckWorker(Command):
             print("ERRORS")
             print("++++++++++++++++++++++++++++++++++++")
             for num, x in ng_group:
-                print "[-]NG({}) point:{}".format(num, x)
+                print "[-]NG({0:04d}) point:{0:04d}".format(num, x)
             print("++++++++++++++++++++++++++++++++++++")
         else:
             print("")
