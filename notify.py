@@ -3,7 +3,7 @@ from __future__ import absolute_import, unicode_literals
 
 from datetime import datetime
 
-from rarity import RARE_POKEMON
+from constants.rarity import RARE_POKEMON
 from slacker import Slacker
 SLACK_TOKEN = "xoxp-13918973506-15373952882-61429408502-0de1196a97"
 SLACK_CHANNEL = "pokemon-go"

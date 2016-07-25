@@ -28,9 +28,10 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 from requests.adapters import ConnectionError
 from requests.models import InvalidURL
 
-from dictionary import POKEMON_JAPANESE_NAME
+from constants.dictionary import POKEMON_JAPANESE_NAME
+from constants.cp import POKEMON_MAX_CP
+from constants.rarity import RARE_POKEMON
 from points import POINTS, get_near_point
-from rarity import RARE_POKEMON
 from transform import *
 from kvs import *
 from threading import local
@@ -1047,10 +1048,18 @@ def get_pokemarkers(point=0, first_time=False):
         pokemon['disappear_time_formatted'] = dateoutput
         pokemon['jpn_name'] = POKEMON_JAPANESE_NAME[pokemon['id']]
 
-        LABEL_TMPL = u'''
+        if pokemon['id'] in POKEMON_MAX_CP:
+            pokemon['max_cp'] = int(POKEMON_MAX_CP[pokemon['id']])
+            LABEL_TMPL = u'''
+<div><b>{jpn_name}</b><span> </span><small><a href='http://www.pokemon.com/us/pokedex/{id}' target='_blank' title='View in Pokedex'>#{id}</a> MaxCP: {max_cp}</small></div>
+<div>逃走まであと - {disappear_time_formatted} <span class='label-countdown' disappears-at='{disappear_time}'></span></div>
+'''
+        else:
+            LABEL_TMPL = u'''
 <div><b>{jpn_name}</b><span> - </span><small><a href='http://www.pokemon.com/us/pokedex/{id}' target='_blank' title='View in Pokedex'>#{id}</a></small></div>
 <div>逃走まであと - {disappear_time_formatted} <span class='label-countdown' disappears-at='{disappear_time}'></span></div>
 '''
+
         label = LABEL_TMPL.format(**pokemon)
         #  NOTE: `infobox` field doesn't render multiple line string in frontend
         label = label.replace('\n', '')
