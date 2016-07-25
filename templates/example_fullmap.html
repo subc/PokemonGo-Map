@@ -48,10 +48,15 @@
      margin-left : auto ; margin-right : auto; opacity: 1.0;
     background-color: #ffffff; width: 400px; padding-bottom: 150px; padding-top: 150px; padding-left: 10px;">
 
+    {% if is_maintanance %}
     サーバ負荷増大のためメンテナンス中です。<br/>申し訳ございません。<br/>
     メンテ解除時刻: 7/26 12時ごろ<br/><br/>
     <a href="http://ispokemongodownornot.com/">>> ステータスを確認</a><br/>
     Thank you for cooperation.<br/>
+    {% else %}
+    サーバ負荷軽減にご協力ください<br/>
+    Thank you for cooperation.<br/>
+    {% endif %}
     </div>
 </div>
 {#AD#}
