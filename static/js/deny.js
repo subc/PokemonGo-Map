@@ -5,7 +5,7 @@ host_name = 'pokemon-go-map.tokyo';
 redirect_millisec = 500;
 
 // コピーされたときに表示するメッセージ
-deny_message = '<h3 style="color: white">本ページは削除されました。(・ω<) ﾃﾍﾍﾟﾛ </h3>';
+deny_message = '<h3 style="color: white">本ページは削除されました。</h3>';
 redirect_deny_url = $('meta[name=Identifier-URL]').attr("content");
 
 
