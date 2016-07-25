@@ -57,10 +57,6 @@ def set_pokemon(key, value, point=10):
         get_client(point=point).setex(get_pokemon_key(point, key), value, diff.seconds)
 
 
-def delete_pokemon(key, point=10):
-    get_client(point=point).delete(get_pokemon_key(point, key))
-
-
 def get_pokemon_keys(point=10):
     keys = get_client(point=point).keys(get_pokemon_key(point, "*"))
     if keys:
@@ -69,25 +65,34 @@ def get_pokemon_keys(point=10):
 
 
 # gym
+def get_gym_key(point, _key):
+    return "gym:{0:04d}:".format(int(point)) + _key
+
+
 def get_gym(key, point=10):
-    return gyms[key]
+    import ast
+    gym = get_client(point=point).get(key)
+    if gym:
+        return ast.literal_eval(gym)
+    return None
 
 
 def get_all_gym(point=10):
-    print("gyms", gyms)
-    return gyms
+    result = []
+    for key in get_gym_keys(point=point):
+        result.append(get_gym(key, point=point))
+    return result
 
 
 def set_gym(key, value, point=10):
-    gyms[key] = value
-
-
-def delete_gym(key, point=10):
-    del gyms[key]
+    get_client(point=point).setex(get_gym_key(point, key), value, 3600 * 24)
 
 
 def get_gym_keys(point=10):
-    return gyms.keys()
+    keys = get_client(point=point).keys(get_gym_key(point, "*"))
+    if keys:
+        return keys
+    return []
 
 
 # acc switch
