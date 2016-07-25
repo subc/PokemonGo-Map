@@ -1046,17 +1046,17 @@ def get_pokemarkers(point=0, first_time=False):
         if is_ampm_clock:
         	dateoutput = datestr.strftime("%I:%M%p").lstrip('0')
         pokemon['disappear_time_formatted'] = dateoutput
-        pokemon['jpn_name'] = POKEMON_JAPANESE_NAME[pokemon['id']]
+        pokemon['jpn_name'] = POKEMON_JAPANESE_NAME.get(pokemon['id'])
 
         if pokemon['id'] in POKEMON_MAX_CP:
             pokemon['max_cp'] = int(POKEMON_MAX_CP[pokemon['id']])
             LABEL_TMPL = u'''
-<div><b>{jpn_name}</b><span> </span><small><a href='http://www.pokemon.com/us/pokedex/{id}' target='_blank' title='View in Pokedex'>#{id}</a> MaxCP: {max_cp}</small></div>
+<div><b>{jpn_name}</b><span> </span><small><a href='http://pokemongo.gamepress.gg/pokemon/{id}' target='_blank' title='View in Pokedex'>#{id}</a> MaxCP: {max_cp}</small></div>
 <div>逃走まであと - {disappear_time_formatted} <span class='label-countdown' disappears-at='{disappear_time}'></span></div>
 '''
         else:
             LABEL_TMPL = u'''
-<div><b>{jpn_name}</b><span> - </span><small><a href='http://www.pokemon.com/us/pokedex/{id}' target='_blank' title='View in Pokedex'>#{id}</a></small></div>
+<div><b>{jpn_name}</b><span> - </span><small><a href='http://pokemongo.gamepress.gg/pokemon/{id}' target='_blank' title='View in Pokedex'>#{id}</a></small></div>
 <div>逃走まであと - {disappear_time_formatted} <span class='label-countdown' disappears-at='{disappear_time}'></span></div>
 '''
 
