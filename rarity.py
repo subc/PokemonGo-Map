@@ -5,15 +5,13 @@ RARE_POKEMON = [
     ### test data
     129,  # コイキング
     92,  # ゴースト
-    # 19, 16, 54, 41,  # ぽっぽとか
-    # 11,  # トランセル
-
     1, 4, 7, 25, 147,  # 御三家とミニリュー
     113,  # ラッキー
     138,  # オムナイト
     12,  # バタフライ
     95,  # イワーク
     133,  # イーブイ
+    66,  # ワンリキー
     ###############
     105,  # Marowak
     44,  # Gloom
@@ -22,7 +20,7 @@ RARE_POKEMON = [
     124,  # Jynx
     70,  # Weepinbell
     114,  # Tangela
-    22,  # Fearow
+    # 22,  # Fearow
     47,  # Parasect
     148,  # Dragonair
     67,  # Machoke
@@ -30,7 +28,7 @@ RARE_POKEMON = [
     28,  # Sandslash
     65,  # Alakazam
     99,  # Kingler
-    85,  # Dodrio
+    # 85,  # Dodrio
     128,  # Tauros
     57,  # Primeape
     82,  # Magneton
