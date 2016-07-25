@@ -13,7 +13,7 @@ for f in poke-app1 poke-app2; do
   ssh -l root $f "ls -lta /var/log/nginx"
 done
 
-for f in poke-worker1; do
+for f in poke-worker1 poke-worker2 poke-worker3 poke-worker4; do
   echo ""
   echo "_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/"
   echo "$f"

@@ -808,7 +808,7 @@ def process_step(config, api_endpoint, access_token, profile_response,
 transform_from_wgs_to_gcj(Location(Fort.Latitude, Fort.Longitude))
                             if Fort.GymPoints and display_gym:
                                 set_gym(Fort.FortId, [Fort.Team, Fort.Latitude,
-                                                      Fort.Longitude, Fort.GymPoints])
+                                                      Fort.Longitude, Fort.GymPoints], point)
 
                             elif Fort.FortType \
                                 and display_pokestop:
@@ -915,10 +915,10 @@ def register_background_thread(initial_registration=False):
 #     return json.dumps(get_pokemarkers(point=ct, first_time=first_time))
 
 
-@app.route('/raw_data')
-def raw_data():
-    """ Gets raw data for pokemons/gyms/pokestops via REST """
-    return flask.jsonify(pokemons=get_all_pokemon(), gyms=get_all_gym(), pokestops=pokestops)
+# @app.route('/raw_data')
+# def raw_data():
+#     """ Gets raw data for pokemons/gyms/pokestops via REST """
+#     return flask.jsonify(pokemons=get_all_pokemon(), gyms=get_all_gym(), pokestops=pokestops)
 #
 #
 # @app.route('/config')
@@ -1075,8 +1075,8 @@ def get_pokemarkers(point=0, first_time=False):
             'infobox': label
         })
 
-    for gym_key in get_gym_keys():
-        gym = get_gym(gym_key)
+    for gym_key in get_gym_keys(point):
+        gym = get_gym(gym_key, point)
         if gym[0] == 0:
             color = "rgba(0,0,0,.4)"
         if gym[0] == 1:
