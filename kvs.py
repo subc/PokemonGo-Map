@@ -85,7 +85,7 @@ def get_all_gym(point=10):
 
 
 def set_gym(key, value, point=10):
-    get_client(point=point).setex(get_gym_key(point, key), value, 3600 * 24)
+    get_client(point=point).setex(get_gym_key(point, key), value, 3600 * 24 * 10)
 
 
 def get_gym_keys(point=10):
