@@ -8,7 +8,6 @@ AUTO_REFRESH = 2000
 # LAT, LON = (float(35.687971), float(139.7544148))
 LAT, LON = (float(35.683885), float(139.712122))
 ZOOM = 14
-GOOGLEMAPS_KEY = "AIzaSyAZzeHhs-8JZ7i18MjFuM35dJHq70n3Hx4"
 STEP_LIMIT = 9
 DISPLAY_GYM = False
 DISPLAY_POKE_STOP = False
@@ -19,3 +18,10 @@ LOCALE = "en"
 
 IS_LOCAL = True
 IS_PRODUCTION = False
+
+# KEY
+GOOGLEMAPS_KEYS = [
+    "AIzaSyAZzeHhs-8JZ7i18MjFuM35dJHq70n3Hx4",  # id.s
+    "AIzaSyAVreVNXS9WsfEBP3u5shGUnR27QCg2680",  # sub33
+    "AIzaSyBCwfqt2qXfzfzkonj-vB8aGKbwGeAlVz4",  # kt.me
+]

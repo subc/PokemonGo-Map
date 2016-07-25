@@ -6,6 +6,7 @@ import flask
 from flask import render_template, Blueprint
 from flask import Flask, render_template
 from flask_googlemaps import Map, DEFAULT_ICON, icons, Markup
+import random
 import os
 import re
 import sys
@@ -950,7 +951,7 @@ def raw_data():
 def fullmap():
     # clear_stale_pokemons()
     from app import conf
-    key = conf().get('GOOGLEMAPS_KEY')
+    key = get_google_map_api(conf())
     fullmap, fullmap_js = get_map()
     config = conf()
     zoom = conf().get('ZOOM')
@@ -1111,12 +1112,17 @@ def get_pokemarkers(point=0, first_time=False):
     return pokeMarkers
 
 
+def get_google_map_api(config):
+    keys = config.get('GOOGLEMAPS_KEYS')
+    return random.choice(keys)
+
+
 def get_map():
     from app import conf
     config = conf()
     origin_lat = config.get('LAT')
     origin_lon = config.get('LON')
-    key = config.get('GOOGLEMAPS_KEY')
+    key = get_google_map_api(config)
     fullmap = Map(
         identifier="fullmap2",
         style='height:100%;width:100%;top:0;left:0;position:absolute;z-index:200;',
