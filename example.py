@@ -1048,7 +1048,7 @@ def get_pokemarkers(point=0, first_time=False):
 
         LABEL_TMPL = u'''
 <div><b>{jpn_name}</b><span> - </span><small><a href='http://www.pokemon.com/us/pokedex/{id}' target='_blank' title='View in Pokedex'>#{id}</a></small></div>
-<div>消滅まであと - {disappear_time_formatted} <span class='label-countdown' disappears-at='{disappear_time}'></span></div>
+<div>逃走まであと - {disappear_time_formatted} <span class='label-countdown' disappears-at='{disappear_time}'></span></div>
 '''
         label = LABEL_TMPL.format(**pokemon)
         #  NOTE: `infobox` field doesn't render multiple line string in frontend
