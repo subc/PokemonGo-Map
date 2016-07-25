@@ -26,9 +26,14 @@ class CheckWorker(Command):
                 print "[-]NGNGNG({}) point:{}".format(num, x)
                 ng_group.append((num, x))
 
-        print("++++++++++++++++++++++++++++++++++++")
-        print("ERRORS")
-        print("++++++++++++++++++++++++++++++++++++")
-        for num, x in ng_group:
-            print "[-]NG({}) point:{}".format(num, x)
-        print("++++++++++++++++++++++++++++++++++++")
+        if ng_group:
+            print("++++++++++++++++++++++++++++++++++++")
+            print("ERRORS")
+            print("++++++++++++++++++++++++++++++++++++")
+            for num, x in ng_group:
+                print "[-]NG({}) point:{}".format(num, x)
+            print("++++++++++++++++++++++++++++++++++++")
+        else:
+            print("")
+            print("ok.")
+            print("")
