@@ -1033,6 +1033,9 @@ def get_rare_markers():
     """
     pokeMarkers = []
     for point in range(len(POINTS)):
+        if random.randint(1, 10) != 3:
+            continue
+
         for pokemon_key in get_pokemon_keys(point=point):
             pokemon = get_pokemon(pokemon_key, point=point)
             if not pokemon:
