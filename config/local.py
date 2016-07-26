@@ -7,6 +7,6 @@ try:
 except ImportError:
     pass
 
-GOOGLEMAPS_KEYS = [
-    "AIzaSyAZzeHhs-8JZ7i18MjFuM35dJHq70n3Hx4",  # open
-]
+# GOOGLEMAPS_KEYS = [
+#     "AIzaSyAZzeHhs-8JZ7i18MjFuM35dJHq70n3Hx4",  # open
+# ]
