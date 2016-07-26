@@ -1066,7 +1066,7 @@ def get_rare_markers():
             pokemon['jpn_name'] = POKEMON_JAPANESE_NAME.get(pokemon['id'])
 
             # check rare pokemon
-            if is_rare_pokemon(pokemon['id']):
+            if not is_rare_pokemon(pokemon['id']):
                 continue
 
             if pokemon['id'] in POKEMON_MAX_CP:
