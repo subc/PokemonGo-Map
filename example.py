@@ -1024,6 +1024,23 @@ def get_marker_for_debug(point):
     return r
 
 
+def is_rare_pokemon(pokemon_id):
+    # max_cp が2000以上
+    max_cp = POKEMON_MAX_CP[pokemon_id]
+    if max_cp <= 2500:
+        return False
+
+    # 特定ポケモン除外
+    ignore_id = [
+        55,  # ゴルダック
+        127,  # カイロス
+    ]
+    if pokemon_id in ignore_id:
+        return False
+
+    return True
+
+
 def get_rare_markers():
     """
     first_timeはhtmlのjs側で制御してる。
@@ -1048,11 +1065,12 @@ def get_rare_markers():
             pokemon['disappear_time_formatted'] = dateoutput
             pokemon['jpn_name'] = POKEMON_JAPANESE_NAME.get(pokemon['id'])
 
+            # check rare pokemon
+            if is_rare_pokemon(pokemon['id']):
+                continue
+
             if pokemon['id'] in POKEMON_MAX_CP:
                 pokemon['max_cp'] = int(POKEMON_MAX_CP[pokemon['id']])
-
-                if pokemon['max_cp'] <= 2000:
-                    continue
 
                 LABEL_TMPL = u'''
 <div><b>{jpn_name}</b><span> </span><small><a href='http://pokemongo.gamepress.gg/pokemon/{id}' target='_blank' title='View in Pokedex'>#{id}</a> MaxCP: {max_cp}</small></div>
