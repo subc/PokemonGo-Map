@@ -21,7 +21,10 @@ IS_PRODUCTION = False
 
 # KEY
 GOOGLEMAPS_KEYS = [
-    # "AIzaSyAZzeHhs-8JZ7i18MjFuM35dJHq70n3Hx4",  # id.s
+    "AIzaSyAZzeHhs-8JZ7i18MjFuM35dJHq70n3Hx4",  # id.s
     "AIzaSyAVreVNXS9WsfEBP3u5shGUnR27QCg2680",  # sub33
     "AIzaSyBCwfqt2qXfzfzkonj-vB8aGKbwGeAlVz4",  # kt.me
+    "AIzaSyDER1RwjdUbygOk1TyA1Tigm11ADmHYrrY",  # kt.me.a
+    "AIzaSyDqbUsSLmGsVVVXePcGOvN6pJNzvYARPhM",  # hoge001@pgo.tok
+    "AIzaSyACtwPg-NqsPXw5gNyXpVZVKALgZpgKfrc",  # subc1-5
 ]
