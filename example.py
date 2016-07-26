@@ -1024,6 +1024,61 @@ def get_marker_for_debug(point):
     return r
 
 
+def get_rare_markers():
+    """
+    first_timeはhtmlのjs側で制御してる。
+    :param point:
+    :param first_time:
+    :param enable_gym:
+    """
+    pokeMarkers = []
+    for point in range(len(POINTS)):
+        for pokemon_key in get_pokemon_keys(point=point):
+            pokemon = get_pokemon(pokemon_key, point=point)
+            if not pokemon:
+                continue
+            datestr = datetime.fromtimestamp(pokemon[
+                'disappear_time'])
+            dateoutput = datestr.strftime("%H:%M:%S")
+            if is_ampm_clock:
+                dateoutput = datestr.strftime("%I:%M%p").lstrip('0')
+            pokemon['disappear_time_formatted'] = dateoutput
+            pokemon['jpn_name'] = POKEMON_JAPANESE_NAME.get(pokemon['id'])
+
+            if pokemon['id'] in POKEMON_MAX_CP:
+                pokemon['max_cp'] = int(POKEMON_MAX_CP[pokemon['id']])
+
+                if pokemon['max_cp'] <= 2000:
+                    continue
+
+                LABEL_TMPL = u'''
+<div><b>{jpn_name}</b><span> </span><small><a href='http://pokemongo.gamepress.gg/pokemon/{id}' target='_blank' title='View in Pokedex'>#{id}</a> MaxCP: {max_cp}</small></div>
+<div>逃走まであと - {disappear_time_formatted} <span class='label-countdown' disappears-at='{disappear_time}'></span></div>
+'''
+            else:
+                LABEL_TMPL = u'''
+<div><b>{jpn_name}</b><span> - </span><small><a href='http://pokemongo.gamepress.gg/pokemon/{id}' target='_blank' title='View in Pokedex'>#{id}</a></small></div>
+<div>逃走まであと - {disappear_time_formatted} <span class='label-countdown' disappears-at='{disappear_time}'></span></div>
+'''
+
+            label = LABEL_TMPL.format(**pokemon)
+            #  NOTE: `infobox` field doesn't render multiple line string in frontend
+            label = label.replace('\n', '')
+            large_icon = int(pokemon["id"]) in RARE_POKEMON
+            icon = 'static/{}/{}.png'.format("larger-icons" if large_icon else "icons", pokemon["id"])
+            pokeMarkers.append({
+                'type': 'pokemon',
+                'key': pokemon_key,
+                'disappear_time': pokemon['disappear_time'],
+                'icon': icon,
+                'lat': pokemon["lat"],
+                'lng': pokemon["lng"],
+                'infobox': label
+            })
+
+    return pokeMarkers
+
+
 def get_pokemarkers(point=0, first_time=False, enable_gym=False):
     """
     first_timeはhtmlのjs側で制御してる。
