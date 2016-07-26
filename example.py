@@ -1068,7 +1068,7 @@ def get_rare_markers():
             #  NOTE: `infobox` field doesn't render multiple line string in frontend
             label = label.replace('\n', '')
             large_icon = int(pokemon["id"]) in RARE_POKEMON
-            icon = 'static/{}/{}.png'.format("larger-icons" if large_icon else "icons", pokemon["id"])
+            icon = '../static/{}/{}.png'.format("larger-icons" if large_icon else "icons", pokemon["id"])
             pokeMarkers.append({
                 'type': 'pokemon',
                 'key': pokemon_key,
