@@ -14,7 +14,7 @@ app = Blueprint("date",
 
 
 @app.route('/', methods=['GET'])
-# @err
+@err
 def data():
     """
     Gets all the PokeMarkers via REST
