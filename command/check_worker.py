@@ -18,20 +18,20 @@ class CheckWorker(Command):
 
     def _run(self):
         ng_group = []
-        for x in xrange((len(POINTS))):
-            num = len(get_all_pokemon(point=x))
+        for point in xrange((len(POINTS))):
+            num = len(get_all_pokemon(point=point))
             if num > 5:
-                print "[+]ok({0:04d}) point:{0:04d}".format(num, int(x))
+                print "[-]OK({0:04d})".format(num) + " point:{0:04d}".format(point)
             else:
-                print "[-]NGNGNG({0:04d}) point:{0:04d}".format(num, int(x))
-                ng_group.append((num, x))
+                print "[-]NGNGNG({0:04d})".format(num) + " point:{0:04d}".format(point)
+                ng_group.append((num, point))
 
         if ng_group:
             print("++++++++++++++++++++++++++++++++++++")
             print("ERRORS")
             print("++++++++++++++++++++++++++++++++++++")
-            for num, x in ng_group:
-                print "[-]NG({0:04d}) point:{0:04d}".format(num, x)
+            for num, point in ng_group:
+                print "[-]NGNGNG({0:04d})".format(num) + " point:{0:04d}".format(point)
             print("++++++++++++++++++++++++++++++++++++")
         else:
             print("")

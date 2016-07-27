@@ -2,7 +2,6 @@
 import logging
 import traceback
 from functools import wraps
-from flask import redirect, url_for
 import datetime
 
 
@@ -30,28 +29,6 @@ def app_log(log_level, msg):
         _l.debug(msg)
 
 
-def requires_site_title(f):
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        site_title = kwargs.pop('site_title')
-
-        if site_title == "example":
-            return "HelloWorld"
-
-        if site_title in IGNORE_NAMES:
-            # faviconやrobots.txtにアクセスされた場合
-            app_log(logging.ERROR, "File does not exist :{}".format(site_title))
-            return "File does not exist"
-        try:
-            site = Site.get_title(site_title)
-        except IndexError:
-            # サイトトップにリダイレクト
-            app_log(logging.ERROR, "Site title does not exist :{}".format(site_title))
-            return redirect(url_for('site_top.index'))
-        return f(site, **kwargs)
-    return decorated_function
-
-
 def err(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -64,6 +41,5 @@ def err(f):
         except Exception as e:
             from app import create_app
             app_log(logging.ERROR, traceback.format_exc())
-            app_log(logging.ERROR, "test 12345")
             raise e
     return decorated_function
