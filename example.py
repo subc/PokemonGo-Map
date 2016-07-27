@@ -573,7 +573,7 @@ def get_user_and_password(config, point):
 @memoize
 def login(config, point):
     global global_password
-    auth_service = "ptc"
+    auth_service = "google"
     username, global_password = get_user_and_password(config, point)
 
     access_token = get_token(auth_service, username, global_password)
