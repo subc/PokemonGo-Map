@@ -50,7 +50,7 @@
 
     {% if is_maintenance %}
     サーバ負荷増大のためメンテナンス中です。<br/>申し訳ございません。<br/>
-    メンテ解除時刻: 7/26 12時ごろ<br/><br/>
+    メンテ解除時刻: 7/27 19時ごろ<br/><br/>
     <a href="http://ispokemongodownornot.com/">>> ステータスを確認</a><br/>
     Thank you for cooperation.<br/>
     {% else %}
@@ -122,7 +122,7 @@
         var gym = false;
         var firstTime = true;
         var counter = 0;
-        var adLimit = {% if is_maintenance %}{% else %}300{% endif %};
+        var adLimit = {% if is_maintenance %}1{% else %}300{% endif %};
         var markers = [];
         var markerCache = {};
         // Adds a marker to the map and push to the array.

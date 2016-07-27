@@ -6,6 +6,7 @@ from flask import Blueprint
 
 from example import get_pokemarkers
 from points import get_near_point
+from views.decorator import err
 
 app = Blueprint("date",
                 __name__,
@@ -13,6 +14,7 @@ app = Blueprint("date",
 
 
 @app.route('/', methods=['GET'])
+# @err
 def data():
     """
     Gets all the PokeMarkers via REST

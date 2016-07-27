@@ -36,6 +36,8 @@ from transform import *
 from kvs import *
 from threading import local
 
+from views.decorator import err
+
 app = Blueprint("example",
                 __name__,
                 url_prefix='/<user_url_slug>')
@@ -949,6 +951,7 @@ def register_background_thread(initial_registration=False):
 
 
 @app.route('/')
+@err
 def fullmap():
     # clear_stale_pokemons()
     from app import conf
