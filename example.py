@@ -1002,7 +1002,7 @@ def get_marker_for_debug(point):
             'icon': icons.dots.red,
             'lat': _x,
             'lng': _y,
-            'infobox': "{} position:{},{} No:{}".format(flavor_text, _x, _y, ct),
+            'infobox': "{} position:{},{} [LEN:{}]".format(flavor_text, _x, _y, ct),
             'type': 'custom',
             'key': 'start-position:{}:{}'.format(_x, _y),
             'disappear_time': -1
