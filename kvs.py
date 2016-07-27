@@ -53,6 +53,7 @@ def get_all_pokemon(point=10):
 def set_pokemon(key, value, point=10):
     diff = datetime.fromtimestamp(value['disappear_time']) - datetime.now()
     diff_sec = diff.seconds - 10  # 10秒短く設定しておく
+    diff_sec = min(900, diff_sec)  # 最大値は15分
     if diff_sec > 0:
         get_client(point=point).setex(get_pokemon_key(point, key), value, diff.seconds)
 
@@ -85,7 +86,7 @@ def get_all_gym(point=10):
 
 
 def set_gym(key, value, point=10):
-    get_client(point=point).setex(get_gym_key(point, key), value, 3600 * 24 * 10)
+    get_client(point=point).setex(get_gym_key(point, key), value, 900)
 
 
 def get_gym_keys(point=10):
