@@ -63,9 +63,7 @@ def err(f):
             return r
         except Exception as e:
             from app import create_app
-            now = datetime.datetime.now()
-            create_app().logger.critical(datetime.datetime.now())
-            create_app().logger.critical(112233)
-            create_app().logger.critical("{}\n{}".format(str(now), traceback.format_exc()))
+            app_log(logging.ERROR, traceback.format_exc())
+            app_log(logging.ERROR, "test 12345")
             raise e
     return decorated_function
