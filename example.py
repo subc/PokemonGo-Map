@@ -576,6 +576,7 @@ def login(config, point):
     global global_password
     auth_service = "google"
     username, global_password = get_user_and_password(config, point)
+    print ('[+]USERNAME: {}'.format(username))
 
     access_token = get_token(auth_service, username, global_password)
     print(access_token)
