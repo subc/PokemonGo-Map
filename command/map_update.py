@@ -21,16 +21,13 @@ class MapUpdate(Command):
         from app import conf
         config = conf()
         acc1 = config['ACCOUNTS']
-        acc2 = config['ACCOUNTS2']
 
         # test
         from points import POINTS
-        assert len(POINTS) <= len(acc1), "point:{} acc1:{}".format(len(POINTS), len(acc1))
-        assert len(POINTS) <= len(acc2), "point:{} acc2:{}".format(len(POINTS), len(acc2))
+        assert len(POINTS) * 2 <= len(acc1), "point:{} acc1:{}".format(len(POINTS), len(acc1))
 
         # printer
-        print "POINT:{} ACC1:{} ACC2:{}".format(len(POINTS), len(acc1), len(acc2))
-
+        print "POINT:{} ACC:{}".format(len(POINTS), len(acc1))
 
     def _run(self, point):
         update_map(point)

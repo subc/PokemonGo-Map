@@ -562,11 +562,12 @@ def get_args(worker=False):
 
 def get_user_and_password(config, point):
     use_sub_account = get_acc_version(point)
+    accounts = config['ACCOUNTS']
 
     if config["IS_PRODUCTION"]:
         if use_sub_account:
-            return config['ACCOUNTS2'][point]
-        return config['ACCOUNTS'][point]
+            return accounts[point + 1]
+        return accounts[point]
     else:
         return config['USERNAME'], config['PASSWORD']
 
@@ -642,10 +643,9 @@ def update_map(point):
 
     api_endpoint, access_token, profile_response = login(config, point)
 
-    # 10000回繰り返す
-    for x in xrange(5):
-        if x > 2:
-            time.sleep(20)
+    # 1回3分くらい
+    for x in xrange(3):
+        time.sleep(5)
 
         # clear_stale_pokemons()
 
