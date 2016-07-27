@@ -65,6 +65,7 @@ def err(f):
             from app import create_app
             now = datetime.datetime.now()
             create_app().logger.critical(datetime.datetime.now())
+            create_app().logger.critical(112233)
             create_app().logger.critical("{}\n{}".format(str(now), traceback.format_exc()))
             raise e
     return decorated_function
