@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
 from datetime import datetime
-import thread
 from threading import local
-from module import Gym
 import redis
 import ast
 gyms = {}
@@ -173,3 +171,22 @@ def get_monitor_account(key):
     client = get_client(0)
     _l = client.lrange(key, 0, -1)
     return [ast.literal_eval(data) for data in _l]
+
+
+# pokemon count
+def get_pokemon_count_key(point):
+    return "CT:POKE:{}".format(point)
+
+
+def update_pokemon_count(point, value):
+    client = get_client(point)
+    key = get_pokemon_count_key(point)
+    now = datetime.now()
+    client.setex(key, "{},{}".format(value, now), 3600 * 2)
+    return
+
+
+def get_pokemon_count(point):
+    client = get_client(point)
+    key = get_pokemon_count_key(point)
+    return client.get(key)

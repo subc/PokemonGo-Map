@@ -6,9 +6,10 @@ from flask import Blueprint
 
 from example import get_pokemarkers
 from module.account_monitor import get_all_login_failed
-from points import get_near_point
+from points import get_near_point, POINTS
 from example import get_google_map_api, render_template, get_map, get_rare_markers
 from command.check_worker import CheckWorker
+from kvs import get_pokemon_count
 
 app = Blueprint("monitor",
                 __name__,
@@ -21,12 +22,17 @@ def monitor():
     all_login_failed = get_all_login_failed()
 
     # redis
-    ok_group, warning_group, ng_group = CheckWorker()._run(cut=True)
+    result = []
+    for x in xrange(len(POINTS)):
+        value = get_pokemon_count(x)
+        if value and "," in value:
+            _ = str(value).split(str(","))
+            result.append((x, _[0], _[1]))
+        else:
+            result.append((x, None, value))
 
     return render_template(
         'monitor.html',
         all_login_failed=all_login_failed.items(),
-        ok_group=ok_group,
-        warning_group=warning_group,
-        ng_group=ng_group,
+        redis_data=result
     )

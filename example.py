@@ -658,6 +658,7 @@ def update_map(point):
         ignore = []
         only = []
 
+        pokemon_count = 0
         pos = 1
         x = 0
         y = 0
@@ -675,11 +676,14 @@ def update_map(point):
 
             (x, y) = (x + dx, y + dy)
 
-            process_step(config, api_endpoint, access_token, profile_response,
-                         pokemonsJSON, ignore, only, point)
+            pokemon_count += process_step(config, api_endpoint, access_token, profile_response,
+                                          pokemonsJSON, ignore, only, point)
 
             print('Completed: ' + str(
                 ((step+1) + pos * .25 - .25) / steplimit2 * 100) + '%')
+
+        # for monitor
+        update_pokemon_count(point, pokemon_count)
 
         global NEXT_LAT, NEXT_LONG
         if (NEXT_LAT and NEXT_LONG and
@@ -853,6 +857,7 @@ transform_from_wgs_to_gcj(Location(Fort.Latitude, Fort.Longitude))
                         },
                     point=point
                     )
+    return wild_pokemon_ct
 
 
 def clear_stale_pokemons():
