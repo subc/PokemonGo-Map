@@ -293,12 +293,11 @@ def retrying_get_profile(service, access_token, api, useauth, username=None, poi
             profile_response = None
 
         # 遅延
-        if ct > 10:
-            # サーバ落ちた
-            print("[-]start sleep... {}sec".format(100))
+        if ct > 5:
+            # サーバ落ちたときはここ
+            print("[-]start sleep... {}sec".format(10))
             login_server_down(username, point)
             time.sleep(10)
-
             raise ValueError, "[-]cannot login"
         ct += 1
 
