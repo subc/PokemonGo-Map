@@ -182,7 +182,7 @@ def update_pokemon_count(point, value):
     client = get_client(point)
     key = get_pokemon_count_key(point)
     now = datetime.now()
-    client.setex(key, "{},{}".format(value, now), 3600 * 2)
+    client.setex(key, "{},{}".format(value, now), 3600)
     return
 
 
