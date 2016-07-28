@@ -207,15 +207,15 @@
                         document.getElementById(options["identifier"]), {
                             center: new google.maps.LatLng(options["lat"], options["lng"]),
                             zoom: options["zoom"],
-                            mapTypeControl: true,
-                            mapTypeControlOptions: {
-                                style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
-                                position: google.maps.ControlPosition.TOP_RIGHT,
-                                mapTypeIds: [
-                                    google.maps.MapTypeId.ROADMAP,
-                                    google.maps.MapTypeId.TERRAIN
-                                ]
-                            },
+                            mapTypeControl: false,
+{#                            mapTypeControlOptions: {#}
+{#                                style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,#}
+{#                                position: google.maps.ControlPosition.TOP_RIGHT,#}
+{#                                mapTypeIds: [#}
+{#                                    google.maps.MapTypeId.ROADMAP,#}
+{#                                    google.maps.MapTypeId.TERRAIN#}
+{#                                ]#}
+{#                            },#}
                             zoomControl: true,
                             zoomControlOptions: {
                                 style: google.maps.ZoomControlStyle.LARGE,
