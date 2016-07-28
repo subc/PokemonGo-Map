@@ -9,6 +9,7 @@ from views import data
 from views import config as c
 from views import sitemap
 from views import raremap
+from views import monitor
 
 tls = threading.local()
 
@@ -35,6 +36,7 @@ def create_app(config=None):
     app.register_blueprint(c.app, url_prefix="/config")
     app.register_blueprint(sitemap.app, url_prefix="/sitemap")
     app.register_blueprint(raremap.app, url_prefix="/rare")
+    app.register_blueprint(monitor.app, url_prefix="/monitor")
 
     # log
     handler = RotatingFileHandler('/tmp/error.log', maxBytes=1024 * 1024 * 10, backupCount=1)

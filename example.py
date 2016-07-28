@@ -31,6 +31,8 @@ from requests.models import InvalidURL
 from constants.dictionary import POKEMON_JAPANESE_NAME
 from constants.cp import POKEMON_MAX_CP
 from constants.rarity import RARE_POKEMON
+from module.account_monitor import login_failed
+from module.server_monitor import login_server_down
 from points import POINTS, get_near_point
 from transform import *
 from kvs import *
@@ -275,12 +277,11 @@ def get_api_endpoint(service, access_token, api=API_URL):
     return 'https://%s/rpc' % profile_response.api_url
 
 
-def retrying_get_profile(service, access_token, api, useauth, *reqq):
+def retrying_get_profile(service, access_token, api, useauth, username=None, point=None):
     profile_response = None
     ct = 0
     while not profile_response:
-        profile_response = get_profile(service, access_token, api, useauth,
-                                       *reqq)
+        profile_response = get_profile(service, access_token, api, useauth)
         if not hasattr(profile_response, 'payload'):
             debug(
                 'retrying_get_profile: get_profile returned no payload, retrying')
@@ -293,12 +294,16 @@ def retrying_get_profile(service, access_token, api, useauth, *reqq):
 
         # 遅延
         if ct > 10:
+            # サーバ落ちた
             print("[-]start sleep... {}sec".format(100))
+            login_server_down(username, point)
             time.sleep(10)
+
             raise ValueError, "[-]cannot login"
         ct += 1
 
     return profile_response
+
 
 def get_profile(service, access_token, api, useauth, *reqq):
     req = pokemon_pb2.RequestEnvelop()
@@ -579,9 +584,10 @@ def login(config, point):
     print ('[+]USERNAME: {}'.format(username))
 
     access_token = get_token(auth_service, username, global_password)
-    print(access_token)
+    print('[+]access_token :{}'.format(access_token))
 
     if access_token is None:
+        login_failed(username, point)
         time.sleep(5)
         raise Exception('[-] Wrong username/password')
 
@@ -595,7 +601,7 @@ def login(config, point):
     print '[+] Received API endpoint: {}'.format(api_endpoint)
 
     profile_response = retrying_get_profile(auth_service, access_token,
-                                            api_endpoint, None)
+                                            api_endpoint, None, username=username, point=point)
     if profile_response is None or not profile_response.payload:
         raise Exception('Could not get profile')
     #

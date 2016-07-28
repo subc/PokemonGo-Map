@@ -5,6 +5,7 @@ import thread
 from threading import local
 from module import Gym
 import redis
+import ast
 gyms = {}
 tls_kvs = local()
 
@@ -36,7 +37,6 @@ def get_pokemon_key(point, _key):
 
 
 def get_pokemon(key, point=10):
-    import ast
     pokemon = get_client(point=point).get(key)
     if pokemon:
         return ast.literal_eval(pokemon)
@@ -143,3 +143,33 @@ def get_acc_version(point):
 def key_is_exist(point, key):
     client = get_client(point)
     return bool(client.exists(key))
+
+
+# status monitor
+def get_monitor_account_key(_id):
+    return 'MONITOR:ACC:{}'.format(_id)
+
+
+def set_monitor_account(data):
+    key = get_monitor_account_key(data['username'])
+    client = get_client(0)
+    client.lpush(key, data)
+    client.expire(key, 3600 * 72)
+    return
+
+
+def get_all_monitor_account():
+    key_ast = get_monitor_account_key('*')
+    client = get_client(0)
+    keys = client.keys(key_ast)
+
+    result = []
+    for key in keys:
+        result.append(get_monitor_account(key))
+    return result
+
+
+def get_monitor_account(key):
+    client = get_client(0)
+    _l = client.lrange(key, 0, -1)
+    return [ast.literal_eval(data) for data in _l]

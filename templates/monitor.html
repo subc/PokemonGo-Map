@@ -1,0 +1,31 @@
+<link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<div id="main" style="margin: 20px">
+
+    <h2 class="sub-header">Cannot login by wrong password</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>username</th>
+                <th>error count</th>
+                <th>history</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for account, v in all_login_failed %}
+
+                <tr>
+                    <td>{{ account }}</td>
+                    <td>{{ v|length }}</td>
+                    <td>
+                        {% for _ in v %}
+                            {{ _.time }}<br/>
+                        {% endfor %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
