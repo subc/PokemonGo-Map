@@ -55,7 +55,7 @@ def set_pokemon(key, value, point=10):
     diff_sec = diff.seconds - 10  # 10秒短く設定しておく
     diff_sec = min(900, diff_sec)  # 最大値は15分
     if diff_sec > 0:
-        get_client(point=point).setex(get_pokemon_key(point, key), value, diff.seconds)
+        get_client(point=point).setex(get_pokemon_key(point, key), value, diff_sec)
 
 
 def get_pokemon_keys(point=10):

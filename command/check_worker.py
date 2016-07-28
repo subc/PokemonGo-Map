@@ -2,6 +2,9 @@
 from flask_script import Command, Option
 from points import POINTS
 from kvs import get_all_pokemon
+from datetime import datetime
+from kvs import get_all_pokemon
+
 
 class CheckWorker(Command):
     """
@@ -18,13 +21,24 @@ class CheckWorker(Command):
 
     def _run(self):
         ng_group = []
+        warning_group = []
         for point in xrange((len(POINTS))):
-            num = len(get_all_pokemon(point=point))
+            num = get_pokemon_count(point)
             if num > 5:
                 print "[-]OK({0:04d})".format(num) + " point:{0:04d}".format(point)
+                if num <= 40:
+                    warning_group.append((num, point))
             else:
                 print "[-]NGNGNG({0:04d})".format(num) + " point:{0:04d}".format(point)
                 ng_group.append((num, point))
+
+        if warning_group:
+            print("++++++++++++++++++++++++++++++++++++")
+            print("ERRORS")
+            print("++++++++++++++++++++++++++++++++++++")
+            for num, point in warning_group:
+                print "[-]WARNING({0:04d})".format(num) + " point:{0:04d}".format(point)
+            print("++++++++++++++++++++++++++++++++++++")
 
         if ng_group:
             print("++++++++++++++++++++++++++++++++++++")
@@ -33,7 +47,18 @@ class CheckWorker(Command):
             for num, point in ng_group:
                 print "[-]NGNGNG({0:04d})".format(num) + " point:{0:04d}".format(point)
             print("++++++++++++++++++++++++++++++++++++")
-        else:
-            print("")
-            print("ok.")
-            print("")
+
+        print("")
+        print("ok.")
+        print("")
+
+
+def get_pokemon_count(point):
+    count = 0
+    pokemons = get_all_pokemon(point)
+    for p in pokemons:
+        diff = datetime.fromtimestamp(p['disappear_time']) - datetime.now()
+        sec = diff.seconds
+        if 1 <= sec <= 900:
+            count += 1
+    return count
