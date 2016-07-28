@@ -34,7 +34,7 @@ class CheckWorker(Command):
 
         if warning_group:
             print("++++++++++++++++++++++++++++++++++++")
-            print("ERRORS")
+            print("WARNING")
             print("++++++++++++++++++++++++++++++++++++")
             for num, point in warning_group:
                 print "[-]WARNING({0:04d})".format(num) + " point:{0:04d}".format(point)
@@ -57,6 +57,8 @@ def get_pokemon_count(point):
     count = 0
     pokemons = get_all_pokemon(point)
     for p in pokemons:
+        if not p:
+            continue
         diff = datetime.fromtimestamp(p['disappear_time']) - datetime.now()
         sec = diff.seconds
         if 1 <= sec <= 900:
