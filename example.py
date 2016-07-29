@@ -1146,11 +1146,13 @@ def get_pokemarkers(point=0, first_time=False, enable_gym=False):
             LABEL_TMPL = u'''
 <div><b>{jpn_name}</b><span> </span><small><a href='http://pokemongo.gamepress.gg/pokemon/{id}' target='_blank' title='View in Pokedex'>#{id}</a> MaxCP: {max_cp}</small></div>
 <div>逃走まであと - {disappear_time_formatted} <span class='label-countdown' disappears-at='{disappear_time}'></span></div>
+<div><small>{lat} {lng}</small></div>
 '''
         else:
             LABEL_TMPL = u'''
 <div><b>{jpn_name}</b><span> - </span><small><a href='http://pokemongo.gamepress.gg/pokemon/{id}' target='_blank' title='View in Pokedex'>#{id}</a></small></div>
 <div>逃走まであと - {disappear_time_formatted} <span class='label-countdown' disappears-at='{disappear_time}'></span></div>
+<div><small>{lat} {lng}</small></div>
 '''
 
         label = LABEL_TMPL.format(**pokemon)
