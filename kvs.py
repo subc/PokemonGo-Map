@@ -138,6 +138,19 @@ def get_acc_version(point):
     raise ValueError
 
 
+def force_change_account(point):
+    version = get_acc_version(point)
+    client = get_client(point)
+    base = "ACC:SWICH:{}"
+    key_a = base.format("A")
+    key_b = base.format("B")
+
+    if version:
+        client.delete(key_a)
+    else:
+        client.delete(key_b)
+
+
 def key_is_exist(point, key):
     client = get_client(point)
     return bool(client.exists(key))

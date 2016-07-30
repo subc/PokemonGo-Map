@@ -685,6 +685,11 @@ def update_map(point):
         # for monitor
         update_pokemon_count(point, pokemon_count)
 
+        # pokemonの数が0のときはアカウント切り替え
+        if pokemon_count == 0:
+            force_change_account(point)
+            raise ValueError, "finish 81 area scan, but pokemon count is ZERO, so.. force switch account"
+
         global NEXT_LAT, NEXT_LONG
         if (NEXT_LAT and NEXT_LONG and
                 (NEXT_LAT != FLOAT_LAT or NEXT_LONG != FLOAT_LONG)):
