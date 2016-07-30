@@ -27,7 +27,7 @@ def monitor():
         value = get_pokemon_count(x)
         if value and "," in value:
             _ = str(value).split(str(","))
-            result.append((x, _[0], _[1]))
+            result.append((x, int(_[0]), _[1]))
         else:
             result.append((x, None, value))
 

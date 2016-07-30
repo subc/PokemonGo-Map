@@ -17,6 +17,8 @@
                     <td>
                         {% if not count %}
                         <button type="button" class="btn btn-sm btn-danger">None</button>&nbsp;&nbsp;"{{ data }}"  データ取得失敗、1時間以上取得なし
+                        {% elif count == 0 %}
+                        <button type="button" class="btn btn-sm btn-danger">{{ count }}</button>&nbsp;&nbsp;"{{ data }}"
                         {% elif count <= 20 %}
                         <button type="button" class="btn btn-sm btn-warning">{{ count }}</button>&nbsp;&nbsp;"{{ data }}"
                         {% elif 20 < count %}
