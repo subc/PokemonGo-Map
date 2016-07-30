@@ -689,6 +689,8 @@ def update_map(point):
         if pokemon_count == 0:
             force_change_account(point)
             raise ValueError, "finish 81 area scan, but pokemon count is ZERO, so.. force switch account"
+        else:
+            print "total pokemon count is {}".format(pokemon_count)
 
         global NEXT_LAT, NEXT_LONG
         if (NEXT_LAT and NEXT_LONG and
