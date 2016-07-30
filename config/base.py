@@ -28,4 +28,9 @@ GOOGLEMAPS_KEYS = [
     "AIzaSyDER1RwjdUbygOk1TyA1Tigm11ADmHYrrY",  # kt.me.a
     "AIzaSyDqbUsSLmGsVVVXePcGOvN6pJNzvYARPhM",  # hoge001@pgo.tok
     "AIzaSyACtwPg-NqsPXw5gNyXpVZVKALgZpgKfrc",  # subc1-5
+    "AIzaSyAN3VQBs-WYM5cbgvShmrm6DXVAvMiHSRw",  # subc.nikuniku001
+    "AIzaSyB8vj0YnREgurq4V1397v7nidmWX-BW_DI",  # sn 2
+    "AIzaSyCkKw146lBvcJtlTZqAV2mm3anOHieNrCA",  # sn 3
+    "AIzaSyCbBZkGw23wXiwTuRKSOm03wJXgCdv-Dyc",  # sn 4
+    "AIzaSyCbBZkGw23wXiwTuRKSOm03wJXgCdv-Dyc",  # sn 5
 ]
