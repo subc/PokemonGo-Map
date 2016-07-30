@@ -33,4 +33,25 @@ GOOGLEMAPS_KEYS = [
     "AIzaSyCkKw146lBvcJtlTZqAV2mm3anOHieNrCA",  # sn 3
     "AIzaSyCbBZkGw23wXiwTuRKSOm03wJXgCdv-Dyc",  # sn 4
     "AIzaSyDew3u2VsV9_XQrN8dsAqJ8YHGs0sOTQyI",  # sn 5
+    # SandraBanks707
+    "AIzaSyBLNSCvL_DPF-bm4-8u43X2SgpHr6rGvUw",
+    # LauraWade535
+    "AIzaSyANjwju1A_LVNfrHY4wYHqBorKOT6G5ELQ",
+    # ArrothilGrender45
+    "AIzaSyDJ_bPyT9jBDupTCWgZDApHmfdG76oh3z8",
+    # ssandisarma
+    "AIzaSyABT4IIfrdCYDyRdVMHUzSjtzhV3xjjlPM",
+    # mkane3353
+    "AIzaSyD7KOdhaXgHMpCYBgEUXvVSFcqg0MjnfDM",
+    # dasvula477
+    "AIzaSyDvGu_yu_ylj5Y3qpRuONTX7qei-n6yblY",
+    # rahapallib421
+    "AIzaSyDGrEY3_ubnBbXQBSP8O8DvDPBPguktzkw",
+    # rajinkhamar0
+    "AIzaSyDVLehyAJxSC7hbx-ELp1cozX-ToeF3ZEQ",
+    # dmartib34
+    "AIzaSyCIZFNyz4ULvT7wr1QjZIQZkgezG9hwq6E",
+    # ammdsummy66
+    "AIzaSyCY16MEV0NaaMiVyh72l0goKapdtat73WE",
 ]
+
