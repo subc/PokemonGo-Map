@@ -650,8 +650,9 @@ def update_map(point):
     api_endpoint, access_token, profile_response = login(config, point)
 
     # 1回3分くらい
-    for x in xrange(1):
-        time.sleep(5)
+    for x in xrange(2):
+        if x >= 1:
+            time.sleep(10)
 
         # clear_stale_pokemons()
 
@@ -681,7 +682,7 @@ def update_map(point):
 
             print('Completed: ' + str(
                 ((step+1) + pos * .25 - .25) / steplimit2 * 100) + '%')
-            time.sleep(5)
+            time.sleep(2)
 
         # for monitor
         update_pokemon_count(point, pokemon_count)
