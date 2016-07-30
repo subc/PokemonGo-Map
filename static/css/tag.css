@@ -274,3 +274,30 @@ ul.social-button-syncer li {
 	-ms-transform: rotate(-405deg);
 	transform: rotate(-405deg);
 }
+
+.batu1blk {
+	width: 15px;
+	height: 3px;
+	background-color: #000000;
+	position: absolute;
+	top: 15px;
+	-o-transform: rotate(405deg);
+	-moz-transform: rotate(405deg);
+	-webkit-transform: rotate(405deg);
+	-ms-transform: rotate(405deg);
+	transform: rotate(405deg);
+}
+
+.batu2blk {
+	width: 15px;
+	height: 3px;
+	background-color: #000000;
+	position: absolute;
+	top: 15px;
+	-o-transform: rotate(-405deg);
+	-moz-transform: rotate(-405deg);
+	-webkit-transform: rotate(-405deg);
+	-ms-transform: rotate(-405deg);
+	transform: rotate(-405deg);
+}
+

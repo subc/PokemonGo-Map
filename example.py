@@ -969,8 +969,9 @@ def fullmap():
     key = get_google_map_api(conf())
     fullmap, fullmap_js = get_map()
     config = conf()
-    zoom = conf().get('ZOOM')
-    is_maintenance = conf().get('IS_MAINTENANCE')
+    zoom = config.get('ZOOM')
+    is_local = config.get('IS_LOCAL')
+    is_maintenance = config.get('IS_MAINTENANCE')
     return render_template(
             'example_fullmap.html',
             key=key,
@@ -979,6 +980,7 @@ def fullmap():
             is_maintenance=is_maintenance,
             fullmap=fullmap,
             fullmap_js=fullmap_js,
+            is_local=is_local,
             auto_refresh=conf().get('AUTO_REFRESH'))
 
 
