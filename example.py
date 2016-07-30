@@ -682,7 +682,7 @@ def update_map(point):
 
             print('Completed: ' + str(
                 ((step+1) + pos * .25 - .25) / steplimit2 * 100) + '%')
-            time.sleep(2)
+            time.sleep(5)
 
         # for monitor
         update_pokemon_count(point, pokemon_count)
