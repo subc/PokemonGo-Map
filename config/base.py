@@ -32,5 +32,5 @@ GOOGLEMAPS_KEYS = [
     "AIzaSyB8vj0YnREgurq4V1397v7nidmWX-BW_DI",  # sn 2
     "AIzaSyCkKw146lBvcJtlTZqAV2mm3anOHieNrCA",  # sn 3
     "AIzaSyCbBZkGw23wXiwTuRKSOm03wJXgCdv-Dyc",  # sn 4
-    "AIzaSyCbBZkGw23wXiwTuRKSOm03wJXgCdv-Dyc",  # sn 5
+    "AIzaSyDew3u2VsV9_XQrN8dsAqJ8YHGs0sOTQyI",  # sn 5
 ]
