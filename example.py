@@ -665,13 +665,14 @@ def update_map(point):
         y = 0
         dx = 0
         dy = -1
-        steplimit2 = step_limit**2
+        # steplimit2 = int(step_limit**2 * float(1.5625))
+        steplimit2 = 11 * 11
         for step in range(steplimit2):
-            debug('looping: step {} of {}'.format((step+1), step_limit**2))
+            debug('looping: step {} of {}'.format((step+1), steplimit2))
             # debug('steplimit: {} x: {} y: {} pos: {} dx: {} dy {}'.format(steplimit2, x, y, pos, dx, dy))
             # Scan location math
             if -steplimit2 / 2 < x <= steplimit2 / 2 and -steplimit2 / 2 < y <= steplimit2 / 2:
-                set_location_coords(x * 0.0025 + lat, y * 0.0025 + lon, 0)
+                set_location_coords(x * 0.002 + lat, y * 0.002 + lon, 0)
             if x == y or x < 0 and x == -y or x > 0 and x == 1 - y:
                 (dx, dy) = (-dy, dx)
 
@@ -681,8 +682,8 @@ def update_map(point):
                                           pokemonsJSON, ignore, only, point)
 
             print('Completed: ' + str(
-                ((step+1) + pos * .25 - .25) / steplimit2 * 100) + '%')
-            time.sleep(2)
+                ((step+1) + pos * .2 - .2) / steplimit2 * 100) + '%')
+            time.sleep(1)
 
         # for monitor
         update_pokemon_count(point, pokemon_count)
