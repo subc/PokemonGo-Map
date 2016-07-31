@@ -28,6 +28,7 @@ def data():
 
     # debug
     from points import POINTS
+    # print len(POINTS)
     ct = 0
     for _x, _y, _ in POINTS:
         if point_x == _x and point_y == _y:
