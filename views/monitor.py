@@ -23,16 +23,19 @@ def monitor():
 
     # redis
     result = []
+    total = 0
     for x in xrange(len(POINTS)):
         value = get_pokemon_count(x)
         if value and "," in value:
             _ = str(value).split(str(","))
             result.append((x, int(_[0]), _[1]))
+            total += int(_[0])
         else:
             result.append((x, None, value))
 
     return render_template(
         'monitor.html',
         all_login_failed=all_login_failed.items(),
-        redis_data=result
+        redis_data=result,
+        total=total
     )
