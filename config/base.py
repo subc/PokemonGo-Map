@@ -22,7 +22,7 @@ IS_MAINTENANCE = False
 
 # KEY
 GOOGLEMAPS_KEYS = [
-    "AIzaSyAZzeHhs-8JZ7i18MjFuM35dJHq70n3Hx4",  # id.s
+    "AIzaSyANot6E0gUmvYIgnlAY0I4-2PDRjKdxpwo",  # id.s
     "AIzaSyAVreVNXS9WsfEBP3u5shGUnR27QCg2680",  # sub33
     "AIzaSyBCwfqt2qXfzfzkonj-vB8aGKbwGeAlVz4",  # kt.me
     "AIzaSyDER1RwjdUbygOk1TyA1Tigm11ADmHYrrY",  # kt.me.a
