@@ -570,8 +570,8 @@ def get_user_and_password(config, point):
 
     if config["IS_PRODUCTION"]:
         if use_sub_account:
-            return accounts[point + 1]
-        return accounts[point]
+            return accounts[point * 2 + 1]
+        return accounts[point * 2]
     else:
         return config['USERNAME'], config['PASSWORD']
 
@@ -1015,8 +1015,6 @@ def get_marker_for_debug(point):
     """
     r = []
     ct = -1
-    from app import conf
-    # step = conf().get("STEP_LIMIT")
     for _x, _y, flavor_text in POINTS:
         ct += 1
 
@@ -1026,6 +1024,22 @@ def get_marker_for_debug(point):
             'lat': _x,
             'lng': _y,
             'infobox': "{} position:{},{} [LEN:{}]".format(flavor_text, _x, _y, ct),
+            'type': 'custom',
+            'key': 'start-position:{}:{}'.format(_x, _y),
+            'disappear_time': -1
+        }
+        r.append(red_marker)
+
+    from points import POINTS_COMING_SOON
+    for _x, _y, flavor_text in POINTS_COMING_SOON:
+        ct += 1
+
+        # red
+        red_marker = {
+            'icon': icons.dots.yellow,
+            'lat': _x,
+            'lng': _y,
+            'infobox': "[COMING SOON]{} position:{},{} [LEN:{}]".format(flavor_text, _x, _y, ct),
             'type': 'custom',
             'key': 'start-position:{}:{}'.format(_x, _y),
             'disappear_time': -1
