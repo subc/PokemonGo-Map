@@ -17,7 +17,7 @@ IGNORE_NAMES = [
 
 
 def app_log(log_level, msg):
-    prefix = '[{}] '.format(datetime.datetime.now())
+    prefix = '[{}] '.format(str(datetime.datetime.now()))
     msg = prefix + msg
 
     from app import create_app

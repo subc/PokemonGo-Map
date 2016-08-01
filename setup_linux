@@ -52,19 +52,20 @@ echo "alias sctl='supervisorctl'" >> ~/.bash_profile
 yum install supervisor -y
 echo "" > /etc/supervisord.conf
 /usr/bin/python /usr/bin/supervisord -c /etc/supervisord.conf
+/usr/bin/python /usr/bin/supervisord
 sctl
 
 
 # bash
 echo "# color" >> ~/.bash_profile
-echo "export PS1='\[\e[0;37m\]app2:\u@\h:\w${text}$\[\e[m\] '" >> ~/.bash_profile
+echo "export PS1='\[\e[0;37m\]app3:\u@\h:\w${text}$\[\e[m\] '" >> ~/.bash_profile
 echo "workon poke" >> ~/.bash_profile
 echo "cd /var/poke/pokemap" >> ~/.bash_profile
 
 ##### ssh 鍵のコピー
-scp ~/.ssh/ikeda poke-app1:/root/.ssh/
-scp ~/.ssh/ikeda.pub poke-app1:/root/.ssh/
-scp ~/.ssh/config poke-app1:/root/.ssh/
+scp ~/.ssh/ikeda poke-app3:/root/.ssh/
+scp ~/.ssh/ikeda.pub poke-app3:/root/.ssh/
+scp ~/.ssh/config poke-app3:/root/.ssh/
 
 # create git
 mkdir -p /var/poke/
@@ -87,7 +88,7 @@ DEVICE="eth1"
 BOOTPROTO="none"
 ONBOOT="yes"
 TYPE="Ethernet"
-IPADDR="192.168.0.3"
+IPADDR="192.168.10.3"
 NETMASK="255.255.255.0"
     ###### EXAMPLE
 
@@ -106,6 +107,11 @@ pip install gunicorn
 systemctl status firewalld
 systemctl start firewalld
 systemctl stop firewalld
+
+# for http server
+firewall-cmd --add-service=http --zone=public --permanent
+firewall-cmd --list-services --zone=public  --permanent
+
 
 # create settings
 cd /usr/lib/firewalld/services/
@@ -128,3 +134,8 @@ systemctl start nginx.service
 systemctl stop nginx.service
 systemctl status nginx.service
 sudo systemctl enable nginx
+
+# nginx settings
+echo "" > /etc/nginx/nginx.conf
+vi /etc/nginx/nginx.conf
+
