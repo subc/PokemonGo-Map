@@ -1,14 +1,10 @@
 # -*- coding: utf-8 -*-
-import json
-
-import flask
 from flask import Blueprint
-
-from example import get_pokemarkers
-from points import get_near_point
 from views.decorator import err, credential
+from kvs import set_profiler_account_level, get_profiler_account_level
 
-app = Blueprint("date",
+
+app = Blueprint("account",
                 __name__,
                 url_prefix='/<user_url_slug>')
 
@@ -20,4 +16,10 @@ def account():
     """
     Gets worker account
     """
-    return ok
+    import random
+    import uuid
+    username = str(uuid.uuid4())
+    username = "e3a69e62-9cc9-4846-9f08-58efcc598ae8"
+    level = random.randint(1, 10)
+    set_profiler_account_level(username, level)
+    return "ok:{}".format(str(get_profiler_account_level()))

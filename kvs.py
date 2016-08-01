@@ -203,3 +203,21 @@ def get_pokemon_count(point):
     client = get_client(point)
     key = get_pokemon_count_key(point)
     return client.get(key)
+
+
+# profiler level
+def get_profiler_account_level_key():
+    return "PROFILE:ACCOUNT"
+
+
+def set_profiler_account_level(username, level):
+    client = get_client(0)
+    key = get_profiler_account_level_key()
+    client.hset(key, username, level)
+    client.expire(key, 3600 * 24 * 7)
+
+
+def get_profiler_account_level():
+    client = get_client(0)
+    key = get_profiler_account_level_key()
+    return client.hgetall(key)
