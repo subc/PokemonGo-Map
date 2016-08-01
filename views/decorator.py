@@ -41,7 +41,7 @@ def err(f):
             return r
         except Exception as e:
             from app import create_app
-            app_log(logging.ERROR, datetime.datetime.now())
+            app_log(logging.ERROR, str(datetime.datetime.now()))
             app_log(logging.ERROR, traceback.format_exc())
             raise e
     return decorated_function
