@@ -10,6 +10,7 @@ from points import get_near_point, POINTS
 from example import get_google_map_api, render_template, get_map, get_rare_markers
 from command.check_worker import CheckWorker
 from kvs import get_pokemon_count
+from views.decorator import credential
 
 app = Blueprint("monitor",
                 __name__,
@@ -17,6 +18,7 @@ app = Blueprint("monitor",
 
 
 @app.route('/')
+@credential
 def monitor():
     # acc wrong password
     all_login_failed = get_all_login_failed()

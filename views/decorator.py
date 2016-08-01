@@ -3,6 +3,7 @@ import logging
 import traceback
 from functools import wraps
 import datetime
+import flask
 
 
 IGNORE_NAMES = [
@@ -40,6 +41,24 @@ def err(f):
             return r
         except Exception as e:
             from app import create_app
+            app_log(logging.ERROR, datetime.datetime.now())
             app_log(logging.ERROR, traceback.format_exc())
             raise e
+    return decorated_function
+
+
+def credential(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        """
+        Viewにアクセス制限を掛けるデコレータ
+        """
+        if "credential" not in flask.request.url:
+            return "Required Credential"
+
+        from app import conf
+        if conf()['CREDENTIAL'] not in flask.request.url:
+            return "Wrong Credential Code"
+        r = f(*args, **kwargs)
+        return r
     return decorated_function

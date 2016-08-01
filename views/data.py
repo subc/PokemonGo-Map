@@ -18,7 +18,6 @@ app = Blueprint("date",
 def data():
     """
     Gets all the PokeMarkers via REST
-    :param position: str
     """
     first_time = "FirstTime" in flask.request.url
     enable_gym = "gym" in flask.request.url
