@@ -84,4 +84,26 @@ GOOGLEMAPS_KEYS = [
     "AIzaSyCZg4baF7SXzDAs3sybsK6RLMcMFcS68ME",  # sherylangeline026
     "AIzaSyAweh68UVHsyObhE9y6_0cpGXMh-xFcnaI",  # elizabethheather27
     "AIzaSyDW1kPOgOBJO9noeKx7r6CszFphkK2KogI",  # lauriejuana724
+    # 0802 朝
+    "AIzaSyAHji52ccwbBYQty48zpbFoVk3y7Asih3o",  # charlenejessica540
+    "AIzaSyCxnGsgo0zRGfZeF5bsvA89WCLN26lX3Jg",  #priscillasocorro6
+    "AIzaSyBd04xXbhtQ6ALEyT5ZFDAYjv7XEjQHCq4",  #jerriejoann96
+    "AIzaSyB73cFGh7x6cZdI9XaKq9MajN48HCFZzjo",  #dianekaren651
+    "AIzaSyAuQ-spVtyoy8Q7AJ2Lhcpckuqbke8wzvI",  #ashleymarjorie8
+    "AIzaSyCOEVyVVU1OwYTrcXmm3RZ9IjqHi7EaJBM",  #kathleenmelissa799
+    "AIzaSyCLUEedyc2NzRFDEH14y935Resfbcr8uK0",  #amandataylorc709
+    "AIzaSyDIhcH6c0HbhT-SC4qYGMhn043K302x7Is",  #cnthtrina
+    "AIzaSyAroDccFIqn1RhrNjLqpITVLWcOwKIkIzg",  #jllcaitlin
+    "AIzaSyB5BmGc7BVpKWAZhjyqaWeF26IBka3nn18",  #alicecnth
+    # 0802 朝2
 ]
+
+"""
+from config.base import *
+_ = GOOGLEMAPS_KEYS
+p1 = len(_)
+p2 = len(list(set(_)))
+assert p1 == p2, "{}:{}".format(p1, p2)
+p1
+p2
+"""
