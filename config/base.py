@@ -52,6 +52,7 @@ GOOGLEMAPS_KEYS = [
     "AIzaSyAuyY4kuOD6d1VKPLcBkTlQqDEmNKN9opg",  # socotsaire998
     "AIzaSyBbdYL69Zkelr5IcG4V-Orzk8itNaPvlNU",  # krases365
     "AIzaSyDpNl2VKh49vlCFNLH362WjTnvhaSLLpVo",  # katlod716
+    # 0801 昼
     "AIzaSyAW5A1iGvpRZpNSg-XCBvEB8hKnG_Vf4Y8",  # noradebra66
     "AIzaSyAq4u30aPJ4f82yyXuzsmdVQZPm6StncOM",  # carlajulia672
     "AIzaSyCKJqSAKCWOK5j7Gcz6UJ6LbZgYDIrCR9I",  # ruthmyrtle881
@@ -62,7 +63,6 @@ GOOGLEMAPS_KEYS = [
     "AIzaSyCIa5bh_wbggzz5U87ReaoBX9Zh300iH9E",  # carrielauren759
     "AIzaSyBM-vWFAjgOTL8qZyzO0Z2v3w9IHow75Js",  # jessicamarjorie942
     "AIzaSyAhNe--spaPcWkdV4rYJwHUKIXGn3kjJpk",  # dorothycharles274
-
     "AIzaSyBarY1V1xDVhuQZ4Tlysqllx6JUbfq3_-s",  # pamelaearnestine908
     "AIzaSyDL_DOAiqLOkN23jl3YtCnZnWH54iokPPs",  # lorisharyl95
     "AIzaSyCps4LWmiF-GHqCxJK6RZk2wmwXcJv41x0",  # andrearuby393
@@ -73,4 +73,15 @@ GOOGLEMAPS_KEYS = [
     "AIzaSyA9x4GjGLBxocj0tUoyND0r5yIQwkxwFCo",  # jennajacalyn28
     "AIzaSyAZOI1M4-LLKamTDp6RqKoKALfqUzSNF48",  # diannairene38
     "AIzaSyBuX0fZsVJSzcfsjX-xPo3OyOkeOYB8_dM",  # barbaramarie30
+    # 0801 夜
+    "AIzaSyB9025Q4RZ6H2bYSGJvQoE8jOhOXqmu11Y",  # jennifergloria678
+    "AIzaSyCoViWDvgBVJs0F__VubJhqJh2kOA93MrA",  # pearlpeggy024
+    "AIzaSyBDDZtHzNGPYt_IIXryZKAM3JTr3lpCwNQ",  # ireneteresa836
+    "AIzaSyAA3B296PrDqo6oUgZMx2dKOq107fJA4M8",  # evelyneana801
+    "AIzaSyBDrNL2RW0YUwJHsdnqg58UDO8N-OuNpmI",  # bethmae619
+    "AIzaSyAgBinFRof1BnMWiK9lMiXdVOROdF4AiLI",  # kayebeverley372
+    "AIzaSyCVEvVUz0tn9djCz_BieX3FoR1hmRm2jU0",  # vickidalia24
+    "AIzaSyCZg4baF7SXzDAs3sybsK6RLMcMFcS68ME",  # sherylangeline026
+    "AIzaSyAweh68UVHsyObhE9y6_0cpGXMh-xFcnaI",  # elizabethheather27
+    "AIzaSyDW1kPOgOBJO9noeKx7r6CszFphkK2KogI",  # lauriejuana724
 ]
