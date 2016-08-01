@@ -204,7 +204,11 @@ def get_location_coords():
 
 
 def retrying_api_req(service, api_endpoint, access_token, *args, **kwargs):
+    count = 0
     while True:
+        count += 1
+        if count >= 5:
+            raise ValueError, "api request failed"
         try:
             response = api_req(service, api_endpoint, access_token, *args,
                                **kwargs)
