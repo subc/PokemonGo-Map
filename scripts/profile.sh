@@ -4,7 +4,7 @@
 # エラーなら停止
 set -eu
 
-for f in poke-app1 poke-app2; do
+for f in poke-app1 poke-app2 poke-app3; do
   echo ""
   echo "_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/"
   echo "$f"
