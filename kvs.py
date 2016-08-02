@@ -221,3 +221,15 @@ def get_profiler_account_level():
     client = get_client(0)
     key = get_profiler_account_level_key()
     return client.hgetall(key)
+
+
+# profiler point
+def get_point_access_key(point):
+    return "PROFILE:POINT:{}".format(point)
+
+
+def incr_point_access(point):
+    client = get_client(301)
+    key = get_point_access_key(point)
+    client.incr(key)
+    client.expire(key, 3600 * 24 * 7)

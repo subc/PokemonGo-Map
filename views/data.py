@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 import json
-
+import random
 import flask
 from flask import Blueprint
 
 from example import get_pokemarkers
+from kvs import incr_point_access
 from points import get_near_point
 from views.decorator import err
 
@@ -34,5 +35,9 @@ def data():
             # print "No.is...{}".format(ct)
             break
         ct += 1
+
+    # profile
+    if random.randint(1, 20) == 1:
+        incr_point_access(ct)
 
     return json.dumps(get_pokemarkers(point=ct, first_time=first_time, enable_gym=enable_gym))
