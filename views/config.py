@@ -41,7 +41,10 @@ def configc():
         x, y = p
     elif len(p) == 3:
         x, y, zoom = p
-        print(x, y, zoom)
+
+        # 古いver対応
+        if "z" in zoom:
+            zoom = 18
     else:
         x = config.get('LAT')
         y = config.get('LON')
