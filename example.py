@@ -1197,7 +1197,6 @@ def get_pokemarkers(point=0, first_time=False, enable_gym=False):
             'lat': pokemon["lat"],
             'lng': pokemon["lng"],
             'infobox': label,
-            'rare': int(rare_pokemon),
         })
 
     if not enable_gym:

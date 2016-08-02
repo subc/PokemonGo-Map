@@ -329,22 +329,11 @@
                         disappearsAt = {{ auto_refresh }} + 500;
                     }
 
-                    var marker = null;
-                    if (item['rare'] === 1) {
-                        marker = addMarker({
-                            position: new google.maps.LatLng(item["lat"], item["lng"]),
-                            map: map,
-                            icon: item["icon"],
-                            animation: google.maps.Animation.DROP
-                        });
-                    }else{
-                        marker = addMarker({
+                    var marker = addMarker({
                                 position: new google.maps.LatLng(item["lat"], item["lng"]),
                                 map: map,
                                 icon: item["icon"]
-                            });
-                    }
-
+                        });
                     markerCache[key] = {item: item, marker: marker};
 
                     if (item["infobox"]) {
@@ -367,7 +356,7 @@
                         if(_disappearsAt < 0){
 
                         } else {
-                            var timeout = setTimeout(function(){_marker.setMap(null);}, Math.ceil(_disappearsAt))
+                            var timeout = setTimeout(function(){_marker.setMap(null);}, Math.ceil(_disappearsAt));
                             _marker.timeout = timeout;
                         }
                         _marker.key = key;
