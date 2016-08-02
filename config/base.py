@@ -86,19 +86,30 @@ GOOGLEMAPS_KEYS = [
     "AIzaSyDW1kPOgOBJO9noeKx7r6CszFphkK2KogI",  # lauriejuana724
     # 0802 朝
     "AIzaSyAHji52ccwbBYQty48zpbFoVk3y7Asih3o",  # charlenejessica540
-    "AIzaSyCxnGsgo0zRGfZeF5bsvA89WCLN26lX3Jg",  #priscillasocorro6
-    "AIzaSyBd04xXbhtQ6ALEyT5ZFDAYjv7XEjQHCq4",  #jerriejoann96
-    "AIzaSyB73cFGh7x6cZdI9XaKq9MajN48HCFZzjo",  #dianekaren651
-    "AIzaSyAuQ-spVtyoy8Q7AJ2Lhcpckuqbke8wzvI",  #ashleymarjorie8
-    "AIzaSyCOEVyVVU1OwYTrcXmm3RZ9IjqHi7EaJBM",  #kathleenmelissa799
-    "AIzaSyCLUEedyc2NzRFDEH14y935Resfbcr8uK0",  #amandataylorc709
-    "AIzaSyDIhcH6c0HbhT-SC4qYGMhn043K302x7Is",  #cnthtrina
-    "AIzaSyAroDccFIqn1RhrNjLqpITVLWcOwKIkIzg",  #jllcaitlin
-    "AIzaSyB5BmGc7BVpKWAZhjyqaWeF26IBka3nn18",  #alicecnth
+    "AIzaSyCxnGsgo0zRGfZeF5bsvA89WCLN26lX3Jg",  # priscillasocorro6
+    "AIzaSyBd04xXbhtQ6ALEyT5ZFDAYjv7XEjQHCq4",  # jerriejoann96
+    "AIzaSyB73cFGh7x6cZdI9XaKq9MajN48HCFZzjo",  # dianekaren651
+    "AIzaSyAuQ-spVtyoy8Q7AJ2Lhcpckuqbke8wzvI",  # ashleymarjorie8
+    "AIzaSyCOEVyVVU1OwYTrcXmm3RZ9IjqHi7EaJBM",  # kathleenmelissa799
+    "AIzaSyCLUEedyc2NzRFDEH14y935Resfbcr8uK0",  # amandataylorc709
+    "AIzaSyDIhcH6c0HbhT-SC4qYGMhn043K302x7Is",  # cnthtrina
+    "AIzaSyAroDccFIqn1RhrNjLqpITVLWcOwKIkIzg",  # jllcaitlin
+    "AIzaSyB5BmGc7BVpKWAZhjyqaWeF26IBka3nn18",  # alicecnth
     # 0802 朝2
+    "AIzaSyBjimgQCjDFrMHVOePDnEQ5Tgvp4EnN4T8",  # nicolesharon559
+    "AIzaSyBL63YLwCei8JvJq6uwTu1dgCmp6JzaIkE",  # melindawilliams708
+    "AIzaSyDylifTPBRUwFPuVdtXcDVN4LBTalKmUxg",  # alexispadilla2438
+    "AIzaSyBtdoT8BFEOuHj-eGtlh0tyBro9iiI0gU8",  # annealvarez7937
+    "AIzaSyA4qQptb1HqSbvaoqHvYpYrXqrZ8M5ZJx8",  # tanishadavis335
+    "AIzaSyAob_MGQGInLRy__bm1t_APp5YF9WaywoI",  # judyhardy68
+    "AIzaSyCm5UofmM9zC8IhhMcVlUJdTZwrtzOfBs4",  # conniesartin89
+    "AIzaSyDLq4JUyR6fvO7QFEM88i3HBuoqe7cQET0",  # samanthabaker4322
+    "AIzaSyAE5AkGfqR3hhyZx-Taxvqxg_v6_yvbN9g",  # anakay9276
+    "AIzaSyB5xveM6aGuz036k86t1xg_6Cnyii_EzF4",  # margarethammonds29
 ]
 
 """
+# テストスクリプト
 from config.base import *
 _ = GOOGLEMAPS_KEYS
 p1 = len(_)
