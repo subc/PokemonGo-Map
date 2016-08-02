@@ -997,20 +997,19 @@ def fullmap():
             is_local=is_local,
             auto_refresh=conf().get('AUTO_REFRESH'))
 
-
-@app.route('/next_loc')
-def next_loc():
-    global NEXT_LAT, NEXT_LONG
-
-    lat = flask.request.args.get('lat', '')
-    lon = flask.request.args.get('lon', '')
-    if not (lat and lon):
-        print('[-] Invalid next location: %s,%s' % (lat, lon))
-    else:
-        print('[+] Saved next location as %s,%s' % (lat, lon))
-        NEXT_LAT = float(lat)
-        NEXT_LONG = float(lon)
-        return 'ok'
+# @app.route('/next_loc')
+# def next_loc():
+#     global NEXT_LAT, NEXT_LONG
+#
+#     lat = flask.request.args.get('lat', '')
+#     lon = flask.request.args.get('lon', '')
+#     if not (lat and lon):
+#         print('[-] Invalid next location: %s,%s' % (lat, lon))
+#     else:
+#         print('[+] Saved next location as %s,%s' % (lat, lon))
+#         NEXT_LAT = float(lat)
+#         NEXT_LONG = float(lon)
+#         return 'ok'
 
 
 def get_marker_for_debug(point):
