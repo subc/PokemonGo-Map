@@ -1027,21 +1027,26 @@ def get_marker_for_profile():
 
         if ct in red_ids:
             icon = icons.dots.red
+            message = "上位20位"
         elif ct in blue_ids:
             icon = icons.dots.blue
+            message = "下位20位"
         elif ct in pink_ids:
             icon = icons.dots.pink
+            message = "上位20-40位"
         elif ct in green_ids:
             icon = icons.dots.green
+            message = "下位20-40位"
         else:
             icon = icons.dots.yellow
+            message = ""
 
         # red
         red_marker = {
             'icon': icon,
             'lat': _x,
             'lng': _y,
-            'infobox': "{} position:{},{} [LEN:{}]".format(flavor_text, _x, _y, ct),
+            'infobox': "{}:{} position:{},{} [LEN:{}]".format(message, flavor_text, _x, _y, ct),
             'type': 'custom',
             'key': 'start-position:{}:{}'.format(_x, _y),
             'disappear_time': -1
