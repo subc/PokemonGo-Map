@@ -18,4 +18,5 @@ class ProfilePointAccess(Command):
 
     def _run(self, cut=False):
         for key, count in get_all_point_access():
-            print(key, count)
+            point = key.replace("PROFILE:POINT:", "")
+            print point, key, count
