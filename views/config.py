@@ -35,11 +35,21 @@ def configc():
     from app import conf
     config = conf()
     zoom = conf().get('ZOOM')
-    x, y = flask.request.url.split("?")[1].replace("p=", "").split(",")
+
+    p = flask.request.url.split("?")[1].replace("p=", "").split(",")
+    if len(p) == 2:
+        x, y = p
+    elif len(p) == 3:
+        x, y, zoom = p
+        print(x, y, zoom)
+    else:
+        x = config.get('LAT')
+        y = config.get('LON')
+
     center = {
         'lat': x,
         'lng': y,
-        'zoom': zoom,
+        'zoom': int(zoom),
         'identifier': "fullmap"
     }
     return json.dumps(center)

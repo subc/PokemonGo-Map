@@ -204,7 +204,7 @@
                 var json_obj = $.parseJSON(response);//parse JSON
                 options["lat"] = json_obj["lat"];
                 options["lng"] = json_obj["lng"];
-                options["zoom"] = {{ zoom }};
+                options["zoom"] = json_obj["zoom"];
                 options["identifier"] = json_obj["identifier"];
                 updateMap();
             });
@@ -264,6 +264,15 @@
                 counter += 1;
             }
         }
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                    results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
         function updateMap(){
             // A new map is created because the original one isn't saved
             createMap();
@@ -272,9 +281,13 @@
             createHeader();
             if (counter >= adLimit){return}
 
-            // change active url replace
-            var grid_param = map.mapUrl.split('=')[1];
-            location.hash=grid_param;
+            var ll = getParameterByName('ll', map.mapUrl);
+            if(ll === null){return}
+
+            var grid_param = ll;
+            var z = getParameterByName('z', map.mapUrl);
+            location.hash=grid_param + ',' + z;
+
 
             if(gym){
                 grid_param += '&gym=1';
