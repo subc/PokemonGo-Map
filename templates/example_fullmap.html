@@ -218,14 +218,6 @@
                             center: new google.maps.LatLng(options["lat"], options["lng"]),
                             zoom: options["zoom"],
                             mapTypeControl: false,
-{#                            mapTypeControlOptions: {#}
-{#                                style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,#}
-{#                                position: google.maps.ControlPosition.TOP_RIGHT,#}
-{#                                mapTypeIds: [#}
-{#                                    google.maps.MapTypeId.ROADMAP,#}
-{#                                    google.maps.MapTypeId.TERRAIN#}
-{#                                ]#}
-{#                            },#}
                             zoomControl: true,
                             zoomControlOptions: {
                                 style: google.maps.ZoomControlStyle.LARGE,
@@ -336,11 +328,23 @@
                     } else {
                         disappearsAt = {{ auto_refresh }} + 500;
                     }
-                    var marker = addMarker({
+
+                    var marker = null;
+                    if (item['rare'] === 1) {
+                        marker = addMarker({
                             position: new google.maps.LatLng(item["lat"], item["lng"]),
                             map: map,
                             icon: item["icon"],
+                            animation: google.maps.Animation.DROP
                         });
+                    }else{
+                        marker = addMarker({
+                                position: new google.maps.LatLng(item["lat"], item["lng"]),
+                                map: map,
+                                icon: item["icon"]
+                            });
+                    }
+
                     markerCache[key] = {item: item, marker: marker};
 
                     if (item["infobox"]) {

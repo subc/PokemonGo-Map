@@ -1166,7 +1166,7 @@ def get_pokemarkers(point=0, first_time=False, enable_gym=False):
             'disappear_time'])
         dateoutput = datestr.strftime("%H:%M:%S")
         if is_ampm_clock:
-        	dateoutput = datestr.strftime("%I:%M%p").lstrip('0')
+            dateoutput = datestr.strftime("%I:%M%p").lstrip('0')
         pokemon['disappear_time_formatted'] = dateoutput
         pokemon['jpn_name'] = POKEMON_JAPANESE_NAME.get(pokemon['id'])
 
@@ -1187,8 +1187,8 @@ def get_pokemarkers(point=0, first_time=False, enable_gym=False):
         label = LABEL_TMPL.format(**pokemon)
         #  NOTE: `infobox` field doesn't render multiple line string in frontend
         label = label.replace('\n', '')
-        large_icon = int(pokemon["id"]) in RARE_POKEMON
-        icon = 'static/{}/{}.png'.format("larger-icons" if large_icon else "icons", pokemon["id"])
+        rare_pokemon = int(pokemon["id"]) in RARE_POKEMON
+        icon = 'static/{}/{}.png'.format("larger-icons" if rare_pokemon else "icons", pokemon["id"])
         pokeMarkers.append({
             'type': 'pokemon',
             'key': pokemon_key,
@@ -1196,7 +1196,8 @@ def get_pokemarkers(point=0, first_time=False, enable_gym=False):
             'icon': icon,
             'lat': pokemon["lat"],
             'lng': pokemon["lng"],
-            'infobox': label
+            'infobox': label,
+            'rare': int(rare_pokemon),
         })
 
     if not enable_gym:
