@@ -1086,7 +1086,7 @@ def get_marker_for_debug(point):
             'icon': './static/marker/ball.png?4',
             'lat': _x,
             'lng': _y,
-            'infobox': "{} position:{},{} [LEN:{}]".format(flavor_text, _x, _y, ct),
+            'infobox': "{} position:{},{} [{}]".format(flavor_text, _x, _y, ct),
             'type': 'custom',
             'key': 'start-position:{}:{}'.format(_x, _y),
             'disappear_time': -1
@@ -1103,7 +1103,7 @@ def get_marker_for_debug(point):
             'icon': './static/marker/soon.png?4',
             'lat': _x,
             'lng': _y,
-            'infobox': "[COMING SOON]{} position:{},{} [LEN:{}]".format(flavor_text, _x, _y, ct),
+            'infobox': "[COMING SOON]{} position:{},{} [{}]".format(flavor_text, _x, _y, ct),
             'type': 'custom',
             'key': 'start-position:{}:{}'.format(_x, _y),
             'disappear_time': -1
