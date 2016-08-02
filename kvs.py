@@ -233,3 +233,12 @@ def incr_point_access(point):
     key = get_point_access_key(point)
     client.incr(key)
     client.expire(key, 3600 * 24 * 7)
+
+
+def get_all_point_access():
+    client = get_client(301)
+    key_ast = get_point_access_key('*')
+    result = []
+    for key in client.keys(key_ast):
+        result.append((key, int(client.get(key))))
+    return sorted(result, key=lambda x: x[1], reverse=True)
