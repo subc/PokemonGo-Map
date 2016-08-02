@@ -1012,6 +1012,60 @@ def fullmap():
 #         return 'ok'
 
 
+def get_marker_for_profile():
+    access_group = [[int(key.replace("PROFILE:POINT:", "")), count] for key, count in get_all_point_access()]
+    # 'blue', 'yellow', 'green', 'red', 'pink', 'purple', 'red'
+    red_ids = [x[0] for x in access_group[:20]]  # 上位20
+    blue_ids = [x[0] for x in access_group[-20:]]  # 下位20
+    pink_ids = [x[0] for x in access_group[20:40]]  # 上位20 - 40
+    green_ids = [x[0] for x in access_group[-40:-20]]  # 下位20 - 40
+
+    r = []
+    ct = -1
+    for _x, _y, flavor_text in POINTS:
+        ct += 1
+
+        if ct in red_ids:
+            icon = icons.dots.red
+        elif ct in blue_ids:
+            icon = icons.dots.blue
+        elif ct in pink_ids:
+            icon = icons.dots.pink
+        elif ct in green_ids:
+            icon = icons.dots.green
+        else:
+            icon = icons.dots.yellow
+
+        # red
+        red_marker = {
+            'icon': icon,
+            'lat': _x,
+            'lng': _y,
+            'infobox': "{} position:{},{} [LEN:{}]".format(flavor_text, _x, _y, ct),
+            'type': 'custom',
+            'key': 'start-position:{}:{}'.format(_x, _y),
+            'disappear_time': -1
+        }
+        r.append(red_marker)
+
+    from points import POINTS_COMING_SOON
+    for _x, _y, flavor_text in POINTS_COMING_SOON:
+        ct += 1
+
+        # red
+        red_marker = {
+            'icon': icons.dots.yellow,
+            'lat': _x,
+            'lng': _y,
+            'infobox': "[COMING SOON]{} position:{},{} [LEN:{}]".format(flavor_text, _x, _y, ct),
+            'type': 'custom',
+            'key': 'start-position:{}:{}'.format(_x, _y),
+            'disappear_time': -1
+        }
+        r.append(red_marker)
+    return r
+
+
 def get_marker_for_debug(point):
     """
     デバッグ用、探索範囲をpointする
@@ -1086,7 +1140,7 @@ def is_rare_pokemon(pokemon_id):
     return True
 
 
-def get_rare_markers():
+def get_rare_markers(first_time=False):
     """
     first_timeはhtmlのjs側で制御してる。
     :param point:
@@ -1094,6 +1148,9 @@ def get_rare_markers():
     :param enable_gym:
     """
     pokeMarkers = []
+    if first_time:
+        pokeMarkers = get_marker_for_profile()
+
     for point in range(len(POINTS)):
         if random.randint(1, 10) != 3:
             continue

@@ -51,4 +51,4 @@ def data():
             break
         ct += 1
 
-    return json.dumps(get_rare_markers())
+    return json.dumps(get_rare_markers(first_time=first_time))
