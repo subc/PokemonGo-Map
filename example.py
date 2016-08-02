@@ -1082,7 +1082,8 @@ def get_marker_for_debug(point):
 
         # red
         red_marker = {
-            'icon': icons.dots.red,
+            # 'icon': icons.dots.red,
+            'icon': './static/marker/ball.png',
             'lat': _x,
             'lng': _y,
             'infobox': "{} position:{},{} [LEN:{}]".format(flavor_text, _x, _y, ct),
@@ -1097,8 +1098,9 @@ def get_marker_for_debug(point):
         ct += 1
 
         # red
-        red_marker = {
-            'icon': icons.dots.yellow,
+        soon_marker = {
+            # 'icon': icons.dots.yellow,
+            'icon': './static/marker/soon.png',
             'lat': _x,
             'lng': _y,
             'infobox': "[COMING SOON]{} position:{},{} [LEN:{}]".format(flavor_text, _x, _y, ct),
@@ -1106,7 +1108,7 @@ def get_marker_for_debug(point):
             'key': 'start-position:{}:{}'.format(_x, _y),
             'disappear_time': -1
         }
-        r.append(red_marker)
+        r.append(soon_marker)
 
         # blue 超重い
         # d = (step - 1) / 2
