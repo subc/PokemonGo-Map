@@ -150,7 +150,7 @@ def lot_pokemon():
             if random.randint(1, 4) != 2:
                 return normarise()
 
-        return random.choice(rare_ids)
+        return rare_id
     if z >= 92:
         # noraml
         if random.randint(1, 2) == 1:
