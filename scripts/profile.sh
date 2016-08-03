@@ -28,4 +28,5 @@ for f in poke-worker5 poke-worker6 poke-worker7 poke-worker8 poke-worker9 poke-w
   echo "$f"
   echo "_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/"
   ssh -l root $f "date"
+  ssh -l root $f "/usr/bin/supervisorctl -c /etc/supervisord.conf status"
 done

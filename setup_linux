@@ -68,6 +68,7 @@ scp ~/.ssh/ikeda poke-app3:/root/.ssh/
 scp ~/.ssh/ikeda.pub poke-app3:/root/.ssh/
 scp ~/.ssh/config poke-app3:/root/.ssh/
 
+
 # create git
 mkdir -p /var/poke/
 cd /var/poke
