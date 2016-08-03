@@ -95,7 +95,7 @@ def lot_and_set_kvs(o_lat, o_lon, point):
         'id': pokemon_id,
         'lat': lat,
         'lng': lon,
-        'disappear_time': unix + random.randint(100, 840),
+        'disappear_time': unix + random.randint(100, 600),
     }
     key = '{}:{}:{}:{}'.format(_['id'],
                                _['lat'],
