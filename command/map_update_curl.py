@@ -53,7 +53,7 @@ def pop_pokemon(lat, lon, point, limit, nosleep=False):
         x, y = steps[i]
         lot_and_set_kvs(x, y, point)
         if not nosleep:
-            time.sleep(2)
+            time.sleep(random.randint(2, 10))
 
 
 def get_steps(lat, lon, point):
