@@ -33,7 +33,7 @@ class MapUpdateCurl(Command):
         pass
 
     def _run(self, point, nosleep):
-        limit_pokemon = random.randint(20, 37)
+        limit_pokemon = random.randint(20, 30)
         count = len(get_pokemon_keys(point=point))
         print "total_pokemon_count:{}".format(count)
         if count > limit_pokemon:
