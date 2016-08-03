@@ -143,7 +143,6 @@ def lot_pokemon():
         if rare_id in [89, 134, 4, 59]:  # ベトベトン沸きすぎ対策2
             if random.randint(1, 3) != 2:
                 return normarise()
-
         return random.choice(rare_ids)
     if z >= 92:
         # noraml
