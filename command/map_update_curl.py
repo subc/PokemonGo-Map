@@ -56,8 +56,6 @@ def pop_pokemon(lat, lon, point, limit, nosleep=False):
             time.sleep(2)
 
 
-
-
 def get_steps(lat, lon, point):
     pokemon_count = 0
     pos = 1
@@ -136,6 +134,17 @@ def lot_pokemon():
     z = random.randint(1, 122)
     if z >= 120:
         # rare
+        rare_id = random.choice(rare_ids)
+        if rare_id in [149, 143]:  # カイリュー、カビゴン禁止
+            return normarise()
+        if rare_id in [6, 130]:  # リザードン沸きすぎ対策
+            if random.randint(1, 4) != 2:
+                return normarise()
+
+        if rare_id in [89, 134]:  # ベトベトン沸きすぎ対策2
+            if random.randint(1, 3) != 2:
+                return normarise()
+
         return random.choice(rare_ids)
     if z >= 92:
         # noraml
