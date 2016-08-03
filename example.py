@@ -53,14 +53,19 @@ LOGIN_URL = \
 LOGIN_OAUTH = 'https://sso.pokemon.com/sso/oauth2.0/accessToken'
 APP = 'com.nianticlabs.pokemongo'
 
-with open('credentials.json') as file:
-	credentials = json.load(file)
-
-PTC_CLIENT_SECRET = credentials.get('ptc_client_secret', None)
-ANDROID_ID = credentials.get('android_id', None)
-SERVICE = credentials.get('service', None)
-CLIENT_SIG = credentials.get('client_sig', None)
+# with open('credentials.json') as file:
+# 	credentials = json.load(file)
+#
+# PTC_CLIENT_SECRET = credentials.get('ptc_client_secret', None)
+# ANDROID_ID = credentials.get('android_id', None)
+# SERVICE = credentials.get('service', None)
+# CLIENT_SIG = credentials.get('client_sig', None)
 # GOOGLEMAPS_KEY = credentials.get('gmaps_key', None)
+PTC_CLIENT_SECRET = ''
+ANDROID_ID = '9774d56d682e549c'
+SERVICE = 'audience:server:client_id:848232511240-7so421jotr2609rmqakceuu1luuq0ptb.apps.googleusercontent.com'
+CLIENT_SIG = '321187995bc7cdc2b5fc91b11a96e2baa8602c62'
+GOOGLEMAPS_KEY = ''
 
 SESSION = requests.session()
 SESSION.headers.update({'User-Agent': 'Niantic App'})
