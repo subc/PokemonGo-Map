@@ -39,7 +39,8 @@ class MapUpdateCurl(Command):
         if count > limit_pokemon:
             print "SLEEP 60SEC  pokemon is over"
             if not nosleep:
-                time.sleep(60)
+                s = random.randint(80, 170)
+                time.sleep(s)
             return
         x, y, f = POINTS[point]
         pop_pokemon(x, y, point, limit_pokemon - count, nosleep=nosleep)
