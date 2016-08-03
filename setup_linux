@@ -51,14 +51,15 @@ mkvirtualenv --no-site-packages --python=/usr/local/bin/python2.7 poke
 echo "alias sctl='supervisorctl'" >> ~/.bash_profile
 yum install supervisor -y
 echo "" > /etc/supervisord.conf
+vi /etc/supervisord.conf
 /usr/bin/python /usr/bin/supervisord -c /etc/supervisord.conf
-/usr/bin/python /usr/bin/supervisord
-sctl
+sctl status
+
 
 
 # bash
 echo "# color" >> ~/.bash_profile
-echo "export PS1='\[\e[0;37m\]app3:\u@\h:\w${text}$\[\e[m\] '" >> ~/.bash_profile
+echo "export PS1='\[\e[0;33m\]w5:\u@\h:\w${text}$\[\e[m\] '" >> ~/.bash_profile
 echo "workon poke" >> ~/.bash_profile
 echo "cd /var/poke/pokemap" >> ~/.bash_profile
 
@@ -82,6 +83,7 @@ ip link
 cd /etc/sysconfig/network-scripts
 ls
 cp ifcfg-eth0 ifcfg-eth1
+echo "" > ./ifcfg-eth1
 vi ./ifcfg-eth1
     ###### EXAMPLE
 DEVICE="eth1"
@@ -90,6 +92,7 @@ ONBOOT="yes"
 TYPE="Ethernet"
 IPADDR="192.168.10.3"
 NETMASK="255.255.255.0"
+
     ###### EXAMPLE
 
 service network restart
