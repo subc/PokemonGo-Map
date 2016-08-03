@@ -33,13 +33,13 @@ class MapUpdateCurl(Command):
         pass
 
     def _run(self, point, nosleep):
-        limit_pokemon = random.randint(20, 30)
+        limit_pokemon = random.randint(25, 35)
         count = len(get_pokemon_keys(point=point))
         print "total_pokemon_count:{}".format(count)
         if count > limit_pokemon:
             print "SLEEP 60SEC  pokemon is over"
             if not nosleep:
-                s = random.randint(80, 170)
+                s = random.randint(60, 120)
                 time.sleep(s)
             return
         x, y, f = POINTS[point]
