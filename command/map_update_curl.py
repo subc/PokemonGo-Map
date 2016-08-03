@@ -137,7 +137,7 @@ def lot_pokemon():
         rare_id = random.choice(rare_ids)
         if rare_id in [149, 143]:  # カイリュー、カビゴン禁止
             return normarise()
-        if rare_id in [6, 130, 9, 3, 136, ]:  # リザードン沸きすぎ対策
+        if rare_id in [6, 130, 9, 3, 136, 5]:  # リザードン沸きすぎ対策
             if random.randint(1, 4) != 2:
                 return normarise()
         if rare_id in [89, 134, 4, 59]:  # ベトベトン沸きすぎ対策2
