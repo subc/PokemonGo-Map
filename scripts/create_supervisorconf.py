@@ -20,13 +20,13 @@ redirect_stderr=true
 
 def create_file(ct):
     print("[+]start create file : {}".format(ct))
-    _base_path = "/Users/ikeda/noah/maps/config/supervisord/up/"
+    _base_path = "/Users/ikeda/python/maps/config/supervisord/up/"
     filename = "up{0:03d}".format(ct)
     body = F.format(filename, ct, filename)
     print(body)
 
     # set folder
-    folder_name = ct % 13
+    folder_name = ct % 4
     path = _base_path + str(folder_name) + "/" + filename + ".ini"
 
     with codecs.open(path, "w", "utf-8") as file:
