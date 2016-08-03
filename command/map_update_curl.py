@@ -19,30 +19,45 @@ class MapUpdateCurl(Command):
     """
     option_list = (
         Option('-p', '--point', default=None, required=True, help='update map in range point'),
+        Option('-ns', '--nosleep', default=False, required=False, help='no sleep mode'),
     )
 
-    def run(self, point):
+    def run(self, point, nosleep):
         self.init()
-        self._run(int(point))
-        time.sleep(5)
+        self._run(int(point), nosleep)
+        if not nosleep:
+            time.sleep(5)
         print("finish")
 
     def init(self):
         pass
 
-    def _run(self, point):
-        limit_pokemon = random.randint(30, 37)
+    def _run(self, point, nosleep):
+        limit_pokemon = random.randint(20, 37)
         count = len(get_pokemon_keys(point=point))
         print "total_pokemon_count:{}".format(count)
         if count > limit_pokemon:
-            print "SLEEP 30SEC  pokemon is over"
-            time.sleep(30)
+            print "SLEEP 60SEC  pokemon is over"
+            if not nosleep:
+                time.sleep(60)
             return
         x, y, f = POINTS[point]
-        get_lat(x, y, point)
+        pop_pokemon(x, y, point, limit_pokemon - count, nosleep=nosleep)
+
+def pop_pokemon(lat, lon, point, limit, nosleep=False):
+    steps = get_steps(lat, lon, point)
+    random.shuffle(steps)
+
+    for i in xrange(limit):
+        x, y = steps[i]
+        lot_and_set_kvs(x, y, point)
+        if not nosleep:
+            time.sleep(2)
 
 
-def get_lat(lat, lon, point):
+
+
+def get_steps(lat, lon, point):
     pokemon_count = 0
     pos = 1
     x = 0
@@ -51,31 +66,23 @@ def get_lat(lat, lon, point):
     dy = -1
     # steplimit2 = int(step_limit**2 * float(1.5625))
     steplimit2 = 11 * 11
+    steps = []
     for step in range(steplimit2):
-        if random.randint(1, 3) != 3:
-            continue
-
-        print('looping: step {} of {}'.format((step+1), steplimit2))
+        # print('looping: step {} of {}'.format((step+1), steplimit2))
         # debug('steplimit: {} x: {} y: {} pos: {} dx: {} dy {}'.format(steplimit2, x, y, pos, dx, dy))
         # Scan location math
         if -steplimit2 / 2 < x <= steplimit2 / 2 and -steplimit2 / 2 < y <= steplimit2 / 2:
-            print 'scan:', x * 0.002 + lat, y * 0.002 + lon, 0
+            # print 'scan:', x * 0.002 + lat, y * 0.002 + lon, 0
+            pass
         if x == y or x < 0 and x == -y or x > 0 and x == 1 - y:
             (dx, dy) = (-dy, dx)
 
         (x, y) = (x + dx, y + dy)
+        steps.append((x * 0.002 + lat, y * 0.002 + lon))
+    return steps
 
 
-        get_from_url(x * 0.002 + lat, y * 0.002 + lon, point)
-        pokemon_count += 0
-
-        print('Completed: ' + str(
-            ((step+1) + pos * .2 - .2) / steplimit2 * 100) + '%')
-
-        # time.sleep(0.3)
-
-
-def get_from_url(o_lat, o_lon, point):
+def lot_and_set_kvs(o_lat, o_lon, point):
     pokemon_id = lot_pokemon()
     if not pokemon_id:
         return
@@ -100,8 +107,12 @@ def get_from_url(o_lat, o_lon, point):
 
 
 def fuzzy(p):
+    """
+    0.002が最大
+    """
     r = [0.0000001, 0.0000002, 0.0000003, -0.0000001, -0.0000002, -0.0000003]
-    base = p + random.choice(r)
+    f = float(random.randint(1, 20000)) / (10000 * 1000)
+    base = p + f
     result = float('%03.7f' % base)
     return result
 
@@ -114,16 +125,17 @@ def lot_pokemon():
     外れ91匹
     """
     normal_ids = []
+    rare_ids = []
     for pokemon_id in POP_POKEMONS:
         if pokemon_id in RARE_POKEMON:
-            pass
+            rare_ids.append(pokemon_id)
         else:
             normal_ids.append(pokemon_id)
 
     z = random.randint(1, 122)
     if z >= 120:
         # rare
-        return random.choice(RARE_POKEMON)
+        return random.choice(rare_ids)
     if z >= 92:
         # noraml
         if random.randint(1, 2) == 1:
