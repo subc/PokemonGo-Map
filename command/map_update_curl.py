@@ -158,7 +158,7 @@ def lot_pokemon():
         normal_pokemon_id = random.choice(normal_ids)
 
         # ゴローン ゴースト 沸きすぎ対策
-        if normal_pokemon_id in [93, 75, 4, 113, 83, 100, 77, 108]:
+        if normal_pokemon_id in [93, 75, 4, 113, 83, 100, 77, 108, 20, 111]:
             if random.randint(1, 8) != 2:
                 return normarise()
         return normal_pokemon_id
