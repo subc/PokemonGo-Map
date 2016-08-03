@@ -155,14 +155,20 @@ def lot_pokemon():
         # noraml
         if random.randint(1, 2) == 1:
             return normarise()
-        return random.choice(normal_ids)
+        normal_pokemon_id = random.choice(normal_ids)
+
+        # ゴローン ゴースト 沸きすぎ対策
+        if normal_pokemon_id in [93, 75, 4, 113]:
+            if random.randint(1, 8) != 2:
+                return normarise()
+        return normal_pokemon_id
     return 0
 
 
 def normarise():
     l = [
         (1,0,136),
-        (4,137,321),
+        (84,137,321),
         (10,322,524),
         (13,525,909),
         (16,910,1302),
