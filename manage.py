@@ -20,8 +20,8 @@ manager.add_command('runserver', Server(use_reloader=True))
 manager.add_command('up_old2', MapUpdate())
 manager.add_command('cw', CheckWorker())
 manager.add_command('prof', ProfilePointAccess())
-manager.add_command('up_old', MapUpdateCurl())
-manager.add_command('up', MapUpdateFromUrl())
+manager.add_command('up', MapUpdateCurl())
+manager.add_command('up_old_20160806', MapUpdateFromUrl())
 
 
 if __name__ == "__main__":
