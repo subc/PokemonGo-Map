@@ -28,7 +28,7 @@ class MapUpdateFromUrl(Command):
             print(traceback.format_exc())
 
         if not nosleep:
-            time.sleep(15)
+            time.sleep(30)
         print("finish")
 
     def init(self):
@@ -95,7 +95,7 @@ def get_from_url(x, y, count=5):
 
     if "Internal Server Error" in output_str:
         print("500 error retry... {}".format(count))
-        time.sleep(1)
+        time.sleep(2)
         return get_from_url(x, y, count=count-1)
 
     data = ujson.decode(output_str)
