@@ -1257,7 +1257,11 @@ def get_pokemarkers(point=0, first_time=False, enable_gym=False):
         #  NOTE: `infobox` field doesn't render multiple line string in frontend
         label = label.replace('\n', '')
         rare_pokemon = int(pokemon["id"]) in RARE_POKEMON
-        icon = 'static/{}/{}.png'.format("larger-icons" if rare_pokemon else "icons", pokemon["id"])
+        if rare_pokemon:
+            icon = 'http://pokemonhound.com/static/larger-icons/{}.png'.format(pokemon["id"])
+        else:
+            icon = 'static/{}/{}.png'.format("icons", pokemon["id"])
+
         pokeMarkers.append({
             'type': 'pokemon',
             'key': pokemon_key,
