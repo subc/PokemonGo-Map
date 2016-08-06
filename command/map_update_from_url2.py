@@ -53,7 +53,7 @@ def set_data(point, data):
         pokemon_id = id_raw.replace("id=", "")
         loc = loc_raw.replace("loc=", "").split(",")
         expire = long(expire_low.replace("tol=", ""))
-        print pokemon_id, loc, expire
+        print "ZZZZ:", pokemon_id, loc, expire
 
         # time
         disappear_time = int(expire / 1000)
