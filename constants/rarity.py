@@ -3,7 +3,7 @@ from __future__ import absolute_import, unicode_literals
 
 RARE_POKEMON = [
     ### test data
-    129,  # コイキング
+    # 129,  # コイキング
     1, 2, 4, 5, 7, 8, 25, 147,  # 御三家とミニリュー
     113,  # ラッキー
     138,  # オムナイト
@@ -43,7 +43,7 @@ RARE_POKEMON = [
     94,  # Gengar
     18,  # Pidgeot
     125,  # Electabuzz
-    127,  # Pinsir
+    # 127,  # Pinsir
     141,  # Kabutops
     135,  # Jolteon
     87,  # Dewgong
