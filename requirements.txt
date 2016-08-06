@@ -11,3 +11,4 @@ redis==2.10.5
 numpy==1.11.1
 slacker==0.9.24
 gunicorn==19.6.0
+ujson==1.35
