@@ -7,6 +7,7 @@ from command.map_update_curl import MapUpdateCurl
 from command.profile_point_access import ProfilePointAccess
 from command.map_update_from_url import MapUpdateFromUrl
 from command.map_update_from_url2 import MapUpdateFromUrl2
+from command.map_update_from_url3 import MapUpdateFromUrl3
 
 manager = Manager(create_app)
 
@@ -23,7 +24,8 @@ manager.add_command('cw', CheckWorker())
 manager.add_command('prof', ProfilePointAccess())
 manager.add_command('up_dummy', MapUpdateCurl())  # dummy
 manager.add_command('up_old_20160806', MapUpdateFromUrl())
-manager.add_command('up', MapUpdateFromUrl2())
+manager.add_command('up_pgo_serarch_20160806', MapUpdateFromUrl2())
+manager.add_command('up', MapUpdateFromUrl3())
 
 
 if __name__ == "__main__":
