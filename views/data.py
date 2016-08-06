@@ -3,15 +3,18 @@ import json
 import random
 import flask
 from flask import Blueprint
-
+import threading
 from example import get_pokemarkers
 from kvs import incr_point_access
+from module.tls_property import cached_tls_random
 from points import get_near_point
 from views.decorator import err
 
 app = Blueprint("date",
                 __name__,
                 url_prefix='/<user_url_slug>')
+
+tls = threading.local()
 
 
 @app.route('/', methods=['GET'])
@@ -40,4 +43,11 @@ def data():
     if random.randint(1, 20) == 1:
         incr_point_access(ct)
 
-    return json.dumps(get_pokemarkers(point=ct, first_time=first_time, enable_gym=enable_gym))
+    return json.dumps(A.get_marker(ct, first_time))
+
+
+class A(object):
+    @classmethod
+    @cached_tls_random
+    def get_marker(cls, point, first_time):
+        return get_pokemarkers(point=point, first_time=first_time, enable_gym=False)
