@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import json
+import ujson
 import random
 import flask
 from flask import Blueprint
@@ -43,11 +43,12 @@ def data():
     if random.randint(1, 20) == 1:
         incr_point_access(ct)
 
-    return json.dumps(A.get_marker(ct, first_time))
+    return A.get_marker(ct, first_time)
 
 
 class A(object):
     @classmethod
     @cached_tls_random
     def get_marker(cls, point, first_time):
-        return get_pokemarkers(point=point, first_time=first_time, enable_gym=False)
+        maker = get_pokemarkers(point=point, first_time=first_time, enable_gym=False)
+        return ujson.dumps(maker)
