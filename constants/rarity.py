@@ -20,7 +20,7 @@ RARE_POKEMON = [
     117,  # Seadra
     124,  # Jynx
     70,  # Weepinbell
-    114,  # Tangela
+    # 114,  # Tangela
     # 22,  # Fearow
     47,  # Parasect
     148,  # Dragonair
