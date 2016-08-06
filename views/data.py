@@ -32,7 +32,7 @@ def data():
     ct = 0
     for _x, _y, _ in POINTS:
         if point_x == _x and point_y == _y:
-            print "No.is...{}".format(ct)
+            # print "No.is...{}".format(ct)
             break
         ct += 1
 
