@@ -59,15 +59,14 @@ sctl status
 
 # bash
 echo "# color" >> ~/.bash_profile
-echo "export PS1='\[\e[0;33m\]w5:\u@\h:\w${text}$\[\e[m\] '" >> ~/.bash_profile
+echo "export PS1='\[\e[0;37m\]app5:\u@\h:\w${text}$\[\e[m\] '" >> ~/.bash_profile
 echo "workon poke" >> ~/.bash_profile
 echo "cd /var/poke/pokemap" >> ~/.bash_profile
 
 ##### ssh 鍵のコピー
-scp ~/.ssh/ikeda poke-app3:/root/.ssh/
-scp ~/.ssh/ikeda.pub poke-app3:/root/.ssh/
-scp ~/.ssh/config poke-app3:/root/.ssh/
-
+scp ~/.ssh/ikeda poke-app5:/root/.ssh/
+scp ~/.ssh/ikeda.pub poke-app5:/root/.ssh/
+scp ~/.ssh/config poke-app5:/root/.ssh/
 
 # create git
 mkdir -p /var/poke/
@@ -76,7 +75,8 @@ git clone git@github.com:subc/PokemonGo-Map.git pokemap
 cd pokemap
 pip install -r ./requirements.txt
 pip freeze
-
+scp ~/python/maps/config/password.py poke-app4:/var/poke/pokemap/config
+python manage.py runserver
 
 # network
 ifconfig
@@ -102,6 +102,8 @@ ifconfig
 # ロードバランサ設定
 # IPADDRESS に ロードバランサのグローバルIPを設定するだけでok
 vi /etc/sysconfig/network-scripts/ifcfg-lo
+service network restart
+ifconfig
 
 
 # gunicornで動かす
@@ -143,3 +145,5 @@ sudo systemctl enable nginx
 echo "" > /etc/nginx/nginx.conf
 vi /etc/nginx/nginx.conf
 
+# crontab 忘れずに
+crontab -e

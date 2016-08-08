@@ -20,61 +20,80 @@
     <link rel="apple-touch-icon" sizes="152x152" href="/static/favicon/mario-152-213652.png">
 </head>
 <body style="margin: 0px">
-<div style="height:40px;width:100%;background-color:#333333;color: #ffffff;padding-top: 8px;">
-    <h1 style="height:100%;width:100%;font-size: 12px; margin-top: 3px; margin-left: 5px">PGO MAP - ポケモンGO リアルタイムMAP
-        （座標バグ直した）
-    </h1>
-    <span style="float:left; margin-top: -70px; margin-left: 255px; z-index: 1000"><img src="/static/new.png" style="width: 50px"></span>
-{#    <span style="float:right; margin-top: -52px; margin-right: 15px; z-index: 1000"><a id="showGym" href="#" onclick="toggleGym();" style="color: #ffffff; font-size: 12px">ジム表示</a></span>#}
+<div id="wrap">
 
-</div>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div style="height:40px;width:100%;color: #ffffff;padding-top: 13px;">
+                <h1 style="height:100%;width:100%;font-size: 12px; margin-top: 3px; margin-left: 5px">PGO MAP - ポケモンGO
+                    リアルタイムMAP
+                    （座標バグ直した）
+                </h1>
+                <span style="float:left; margin-top: -55px; margin-left: 255px; z-index: 1000"><img
+                        src="/static/new.png" style="width: 50px"></span>
+                {#    <span style="float:right; margin-top: -52px; margin-right: 15px; z-index: 1000"><a id="showGym" href="#" onclick="toggleGym();" style="color: #ffffff; font-size: 12px">ジム表示</a></span>#}
+            </div>
+        </div>
+    </nav>
 
-<div id="fullmap" style='height:100%;width:100%;margin-top:40px;top:0;left:0;position:absolute;z-index:200;'>
-    {{ fullmap.html }}
-</div>
 
-{#AD#}
-<div id="ad" style="height:calc(100vh);width:100%;background: rgba(0,0,0, 0.5);font-size: 12px">
-{#    <a href="#" onclick="adCloseClick();">#}
-{#        <div class="close-icon">#}
-{#            <div class="batu1"></div>#}
-{#            <div class="batu2"></div>#}
-{#        </div>#}
-{#    </a>#}
+    <div id="fullmap" style='height:100%;width:100%;margin-top:40px;top:0;left:0;position:absolute;z-index:200;'>
+        {{ fullmap.html }}
+    </div>
 
-    <div style="padding-top: 5px"></div>
-    <div style="border-style: solid;
+    <div id="ad" style="height:calc(100vh);width:100%;background: rgba(0,0,0, 0.5);font-size: 12px">
+
+        <div style="padding-top: 5px"></div>
+        <div style="border-style: solid;
     border-width: 1px; border-color: midnightblue; color: black;
      margin-left : auto ; margin-right : auto;
     background-color: #ffffff; width: 380px; padding-bottom: 10px; padding-top: 10px; padding-left: 10px;background: rgba(255,255,255, 1);">
 
-    <a href="#" onclick="adCloseClick();">
-        <div class="close-icon" style="padding-right: 10px">
-            <div class="batu1blk"></div>
-            <div class="batu2blk"></div>
+            <a href="#" onclick="adCloseClick();">
+                <div class="close-icon" style="padding-right: 10px">
+                    <div class="batu1blk"></div>
+                    <div class="batu2blk"></div>
+                </div>
+            </a>
+
+            {% if not is_maintenance %}
+                {% include 'parts/ad.html' %}<br/>
+            {% endif %}
+
+            {% if is_maintenance %}
+                問題は解消されました。5日(金)20時00分復活予定<br/>ご迷惑をお掛けして申し訳ございません。<br/>
+                <br/><br/>
+                Thank you for cooperation.<br/>
+            {% else %}
+                サーバ負荷軽減にご協力ください<br/>
+                {#    Thank you for cooperation.<br/><br/>#}
+                PokemonGO リアルタイムMAPは街に潜むポケモンを
+                <a href="https://twitter.com/uec_pokemongo?ref_src=twsrc%5Etfw" target="_blank">ルンバ</a>や
+                <a href="https://www.youtube.com/watch?v=-bpEgmUkr7w" target="_blank">ドローン</a>や
+                <a href="https://www.reddit.com/r/pokemongo/comments/4rwx6y/the_new_egg_hatching_meta/" target="_blank">野良猫</a>
+                やおじいちゃんに設置したセンサーで探索して、みなさまに共有する地図サービスです。<br/>
+                <br/>
+                We never access Niantic servers. This map has been constructed using
+                <a href="https://skiplagged.com/pokemon" target="_blank">Skiplagged's PokemonMapData</a>.<br/>
+            {% endif %}
         </div>
-    </a>
-
-    {% if not is_maintenance %}
-    {% include 'parts/ad.html' %}<br/>
-    {% endif %}
-
-    {% if is_maintenance %}
-    問題は解消されました。5日(金)20時00分復活予定<br/>ご迷惑をお掛けして申し訳ございません。<br/>
-    <br/><br/>
-    Thank you for cooperation.<br/>
-    {% else %}
-    サーバ負荷軽減にご協力ください<br/>
-{#    Thank you for cooperation.<br/><br/>#}
-        PokemonGO リアルタイムMAPは街に潜むポケモンを<a href="https://twitter.com/uec_pokemongo?ref_src=twsrc%5Etfw" target="_blank">ルンバ</a>や<a href="https://www.youtube.com/watch?v=-bpEgmUkr7w" target="_blank">ドローン</a>や<a href="https://www.reddit.com/r/pokemongo/comments/4rwx6y/the_new_egg_hatching_meta/" target="_blank">野良猫</a>やおじいちゃんに設置したセンサーで探索して、みなさまに共有する地図サービスです。<br/>
-        <br/>
-        We never access Niantic servers. This map has been constructed using <a href="https://skiplagged.com/pokemon" target="_blank">Skiplagged's PokemonMapData</a>.<br />
-    {% endif %}
     </div>
+    {#AD#}
 </div>
-{#AD#}
+
+
+<nav class="navbar navbar navbar-fixed-bottom">
+    <div class="container">
+        {% if not is_maintenance %}
+            {% include 'parts/ad.html' %}<br/>
+        {% endif %}
+    </div>
+</nav>
+
 
 </body>
+<link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
 {#google analy#}
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
