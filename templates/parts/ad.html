@@ -1,13 +1,13 @@
 {#{% if is_local %}#}
 {#    <div style="background-color: #a94442; height: 160px; width: 300px"></div>#}
 {#{% else %}#}
-{% with seed=range(3)|random %}
+{% with seed=range(2)|random %}
             {% if seed==0 %}
                 {% include '/parts/ad/1.html' %}
-            {% elif seed==1 %}
-                {% include '/parts/ad/2.html' %}
+{#            {% elif seed==1 %}#}
+{#                {% include '/parts/ad/2.html' %}#}
             {% else %}
-                {% include '/parts/ad/3.html' %}
+                {% include '/parts/ad/2.html' %}
             {% endif %}
 {% endwith %}
 {#{% endif %}#}
