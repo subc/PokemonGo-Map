@@ -301,3 +301,9 @@ ul.social-button-syncer li {
 	transform: rotate(-405deg);
 }
 
+.navbar2 {
+    position: relative;
+    min-height: 10px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+}
