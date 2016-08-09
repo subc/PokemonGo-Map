@@ -13,6 +13,7 @@ for f in poke-app1 poke-app2 poke-app3 poke-app4 poke-app5; do
   ssh -l root $f "cd /var/poke/pokemap && git pull origin master" &
 done
 
+echo "restart"
 
 for f in poke-app1 poke-app2 poke-app3 poke-app4 poke-app5; do
   echo ""
