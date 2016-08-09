@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
 import threading
 import functools
-import random
+import datetime
 
 tls = threading.local()
 
 
 def cached_tls_random(func):
+    """
+    40秒以内のアクセスならキャッシュから返す
+    """
 
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
@@ -21,15 +24,19 @@ def cached_tls_random(func):
                                 '-'.join([str(kwargs[_]) for _ in kwargs]),
                                 '-'.join([str(_) for _ in args[1:]]))
 
+        now = datetime.datetime.now()
         if key in storage:
-            if random.randint(1, 4) != 2:
-                # print "hit cache"
-                return storage.get(key)
-            else:
-                # print "hit cache bad reload"
-                pass
+            value, data_created_at = storage.get(key)
+            diff = now - data_created_at
+            # print("total seconds:", diff.total_seconds())
+
+            # 40秒以内のアクセスならキャッシュから返す
+            if diff.total_seconds() <= 40:
+                # print "[+]hit cache"
+                return value
+        # print("[-]not hit")
         value = func(*args, **kwargs)
-        storage[key] = value
+        storage[key] = (value, now)
         return value
 
     return wrapper
