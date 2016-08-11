@@ -99,7 +99,6 @@ def get_from_url(x, y, count=5):
         print c_skip
         output_s = cmdline(c_skip).stdout.readlines()
         output_s_str = ''.join(output_s)
-        print output_s_str
         output_str = output_s_str
 
     if "Internal Server Error" in output_str:
