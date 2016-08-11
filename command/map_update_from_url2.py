@@ -38,7 +38,8 @@ class MapUpdateFromUrl2(Command):
     def _run(self, point, nosleep):
         x, y, f = POINTS[point]
         data = get_from_url(x, y)
-        set_data(point, data)
+        count = set_data(point, data)
+        return count
 
 
 def set_data(point, data):
@@ -69,6 +70,7 @@ def set_data(point, data):
 
     # for monitor
     update_pokemon_count(point, pokemon_count)
+    return pokemon_count
 
 
 def get_from_url(x, y, count=5):

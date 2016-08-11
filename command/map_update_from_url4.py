@@ -36,7 +36,7 @@ class MapUpdateFromUrl4(Command):
 
     def _run(self, point, nosleep):
         x, y, f = POINTS[point]
-        data = get_from_url(x, y)
+        data = get_from_url(x, y, point)
         set_data(point, data)
 
 
@@ -66,7 +66,7 @@ def set_data(point, data):
     update_pokemon_count(point, pokemon_count)
 
 
-def get_from_url(x, y, count=5):
+def get_from_url(x, y, point, count=5):
     """
     curl 'https://api.goradar.io/raw_data?&swLat=35.683732&swLng=139.692352&neLat=35.694723&neLng=139.700689&pokemon=true&pokestops=false&gyms=false' -H ':authority: api.goradar.io' -H 'cookie: __cfduid=d24cea22ee8ee917f9cbb63b056356fec1470442248' -H 'accept: application/json' -H 'user-agent: GoRadar/13 CFNetwork/758.5.3 Darwin/15.6.0' -H 'accept-language: ja-jp'  --compressed
 
@@ -95,6 +95,15 @@ def get_from_url(x, y, count=5):
 
     if "Internal Server Error" in output_str:
         print "----------"
+        print "mode pgo"
+        from command.map_update_from_url2 import MapUpdateFromUrl2
+        count = MapUpdateFromUrl2()._run(int(point), True)
+        if count >= 1:
+            print "success from pgo search count:{}".format(count)
+            time.sleep(20)
+
+    if "Internal Server Error" in output_str:
+        print "----------"
         print "mode skip"
         print c_skip
         output_s = cmdline(c_skip).stdout.readlines()
@@ -104,7 +113,7 @@ def get_from_url(x, y, count=5):
     if "Internal Server Error" in output_str:
         print("500 error retry... {}".format(count))
         time.sleep(2)
-        return get_from_url(x, y, count=count-1)
+        return get_from_url(x, y, point, count=count-1)
 
     print output_str
     data = ujson.decode(output_str)
