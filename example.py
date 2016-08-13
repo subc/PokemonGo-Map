@@ -1180,7 +1180,7 @@ def get_rare_markers(first_time=False):
             if is_ampm_clock:
                 dateoutput = datestr.strftime("%I:%M%p").lstrip('0')
             pokemon['disappear_time_formatted'] = dateoutput
-            pokemon['jpn_name'] = POKEMON_JAPANESE_NAME.get(pokemon['id'])
+            pokemon['jpn_name'] = POKEMON_JAPANESE_NAME.get(int(pokemon['id']))
 
             # check rare pokemon
             if not is_rare_pokemon(pokemon['id']):
@@ -1240,7 +1240,7 @@ def get_pokemarkers(point=0, first_time=False, enable_gym=False):
         if is_ampm_clock:
             dateoutput = datestr.strftime("%I:%M%p").lstrip('0')
         pokemon['disappear_time_formatted'] = dateoutput
-        pokemon['jpn_name'] = POKEMON_JAPANESE_NAME.get(pokemon['id'])
+        pokemon['jpn_name'] = POKEMON_JAPANESE_NAME.get(int(pokemon['id']))
 
         if pokemon['id'] in POKEMON_MAX_CP:
             pokemon['max_cp'] = int(POKEMON_MAX_CP[pokemon['id']])
