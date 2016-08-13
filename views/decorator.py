@@ -4,6 +4,7 @@ import traceback
 from functools import wraps
 import datetime
 import flask
+from flask import request
 
 
 IGNORE_NAMES = [
@@ -62,3 +63,28 @@ def credential(f):
         r = f(*args, **kwargs)
         return r
     return decorated_function
+
+
+def sp(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        """
+        User-Agentをみてスマホチェックするデコレータ
+        """
+        is_sp = False
+        ua = request.headers.get('User-Agent')
+
+        TARGETS = [
+            "iPhone",
+            "iPad",
+            "Android"
+        ]
+
+        for target_keyword in TARGETS:
+            if target_keyword in ua:
+                is_sp = TARGETS
+        r = f(is_sp)
+        return r
+    return decorated_function
+
+

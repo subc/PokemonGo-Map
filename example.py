@@ -38,7 +38,7 @@ from transform import *
 from kvs import *
 from threading import local
 
-from views.decorator import err
+from views.decorator import err, sp
 
 app = Blueprint("example",
                 __name__,
@@ -982,7 +982,8 @@ def register_background_thread(initial_registration=False):
 
 @app.route('/')
 @err
-def fullmap():
+@sp
+def fullmap(is_sp):
     # clear_stale_pokemons()
     from app import conf
     key = get_google_map_api(conf())
@@ -1000,7 +1001,9 @@ def fullmap():
             fullmap=fullmap,
             fullmap_js=fullmap_js,
             is_local=is_local,
-            auto_refresh=conf().get('AUTO_REFRESH'))
+            auto_refresh=conf().get('AUTO_REFRESH'),
+            is_sp=is_sp,
+    )
 
 # @app.route('/next_loc')
 # def next_loc():
