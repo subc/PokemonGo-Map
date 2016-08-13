@@ -195,11 +195,31 @@ def get_pokemon_count_key(point):
     return "CT:POKE:{}".format(point)
 
 
-def update_pokemon_count(point, value):
+def update_pokemon_count(point, count):
+    if count >= 10:
+        pass
+    else:
+        # 更新が600秒以内のときは何もしない
+        try:
+            # 前回更新から何秒たったか
+            s = get_pokemon_count(point)
+            tstr = s.split(",")[1]
+            tdatetime = datetime.strptime(tstr, '%Y-%m-%d %H:%M:%S.%f')
+            now = datetime.now()
+            tdiff = now - tdatetime
+            if tdiff.total_seconds() >= 600:
+                pass
+            else:
+                # 600秒以内かつ、数が10以下
+                print "[-]update_pokemon_count lastest update under 600sec and PokeCount under 10"
+                return
+        except:
+            pass
+
     client = get_client(point)
     key = get_pokemon_count_key(point)
     now = datetime.now()
-    client.setex(key, "{},{}".format(value, now), 3600)
+    client.setex(key, "{},{}".format(count, now), 3600)
     return
 
 
