@@ -93,7 +93,7 @@ def get_from_url(x, y, point, count=5):
     output = cmdline(c).stdout.readlines()
     output_str = ''.join(output)
 
-    if "Internal Server Error" in output_str:
+    if go_radar_is_error(output_str):
         print "----------"
         print "mode pgo"
         from command.map_update_from_url2 import MapUpdateFromUrl2
@@ -102,7 +102,7 @@ def get_from_url(x, y, point, count=5):
             print "success from pgo search count:{}".format(count)
             time.sleep(20)
 
-    if "Internal Server Error" in output_str:
+    if go_radar_is_error(output_str):
         print "----------"
         print "mode skip"
         print c_skip
@@ -110,7 +110,7 @@ def get_from_url(x, y, point, count=5):
         output_s_str = ''.join(output_s)
         output_str = output_s_str
 
-    if "Internal Server Error" in output_str:
+    if go_radar_is_error(output_str):
         print("500 error retry... {}".format(count))
         time.sleep(2)
         return get_from_url(x, y, point, count=count-1)
@@ -163,3 +163,11 @@ def fuzzy(p):
     base = p + f
     result = float('%03.6f' % base)
     return result
+
+
+def go_radar_is_error(s):
+    if len(s) <= 10:
+        return True
+    if "Internal Server Error" in s:
+        return True
+    return False
