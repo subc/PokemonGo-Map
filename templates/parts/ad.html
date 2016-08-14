@@ -1,8 +1,13 @@
 {% with seed=range(2)|random %}
             {% if seed==0 %}
-                {% include '/parts/ad/1.html' %}
-{#            {% elif seed==1 %}#}
-{#                {% include '/parts/ad/2.html' %}#}
+                {% with seed2=range(3)|random %}
+                    {% if seed2==0 %}
+                        {% include '/parts/ad/4.html' %}
+                    {% elif seed2==1 %}
+                        {% include '/parts/ad/2.html' %}
+                    {% else%}
+                        {% include '/parts/ad/1.html' %}
+                    {% endif %}
             {% else %}
                 {% if is_sp %}
                     {% include '/parts/ad/5.html' %}
