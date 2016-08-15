@@ -1,9 +1,7 @@
 {% with seed=range(2)|random %}
             {% if seed==0 %}
-                {% with seed2=range(3)|random %}
+                {% with seed2=range(2)|random %}
                     {% if seed2==0 %}
-                        {% include '/parts/ad/4.html' %}
-                    {% elif seed2==1 %}
                         {% include '/parts/ad/2.html' %}
                     {% else%}
                         {% include '/parts/ad/1.html' %}
