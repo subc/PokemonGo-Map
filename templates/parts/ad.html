@@ -3,7 +3,7 @@
                 {% with seed2=range(6)|random %}
                     {% if seed2==0 %}
                         {% include '/parts/ad/2.html' %}
-                    {% elif seed2>1 %}
+                    {% elif seed2>1  and is_sp %}
                         {% include '/parts/ad/4.html' %}
                     {% else%}
                         {% include '/parts/ad/1.html' %}
