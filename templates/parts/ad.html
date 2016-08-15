@@ -1,19 +1,20 @@
-{% with seed=range(2)|random %}
-            {% if seed==0 %}
-                {% with seed2=range(6)|random %}
-                    {% if seed2==0 %}
-                        {% include '/parts/ad/2.html' %}
-                    {% elif seed2>1  and is_sp %}
-                        {% include '/parts/ad/6.html' %}
-                    {% else%}
-                        {% include '/parts/ad/1.html' %}
-                    {% endif %}
-                {% endwith %}
-            {% else %}
-                {% if is_sp %}
-                    {% include '/parts/ad/5.html' %}
-                {% else %}
-                    {% include '/parts/ad/2.html' %}
-                {% endif %}
-            {% endif %}
-{% endwith %}
+{% if is_sp %}
+    {% with seed=range(10)|random %}
+        {% if seed==0 %}
+            {% include '/parts/ad/1.html' %}
+        {% elif seed==1 %}
+            {% include '/parts/ad/5.html' %}
+        {% else %}
+            {% include '/parts/ad/6.html' %}
+        {% endif %}
+    {% endwith %}
+{% else %}
+
+    {% with seed=range(2)|random %}
+        {% if seed==0 %}
+            {% include '/parts/ad/1.html' %}
+        {% else %}
+            {% include '/parts/ad/2.html' %}
+        {% endif %}
+    {% endwith %}
+{% endif %}
