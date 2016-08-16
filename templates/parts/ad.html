@@ -3,16 +3,18 @@
         {% if seed==0 %}
             {% include '/parts/ad/7.html' %}
         {% elif seed==1 %}
-            {% include '/parts/ad/5.html' %}
+            {% include '/parts/ad/4.html' %}
         {% else %}
             {% include '/parts/ad/6.html' %}
         {% endif %}
     {% endwith %}
 {% else %}
 
-    {% with seed=range(2)|random %}
+    {% with seed=range(3)|random %}
         {% if seed==0 %}
             {% include '/parts/ad/1.html' %}
+        {% elif seed==1 %}
+            {% include '/parts/ad/4.html' %}
         {% else %}
             {% include '/parts/ad/2.html' %}
         {% endif %}
