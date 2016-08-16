@@ -74,13 +74,13 @@
 
 /*枠丸ごとリンク*/
 .wrap {
-	width: 100%;
+	width: 100vh;
 	height: 100%;
 }
 
 .wrap a {
 	display: block;
-	width: 100%;
+	width: 100vh;
 	height: 100%;
 }
 
