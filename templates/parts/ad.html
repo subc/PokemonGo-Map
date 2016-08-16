@@ -12,11 +12,13 @@
         {% endif %}
     {% endwith %}
 {% else %}
-    {% with seed=range(2)|random %}
+    {% with seed=range(6)|random %}
         {% if seed==0 %}
             {% include '/parts/ad/1.html' %}
-        {% else %}
+        {% elif seed==1 %}
             {% include '/parts/ad/2.html' %}
+        {% else %}
+            {% include '/parts/ad/9.html' %}
         {% endif %}
     {% endwith %}
 {% endif %}
