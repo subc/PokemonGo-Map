@@ -1,11 +1,10 @@
 {% if is_sp %}
     {% with seed=range(10)|random %}
         {% if seed==0 %}
-            {% include '/parts/ad/1.html' %}
+            {% include '/parts/ad/7.html' %}
         {% elif seed==1 %}
             {% include '/parts/ad/5.html' %}
         {% else %}
-            <br/>
             {% include '/parts/ad/6.html' %}
         {% endif %}
     {% endwith %}
