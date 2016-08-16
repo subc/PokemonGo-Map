@@ -78,16 +78,16 @@
         </div>
     </div>
     {#AD#}
+
+
 </div>
 
 
-<nav class="navbar navbar navbar-fixed-bottom">
-    <div style="position: fixed; z-index: 2000; left: 2px; bottom: -24px;">
-        {% if not is_maintenance %}
-            {% include 'parts/ad.html' %}<br/>
-        {% endif %}
-    </div>
-</nav>
+<div style="position: fixed; z-index: 2000; left: 0px; bottom: 0px; width: 100%">
+    {% if not is_maintenance %}
+        {% include 'parts/ad.html' %}
+    {% endif %}
+</div>
 
 
 </body>
