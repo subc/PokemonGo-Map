@@ -103,12 +103,12 @@ def get_from_url(x, y, point, count=5):
             print "success from pgo search count:{}".format(count)
             time.sleep(20)
 
-    if go_radar_is_error(output_str):
-        print "----------"
-        print "mode skip"
-        output_s = cmdline(c_skip).stdout.readlines()
-        output_s_str = ''.join(output_s)
-        output_str = output_s_str
+    # if go_radar_is_error(output_str):
+    #     print "----------"
+    #     print "mode skip"
+    #     output_s = cmdline(c_skip).stdout.readlines()
+    #     output_s_str = ''.join(output_s)
+    #     output_str = output_s_str
 
     if go_radar_is_error(output_str):
         print("500 error retry... {}".format(count))
