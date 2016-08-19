@@ -87,10 +87,11 @@ def get_from_url(x, y, point, count=5):
 
     base = "curl -H 'Host: stop_fucking_with_us.goradar.io' -H 'Accept: application/json' -H 'Cookie: __cfduid=d24cea22ee8ee917f9cbb63b056356fec1470442248' -H 'User-Agent: GoRadar/13 CFNetwork/758.5.3 Darwin/15.6.0' -H 'Accept-Language: ja-jp' --compressed 'https://stop_fucking_with_us.goradar.io/raw_data?&swLat={lat}&swLng={lon}&neLat={lat2}&neLng={lon2}&pokemon=true&pokestops=false&gyms=true'"
     base_skip = "curl 'https://skiplagged.com/api/pokemon.php?bounds={lat},{lon},{lat2},{lon2}' -H 'Accept-Encoding: gzip, deflate, sdch, br' -H 'Accept-Language: ja,en-US;q=0.8,en;q=0.6' -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.106 Safari/537.36' -H 'Content-Type: application/x-www-form-urlencoded; charset=UTF-8' -H 'Accept: */*' -H 'Referer: https://skiplagged.com/catch-that/' -H 'Connection: keep-alive' --compressed"
-    c = base.format(lat=lat, lon=lon, lat2=lat2, lon2=lon2, f5=f5, f5_2=f5_2)
-    c_skip = base_skip.format(lat=lat, lon=lon, lat2=lat2, lon2=lon2)
-    print c
-    output = cmdline(c).stdout.readlines()
+    # c = base.format(lat=lat, lon=lon, lat2=lat2, lon2=lon2, f5=f5, f5_2=f5_2)
+    # c_skip = base_skip.format(lat=lat, lon=lon, lat2=lat2, lon2=lon2)
+    # print c
+    # output = cmdline(c).stdout.readlines()
+    output = []
     output_str = ''.join(output)
 
     if go_radar_is_error(output_str):
