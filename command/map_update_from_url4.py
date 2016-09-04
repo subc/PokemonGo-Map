@@ -170,4 +170,4 @@ def go_radar_is_error(s):
         return True
     if "Internal Server Error" in s:
         return True
-    return False
+    return True

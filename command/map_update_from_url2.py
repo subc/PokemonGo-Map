@@ -97,6 +97,7 @@ def get_from_url(x, y, count=5):
     lon = fuzzy(y)
 
     base = "curl 'https://sv-db{db}.pmap.kuku.lu/_dbserver.php?action=viewData&sv=undefined&research_key=&loc1={lat}6693448&loc2={lon}7519534&_=14704399{f5}' -H 'Origin: https://pmap.kuku.lu' -H 'Accept-Encoding: gzip, deflate, sdch, br' -H 'Accept-Language: ja,en-US;q=0.8,en;q=0.6' -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.106 Safari/537.36' -H 'Accept: */*' -H 'Referer: https://pmap.kuku.lu/' -H 'Connection: keep-alive' --compressed"
+    base = "curl 'https://sv-db.pmap.kuku.lu/_dbserver.php?action=viewData&fort=&pokesource=&history_pokemonid=&sv=undefined&research_key=&loc1={lat}76496555&loc2={lon}9633792&_=1472977897840' -H 'Origin: https://pmap.kuku.lu' -H 'Accept-Encoding: gzip, deflate, sdch, br' -H 'Accept-Language: ja,en-US;q=0.8,en;q=0.6' -H 'User-Agent: Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36' -H 'Accept: */*' -H 'Referer: https://pmap.kuku.lu/' -H 'Connection: keep-alive' --compressed"
     c = base.format(lat=lat, lon=lon, db=random.randint(2, 3), f5=random.randint(10000, 99999))
     print c
     output = cmdline(c).stdout.readlines()
